@@ -117,8 +117,11 @@ url = {http://search.proquest.com/docview/1718994569/},
 
 
 \begin{document}
+\section*{Introduction}
+The Solvency II Directive states that .... Something about FMA's and which quantity to develop in order to create the balance sheet for all periods.
 
-\subsection*{Differential equation for the expected statewise-reserve}
+
+\section*{State-Wise Probability Weighted Reserve}
 Define
 \begin{align*}
 \tilde{X}^j(t):=\E_{Z(0)}[X(t)\indic{Z(t)=j}]
@@ -143,11 +146,17 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 =&
 \sum_{j\in \mathcal{J}} \tilde{X}^j.
 \end{align*}
+
+\subsection*{Life Insurance Setup}
+The setup differs from the classical ...
 The dynamics of $X$ are assumed to be affine
 \begin{align*}
 dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 &+\sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_2(s,Z(s-),h)\right) dN^h(s).
 \end{align*}
+
+\subsection*{Differential equation for the expected statewise-reserve}
+
 Without loss of generality, we can assume that $g_2=h_2=0$, as they do not appear in terms with $X$ and are therefore identical to the problem solved by \citep{Norberg}.
 By the tower property,
 \begin{align*}

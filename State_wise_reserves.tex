@@ -155,6 +155,71 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 &+\sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_2(s,Z(s-),h)\right) dN^h(s).
 \end{align*}
 
+\subsection*{Life-Death Model}
+\def\PlA{(0,0)}
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
+    \node (0) at \PlA {0, alive};
+    \node (1) at ($(0) + (4,0)$) {1, dead};
+\end{scope}
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge [bend left=0] node {$\mu$} (1);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+\subsection*{Life-Death-Surrender}
+\def\PlA{(0,0)}
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
+    \node (0) at \PlA {0, alive};
+    \node (1) at ($(0.center) + (4,0)$) {1, dead};
+    \node (2) at ($(0.center) + (-4.5,0)$) {2, surrender};    
+\end{scope}
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge [bend left=0] node {$\mu^{01}$} (1);
+    \path [->] 	(0) edge [bend left=0] node {$\mu^{02}$} (2);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+
+
+\subsection*{Life-Death-Surrender With Free Policy}
+\def\PlA{(0,0)}
+\def\PlB{(0,-3)}
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm,align=center]
+    \node (0) at \PlA {0, alive};
+    \node (1) at ($(0.center) + (4,0)$) {1, dead};
+    \node (2) at ($(0.center) + (-4.5,0)$) {2, surrender}; 
+    \node (3) at \PlB {3, alive\\ free policy};
+    \node (4) at ($(3.center) + (4,0)$) {4, dead \\ free policy};
+    \node (5) at ($(3.center) + (-4.5,0)$) {5, surrender \\ free policy};    
+\end{scope}
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge [bend left=0] node {$\mu^{01}$} (1);
+    \path [->] 	(0) edge [bend left=0] node {$\mu^{02}$} (2);
+    \path [->] 	(0) edge [bend left=0] node {$\mu^{03}$} (3);
+    \path [->] 	(3) edge [bend left=0] node {$\mu^{34}$} (4);
+    \path [->] 	(3) edge [bend left=0] node {$\mu^{35}$} (5);
+\end{scope}
+\end{tikzpicture}
+\end{center}
+
+
 \subsection*{Differential equation for the expected statewise-reserve}
 
 Without loss of generality, we can assume that $g_2=h_2=0$, as they do not appear in terms with $X$ and are therefore identical to the problem solved by \citep{Norberg}.

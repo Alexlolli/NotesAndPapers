@@ -157,12 +157,12 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 
 \subsection*{Life-Death Model}
 \def\PlA{(0,0)}
-\begin{figure}
+\begin{figure}[H]
 \begin{center}
 \begin{tikzpicture}
 \begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
     \node (0) at \PlA {0, alive};
-    \node (1) at ($(0) + (4,0)$) {1, dead};
+    \node (1) at ($(0) + (4.5,0)$) {1, dead};
 \end{scope}
 
 \begin{scope}[>={Stealth[black]},
@@ -183,7 +183,7 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 \begin{tikzpicture}
 \begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
     \node (0) at \PlA {0, alive};
-    \node (1) at ($(0.center) + (4,0)$) {1, dead};
+    \node (1) at ($(0.center) + (4.9,0)$) {1, dead};
     \node (2) at ($(0.center) + (-4.5,0)$) {2, surrender};    
 \end{scope}
 
@@ -205,10 +205,10 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 \begin{tikzpicture}
 \begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm,align=center]
     \node (0) at \PlA {0, alive};
-    \node (1) at ($(0.center) + (4,0)$) {1, dead};
+    \node (1) at ($(0.center) + (4.5,0)$) {1, dead};
     \node (2) at ($(0.center) + (-4.5,0)$) {2, surrender}; 
     \node (3) at \PlB {3, alive\\ free policy};
-    \node (4) at ($(3.center) + (4,0)$) {4, dead \\ free policy};
+    \node (4) at ($(3.center) + (4.5,0)$) {4, dead \\ free policy};
     \node (5) at ($(3.center) + (-4.5,0)$) {5, surrender \\ free policy};    
 \end{scope}
 
@@ -227,8 +227,19 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 \subsection*{Thoughts}
 \begin{itemize}
 \item Same build-up as \citet{THM_BUC}. Hierarchical examples $\Rightarrow$ general transient.
+\item Refer to \citet{Norberg}
+\begin{itemize}
+\item Introduction and motivation - stochastic reserve, Monte Carlo method. A little comment on the fact that the problem is still hard to solve.
+\item Life-death (simple analytic solution).
+\item Life-death free policy (how to deal with extra states).
+\item General model without duration.
+\item Life-death-surrender free policy, including discussion of free policy factor.
+\item Lost all trick works.
+\item General model with duration dependence.
+\item Inclusion of surplus. Use independence when dividend is assigned on discrete points in time.
+\end{itemize}
 \item Deterministic intensities.
-\item How to deal with free policy.
+\item Market dependent intensities - allowed when directly dependent on the market.
 \end{itemize}
 
 

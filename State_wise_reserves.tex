@@ -1,4 +1,3 @@
-
 \documentclass[12pt]{article}
 \usepackage[pdfstartview=FitH,hidelinks]{hyperref}
 \usepackage[british]{babel}
@@ -39,6 +38,8 @@
 \newcommand{\noin}{\noindent}
 \newcommand{\Var}{\text{Var}}
 \renewcommand{\P}{\text{P}}
+\renewcommand{\baselinestretch}{1.25} 
+
 \newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \font\tt=rm-lmtl10
@@ -110,6 +111,66 @@ url = {http://search.proquest.com/docview/1718994569/},
 }
 
 
+
+@book{Liv2,
+series = {International Series on Actuarial Science},
+publisher = {Cambridge University Press},
+isbn = {0521868777},
+year = {2007},
+title = {Market-valuation methods in life and pension insurance},
+language = {eng},
+address = {Cambridge},
+author = {Møller, Thomas and Steffensen, Mogens},
+keywords = {Insurance - Mathematics; Insurance, Life - Policies - Mathematics; Insurance, Pension trust guaranty - Mathematics; Life insurance policies - Mathematics; Pension trust guaranty insurance - Mathematics; Pension trusts - Mathematics; Økonomi, forsikring},
+}
+
+@article{Steffensen0,
+issn = {01676687},
+abstract = {The multi-state life insurance contract is reconsidered in a framework of securitization where insurance claims may be priced by the principle of no arbitrage. This way a generalized version of Thiele's differential equation is obtained for insurance contracts linked to indices, possibly marketed securities. The equation is exemplified by a traditional policy, a simple unit-linked policy and a half-dependent unit-linked policy.},
+journal = {Insurance, Mathematics & Economics},
+pages = {201--214},
+volume = {27},
+publisher = {Elsevier Sequoia S.A.},
+number = {2},
+year = {2000},
+title = {A no arbitrage approach to Thiele's differential equation},
+language = {eng},
+address = {Amsterdam},
+author = {Steffensen, Mogens},
+keywords = {Arbitrage ; Securitization ; Market Prices ; Insurance Policies ; Stochastic Models ; Economic Theory ; Studies ; Economic Theory ; Insurance Industry ; Experimental/Theoretical},
+url = {http://search.proquest.com/docview/208166412/},
+}
+
+@book{Steffensen1,
+publisher = {Laboratory of Actuarial Mathematics, University of Copenhagen},
+isbn = {8778344492},
+year = {2001},
+title = {On valuation and control in life and pension insurance},
+language = {eng},
+address = {Copenhagen},
+author = {Steffensen, Mogens},
+}
+
+
+
+@article{NorbergB,
+issn = {0949-2984},
+abstract = {The issue of bonus in life insurance is considered in a model framework where the traditional set-up is extended by letting the experience basis (mortality, interest, etc.) be stochastic. A novel definition of the technical surplus on an insurance contract is proposed, and basic principles for its repayment as bonus are discussed. Making the experience basis an endogenous part of the model opens possibilities of model-based prognostication of future bonuses. Numerical illustrations are provided.},
+journal = {Finance and Stochastics},
+pages = {373--390},
+volume = {3},
+publisher = {Springer-Verlag},
+number = {4},
+year = {1999},
+title = {A theory of bonus in life insurance},
+language = {eng},
+address = {Berlin Heidelberg},
+author = {Norberg, Ragnar},
+keywords = {Key words: Safety margins, prospective reserves, retrospective reserves, stochastic interest, stochastic mortality, counting processes ; JEL Classification:G22, G23 ; Mathematics Subject Classification (1991):60J27, 62P05},
+}
+
+
+
 \end{filecontents*}
 
 \fi
@@ -117,13 +178,16 @@ url = {http://search.proquest.com/docview/1718994569/},
 
 
 \begin{document}
+
+\subsection*{Stuff to fix}
+\begin{itemize}
+\item Jeg kommer med flere påstande om industrien som jeg ikke er sikker på har hold i virkeligheden. fx at forsikringsselskaber ikke har bekymret sig for om deres udlodningsstrategier er fair på policeniveau.
+\end{itemize}
 \section*{Introduction}
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made, and in the recent years a lot of attention has been aimed at how this distribution of surplus should be conducted fairly. In this regard, fairness means that the value of contributions to the surplus correspond to the value of the bonus received. If one is content with fairness on the portfolio level, the simple requirement that the surplus should be zero when all contracts are terminated, is sufficient. However, if we wish to distribute fairly on the policy level, more information about the development of each individual policy is needed. 
 
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made, and in the recent years a lot of attention has been aimed at how this distribution of surplus should be conducted fairly. In this regard, fairness means that the value of contributions to the surplus correspond to the value of the bonus received. If one is content with fairness on the portfolio level, it is sufficient to require that the collective surplus should be zero when all contracts are terminated. However, if we wish to distribute fairly on the policy level, more information about the development of each individual policy is needed. In this paper we derive a retrospective differential equation for the savings account, which aids in determining how much each individual policy has contributed to the collective surplus. Apart from providing a tool for fair distribution of surplus, the method provides insight on the financial risks carried by the insurance companies.\\
+The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a serious problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are used to find the liabilities of today, while the savings of today already are known. the notion of bonus as been studied See chapter 6 of \citet{Liv2}... [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]
 
-
-
-The Solvency II Directive states that .... Something about FMA's and which quantity to develop in order to create the balance sheet for all periods.
 
 
 \section*{State-Wise Probability Weighted Reserve}

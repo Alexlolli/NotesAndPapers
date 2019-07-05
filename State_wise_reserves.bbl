@@ -1,4 +1,4 @@
-\begin{thebibliography}{2}
+\begin{thebibliography}{3}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -12,6 +12,13 @@ Kristian Buchardt, Thomas Møller, and Kristian Schmidt.
 \newblock \emph{Scandinavian Actuarial Journal}, 2015\penalty0 (8), 2015.
 \newblock ISSN 03461238.
 \newblock URL \url{http://search.proquest.com/docview/1718994569/}.
+
+\bibitem[Møller and Steffensen(2007)]{Liv2}
+Thomas Møller and Mogens Steffensen.
+\newblock \emph{Market-valuation methods in life and pension insurance}.
+\newblock International Series on Actuarial Science. Cambridge University
+  Press, Cambridge, 2007.
+\newblock ISBN 0521868777.
 
 \bibitem[Norberg(1991)]{Norberg}
 Ragnar Norberg.

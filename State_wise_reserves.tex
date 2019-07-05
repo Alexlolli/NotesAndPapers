@@ -157,6 +157,7 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 
 \subsection*{Life-Death Model}
 \def\PlA{(0,0)}
+\begin{figure}
 \begin{center}
 \begin{tikzpicture}
 \begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
@@ -170,7 +171,11 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
     \path [->] 	(0) edge [bend left=0] node {$\mu$} (1);
 \end{scope}
 \end{tikzpicture}
+\label{fig:1}
+\caption{Life-Death model}
 \end{center}
+\end{figure}
+
 
 \subsection*{Life-Death-Surrender}
 \def\PlA{(0,0)}
@@ -214,10 +219,17 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
     \path [->] 	(0) edge [bend left=0] node {$\mu^{02}$} (2);
     \path [->] 	(0) edge [bend left=0] node {$\mu^{03}$} (3);
     \path [->] 	(3) edge [bend left=0] node {$\mu^{34}$} (4);
-    \path [->] 	(3) edge [bend left=0] node {$\mu^{35}$} (5);
+    \path [->] 	(3) edge [bend left=0] node {$\mu^{35	}$} (5);
 \end{scope}
 \end{tikzpicture}
 \end{center}
+
+\subsection*{Thoughts}
+\begin{itemize}
+\item Same build-up as \citet{THM_BUC}. Hierarchical examples $\Rightarrow$ general transient.
+\item Deterministic intensities.
+\item How to deal with free policy.
+\end{itemize}
 
 
 \subsection*{Differential equation for the expected statewise-reserve}

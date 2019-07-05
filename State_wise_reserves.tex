@@ -118,6 +118,11 @@ url = {http://search.proquest.com/docview/1718994569/},
 
 \begin{document}
 \section*{Introduction}
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made, and in the recent years a lot of attention has been aimed at how this distribution of surplus should be conducted fairly. In this regard, fairness means that the value of contributions to the surplus correspond to the value of the bonus received. If one is content with fairness on the portfolio level, the simple requirement that the surplus should be zero when all contracts are terminated, is sufficient. However, if we wish to distribute fairly on the policy level, more information about the development of each individual policy is needed. 
+
+
+
+
 The Solvency II Directive states that .... Something about FMA's and which quantity to develop in order to create the balance sheet for all periods.
 
 
@@ -156,6 +161,13 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 \end{align*}
 
 \subsection*{Life-Death Model}
+Dynamics given by
+\begin{align*}
+dX(s)=& \indic{Z(s-)=0}\left(X(s)g_1(s)+g_2(s) \right) ds - X(s-)dN^1(s).
+\end{align*}
+We have not specified how the pay-out of the reserve upon death is distributed between the insured and the insurer - only that the reserve is nullified.
+
+
 \def\PlA{(0,0)}
 \begin{figure}[H]
 \begin{center}
@@ -226,6 +238,7 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 
 \subsection*{Thoughts}
 \begin{itemize}
+\item With-profit insurance! Expected reserve including accumulation of dividends.
 \item Same build-up as \citet{THM_BUC}. Hierarchical examples $\Rightarrow$ general transient.
 \item Refer to \citet{Norberg}
 \begin{itemize}
@@ -239,7 +252,9 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 \item Inclusion of surplus. Use independence when dividend is assigned on discrete points in time.
 \end{itemize}
 \item Deterministic intensities.
-\item Market dependent intensities - allowed when directly dependent on the market.
+\item Market dependent intensities - allowed when directly dependent on the market, making them deterministic.
+\item We are only concerned with the reserve.
+\item Maybe we should use a different wording? \textbf{Savings}/stash/backlog/accumulation/hoard/reservoir instead of reserve, to distinguish between the Danish words for "reserve" and "depot"
 \end{itemize}
 
 

@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{4}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -24,5 +24,12 @@ Thomas Møller and Mogens Steffensen.
 Ragnar Norberg.
 \newblock Reserves in life and pension insurance.
 \newblock \emph{Scand. Actuar. J. 1}, pages 3--24, 1991.
+
+\bibitem[Norberg(1999)]{NorbergB}
+Ragnar Norberg.
+\newblock A theory of bonus in life insurance.
+\newblock \emph{Finance and Stochastics}, 3\penalty0 (4):\penalty0 373--390,
+  1999.
+\newblock ISSN 0949-2984.
 
 \end{thebibliography}

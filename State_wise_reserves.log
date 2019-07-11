@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.6.27)  10 JUL 2019 12:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.6.27)  11 JUL 2019 08:43
 entering extended mode
 **./State_wise_reserves.tex
 (State_wise_reserves.tex
@@ -1269,54 +1269,54 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {C:/Users/Alexander Lollike/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 213.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 212.
 
 
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\doublestroke\
 udsrom.fd"
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
-) [2] [3]
-Overfull \hbox (41.00151pt too wide) in paragraph at lines 334--335
+) [2]
+LaTeX Font Info:    Font shape `OMS/cmr/bx/n' in size <17.28> not available
+(Font)              Font shape `OMS/cmsy/b/n' tried instead on input line 240.
+ [3] [4]
+Overfull \hbox (41.00151pt too wide) in paragraph at lines 337--338
 []\OT1/cmr/m/n/12 Maybe we should use a dif-fer-ent word-ing? \OT1/cmr/bx/n/12 
 Sav-ings\OT1/cmr/m/n/12 /stash/backlog/accumulation/hoard/reservoir
  []
 
-[4] [5] (State_wise_reserves.bbl) [6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
+[5] (State_wise_reserves.bbl) [6]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
  (State_wise_reserves.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
 Package rerunfilecheck Info: File `State_wise_reserves.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 342.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
  ) 
 Here is how much of TeX's memory you used:
- 22568 strings out of 493312
- 409114 string characters out of 3138861
- 506481 words of memory out of 3000000
- 25670 multiletter control sequences out of 15000+200000
- 10918 words of font info for 43 fonts, out of 3000000 for 9000
+ 22572 strings out of 493312
+ 409168 string characters out of 3138861
+ 505481 words of memory out of 3000000
+ 25672 multiletter control sequences out of 15000+200000
+ 11173 words of font info for 44 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,12n,68p,1263b,1049s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmsy8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/
-Users/Alexander Lollike/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/doublestr
-oke/dsrom12.pfb>
-Output written on State_wise_reserves.pdf (6 pages, 135254 bytes).
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbsy10.pfb><C:/P
+rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8
+.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:
+/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/A
+lexander Lollike/AppData/Roaming/MiKTeX/2.9/fonts/type1/public/doublestroke/dsr
+om12.pfb>
+Output written on State_wise_reserves.pdf (6 pages, 145344 bytes).
 PDF statistics:
- 106 PDF objects out of 1000 (max. 8388607)
- 22 named destinations out of 1000 (max. 500000)
+ 111 PDF objects out of 1000 (max. 8388607)
+ 23 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

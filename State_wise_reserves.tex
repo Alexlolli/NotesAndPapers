@@ -172,6 +172,8 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 
 
 
+
+
 \end{filecontents*}
 
 %\fi
@@ -186,15 +188,37 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 \end{itemize}
 \section*{Introduction}
 
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made, and in the recent years a lot of attention has been aimed at how this distribution of surplus should be conducted fairly. In this regard, fairness means that the value of contributions to the surplus correspond to the value of the bonus received. If one is content with fairness on the portfolio level, it is sufficient to require that the collective surplus should be zero when all contracts are terminated. However, if we wish to distribute fairly on the policy level, more information about the development of each individual policy is needed. In this paper we derive a retrospective differential equation for the savings account, which aids in determining how much each individual policy has contributed to the collective surplus. Apart from providing a tool for fair distribution of surplus, the method provides insight on the financial risks carried by the insurance companies.\\
-The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are a tool to find the liabilities of today, while the savings of today already are known. The notion of bonus has been studied before; see chapter 6 of \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} and \citet{Steffensen1}. Partial differential equations describing the prospective second order reserve have been derived by (hvem? Mogens? I hvert fald i kapitel 6 i Liv2), and while they provide a conceptually powerful tool, they are limited to simple market dynamics, and as stated in chapter 6 of \citet{Liv2}, they do not provide new realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a Markov chain environment, allowing for great model flexibility, but...
-\\
-Previous contributions to the subject that have provided closed form solutions for the reserve and surplus. The closed form solutions come at a price - a distribution of the financial market is .
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention, have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk of negative surplus? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide new realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected. In the existing literature, the human element is left out of the equation. Insurance companies are governed by humans, and the decisions they make, have an influence on their portfolio - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are accrued is not. The insurance company has a certain amount of freedom when it comes to the distribution of surplus, and the 
 
-The contribution of this paper, is to provide a tool that can be used for prognostication based on simulation of arbitrary complexity. In a sense, we embrace the complexity of the financial market and its intricate influence on life insurance... It is infeasible to do nested monte-carlo simulations, so we try to average over the biometric risks only.
 
- With the methods from this paper, any   [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. Much of the theory concerning surplus has not taken into account that dividends usually are spent on increasing the policies benefits. This increase in benefits has an impact on the dynamics of the savings, and several of the  [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]. Bonus emerges due to the difference between the first and second order basis. The first order basis
+one of their free variable
 
+ The human element is encapsulated in the so-called Management Actions. 
+
+
+Future management actions are mathematically intangible 
+
+In order to ensure a
+
+ In this paper we derive a retrospective differential equation for the savings account, which aids in determining how much each individual policy has contributed to the collective surplus. Apart from providing a tool for fair distribution of surplus, the method provides insight on the financial risks carried by the insurance companies.\\
+The notion of bonus has been studied before; see chapter 6 of \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} and \citet{Steffensen1}.  As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} w
+\begin{displayquote}
+The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information.
+\end{displayquote}
+
+It seems as though previous contributions to the subject have focused on deriving closed form solutions for the reserve and surplus. The closed form solutions come at a price - a distribution of the financial market is a necessity. In essence, these models need to know how the market is expected to develop, in order to provide information about how the prospective reserves are expected to develop. Appealing as these analytical solutions are, However, the real-world complexity of $S$ can rarely be captured by a simple distribution with analytically known moments, and therefore simulations are used instead
+
+
+Our method is fundamentally different
+
+The contribution of this paper, is to provide a tool that can be used for prognostication based on simulation of arbitrary complexity. In a sense, we embrace the complexity of the financial market and its intricate influence on life insurance... It is infeasible to do nested monte-carlo simulations, so we average over the biometric risks only. In principle providing the true estimate
+
+The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are a tool to find the liabilities of today, while the savings of today already are known. 
+
+ With the methods from this paper, any [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. Much of the theory concerning surplus has not taken into account that dividends usually are spent on increasing the policies benefits. This increase in benefits has an impact on the dynamics of the savings, and several of the  [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]. Bonus emerges due to the difference between the first and second order basis. The first order basis
+
+\subsection*{"Life can only be understood backwards; but it must be lived forwards"}
+The contribution of this article is to embrace the fact that we, as humans, make decisions based on our past.  Even though I twist the wise words of Søren Kierkegaard, they 
 
 \subsection*{Setup}
 We consider the classic multi-state life insurance setup, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. 

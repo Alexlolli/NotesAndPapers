@@ -55,7 +55,7 @@
 \usepackage{csquotes}
 
 
-\iffalse
+%\iffalse
 \begin{filecontents*}{BIBS.bib}
 
 @article{Djehiche,
@@ -99,14 +99,14 @@ issn = {03461238},
 abstract = {Within the setup of a semi-Markov process in a finite state space, we consider a life insurance contract. First, without the modelling of policyholder behaviour, we show how to calculate the expected cash flow associated with future payments, and to that end we present a version of Kolmogorov's forward integro-differential equation. The semi-Markov model is then extended to include modelling of surrender and free policy behaviour, and the main result is a modification of Kolmogorov's forward integro-differential equation, such that the cash flow can be calculated without significantly more complexity than the cash flow without policyholder modelling. The result is also demonstrated for the traditional Markov case where there is no duration dependence, and numerical examples are studied.},
 journal = {Scandinavian Actuarial Journal},
 volume = {2015},
-publisher = {Taylor & Francis Ltd.},
+publisher = {Taylor and Francis Ltd.},
 number = {8},
 year = {2015},
 title = {Cash flows and policyholder behaviour in the semi-Markov life insurance setup},
 language = {eng},
 address = {Stockholm},
 author = {Buchardt, Kristian and Møller, Thomas and Schmidt, Kristian},
-keywords = {Studies ; Cash Flow ; Markov Analysis ; Life Insurance ; Differential Equations ; Experiment/Theoretical Treatment ; Management Science/Operations Research ; Life & Health Insurance},
+keywords = {Studies ; Cash Flow ; Markov Analysis ; Life Insurance ; Differential Equations ; Experiment/Theoretical Treatment ; Management Science/Operations Research ; Life and Health Insurance},
 url = {http://search.proquest.com/docview/1718994569/},
 }
 
@@ -127,7 +127,7 @@ keywords = {Insurance - Mathematics; Insurance, Life - Policies - Mathematics; I
 @article{Steffensen0,
 issn = {01676687},
 abstract = {The multi-state life insurance contract is reconsidered in a framework of securitization where insurance claims may be priced by the principle of no arbitrage. This way a generalized version of Thiele's differential equation is obtained for insurance contracts linked to indices, possibly marketed securities. The equation is exemplified by a traditional policy, a simple unit-linked policy and a half-dependent unit-linked policy.},
-journal = {Insurance, Mathematics & Economics},
+journal = {Insurance, Mathematics and Economics},
 pages = {201--214},
 volume = {27},
 publisher = {Elsevier Sequoia S.A.},
@@ -173,7 +173,7 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 
 \end{filecontents*}
 
-\fi
+%\fi
 
 
 
@@ -186,7 +186,15 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 \section*{Introduction}
 
 With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made, and in the recent years a lot of attention has been aimed at how this distribution of surplus should be conducted fairly. In this regard, fairness means that the value of contributions to the surplus correspond to the value of the bonus received. If one is content with fairness on the portfolio level, it is sufficient to require that the collective surplus should be zero when all contracts are terminated. However, if we wish to distribute fairly on the policy level, more information about the development of each individual policy is needed. In this paper we derive a retrospective differential equation for the savings account, which aids in determining how much each individual policy has contributed to the collective surplus. Apart from providing a tool for fair distribution of surplus, the method provides insight on the financial risks carried by the insurance companies.\\
-The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are used to find the liabilities of today, while the savings of today already are known. the notion of bonus has been studied See chapter 6 of \citet{Liv2}... [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. Much of the theory concerning surplus has not taken into account that dividends usually are spent on increasing the policies benefits. This increase in benefits has an impact on the dynamics of the savings, and several of the  [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]. Bonus emerges due to the difference between the first and second order basis. The first order basis
+The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are a tool to find the liabilities of today, while the savings of today already are known. The notion of bonus has been studied before; see chapter 6 of \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} and \citet{Steffensen1}. Partial differential equations describing the prospective second order reserve have been derived by (hvem? Mogens? I hvert fald i kapitel 6 i Liv2), and while they provide a powerful tool, they are limited to simple market dynamics, and as stated in chapter 6 of \citet{Liv2} 
+\begin{citation}
+It serves to present the concept of
+surplus-linked life insurance payments and demonstrate the partial differential
+equation methodology for calculation of reserves based on this concept. It
+does not provide new realistic models for long term financial markets and
+stochastic intensities.
+\end{citation}
+  The contribution of this paper, is to provide a tool  [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. Much of the theory concerning surplus has not taken into account that dividends usually are spent on increasing the policies benefits. This increase in benefits has an impact on the dynamics of the savings, and several of the  [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]. Bonus emerges due to the difference between the first and second order basis. The first order basis
 
 
 \subsection*{Setup}
@@ -205,7 +213,9 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
 
 In practice, the surplus account is shared among policyholders. The increased benefits are also guaranteed, which wi do not consider.
 
-\subsection*{State-0 model}
+Due to the fact that there are risk premiums on the bonus benefits, we get a system of two quantities that influence each other - the savings and the surplus. In the case of cash dividends, one simply has to find an expression for the expected surplus, as the reserves of the policies are unaffected by cash dividends.
+
+\subsection*{1 Active state model}
 We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with a non-zero savings-dependent payment process $b$. On transition to one of the inactive states, the savings are nullified. We need not specify what happens to the savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that the savings are zero in all inactive states. As there are no payments in the inactive states, $\chi^{0j}(t,x)=0$ for all inactive states $j$, implying that $h_x(t,0,j,x,y)=-x$. While the policy is in the active state, it contributes and receives dividend from a surplus account, $Y$. The survival model with and without surrender options are special cases of this model. Denote by $0$ the active state. The dynamics of $X$ are
 \begin{align*}
 dX(s)=& \indic{Z(s-)=0}g(s,0,X(s))ds - \sum_{h=1}^n X(s-)dN^h(s).
@@ -237,6 +247,10 @@ Remark: If the benefits are identical after age 65, the states 0,1,3 and 4 can b
 \end{center}
 \end{figure}
 
+
+\subsection*{2 Active state model}
+
+\subsection*{$n$-state model}
 
 
 \section*{State-Wise Probability Weighted Reserve}
@@ -314,6 +328,7 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \end{scope}
 \end{tikzpicture}
 \end{center}
+\subsection*{Use of Savings account}
 
 \subsection*{Thoughts}
 \begin{itemize}

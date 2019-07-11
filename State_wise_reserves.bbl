@@ -1,4 +1,4 @@
-\begin{thebibliography}{4}
+\begin{thebibliography}{2}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -13,23 +13,9 @@ Kristian Buchardt, Thomas Møller, and Kristian Schmidt.
 \newblock ISSN 03461238.
 \newblock URL \url{http://search.proquest.com/docview/1718994569/}.
 
-\bibitem[Møller and Steffensen(2007)]{Liv2}
-Thomas Møller and Mogens Steffensen.
-\newblock \emph{Market-valuation methods in life and pension insurance}.
-\newblock International Series on Actuarial Science. Cambridge University
-  Press, Cambridge, 2007.
-\newblock ISBN 0521868777.
-
 \bibitem[Norberg(1991)]{Norberg}
 Ragnar Norberg.
 \newblock Reserves in life and pension insurance.
 \newblock \emph{Scand. Actuar. J. 1}, pages 3--24, 1991.
-
-\bibitem[Norberg(1999)]{NorbergB}
-Ragnar Norberg.
-\newblock A theory of bonus in life insurance.
-\newblock \emph{Finance and Stochastics}, 3\penalty0 (4):\penalty0 373--390,
-  1999.
-\newblock ISSN 0949-2984.
 
 \end{thebibliography}

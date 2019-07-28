@@ -184,66 +184,108 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 
 \subsection*{Stuff to fix}
 \begin{itemize}
-\item Jeg kommer med flere påstande om industrien som jeg ikke er sikker på har hold i virkeligheden. fx at forsikringsselskaber ikke har bekymret sig for om deres udlodningsstrategier er fair på policeniveau.
+\item Jeg kommer med flere påstande som jeg ikke er sikker på har hold i virkeligheden.
 \end{itemize}
 \section*{Introduction}
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk carried by the equity? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a financial Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected: the human element.
+\\[12pt]
+Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are accrued is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
+%As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} \begin{displayquote} The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information. \end{displayquote}
+From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature.
+\\[12pt]
+In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a model where dividends are spent on increasing benefits.  
 
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention, have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk of negative surplus? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide new realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected. In the existing literature, the human element is left out of the equation. Insurance companies are governed by humans, and the decisions they make, have an influence on their portfolio - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are accrued is not. The insurance company has a certain amount of freedom when it comes to the distribution of surplus, and the 
-
-
-one of their free variable
-
- The human element is encapsulated in the so-called Management Actions. 
-
-
-Future management actions are mathematically intangible 
-
-In order to ensure a
-
- In this paper we derive a retrospective differential equation for the savings account, which aids in determining how much each individual policy has contributed to the collective surplus. Apart from providing a tool for fair distribution of surplus, the method provides insight on the financial risks carried by the insurance companies.\\
-The notion of bonus has been studied before; see chapter 6 of \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} and \citet{Steffensen1}.  As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} w
-\begin{displayquote}
-The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information.
-\end{displayquote}
-
-It seems as though previous contributions to the subject have focused on deriving closed form solutions for the reserve and surplus. The closed form solutions come at a price - a distribution of the financial market is a necessity. In essence, these models need to know how the market is expected to develop, in order to provide information about how the prospective reserves are expected to develop. Appealing as these analytical solutions are, However, the real-world complexity of $S$ can rarely be captured by a simple distribution with analytically known moments, and therefore simulations are used instead
-
-
-Our method is fundamentally different
-
-The contribution of this paper, is to provide a tool that can be used for prognostication based on simulation of arbitrary complexity. In a sense, we embrace the complexity of the financial market and its intricate influence on life insurance... It is infeasible to do nested monte-carlo simulations, so we average over the biometric risks only. In principle providing the true estimate
-
-The savings account, henceforth referred to as savings, differs from the reserves that classically are used to asses insurance liabilities, for in particular one reason: it depends on the entire history of the policy. This poses a problem, as the Markov property that usually saves us from the hassle of dealing with the past, no longer can be directly applied. Furthermore, the prospective reserves are a tool to find the liabilities of today, while the savings of today already are known. 
-
- With the methods from this paper, any [but as insurance companies have been satisfied with fairness on portfolio level, there has been little effort invested in the surplus generation on the individual policy]. Much of the theory concerning surplus has not taken into account that dividends usually are spent on increasing the policies benefits. This increase in benefits has an impact on the dynamics of the savings, and several of the  [\citep{NorbergB} concerned with the size of the surplus belonging to each policy, we are interested in the case where surplus is used to buy more insurance.]. Bonus emerges due to the difference between the first and second order basis. The first order basis
 
 \subsection*{"Life can only be understood backwards; but it must be lived forwards"}
-The contribution of this article is to embrace the fact that we, as humans, make decisions based on our past.  Even though I twist the wise words of Søren Kierkegaard, they 
+In its simplicity, the contribution of this article is to embrace the fact that we, as humans, make decisions based on our past. Even though I twist the wise words of Søren Kierkegaard, they 
 
 \subsection*{Setup}
-We consider the classic multi-state life insurance setup, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. 
+We consider the classic multi-state life insurance setup, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. As all dividends are spent on increasing benefits $B_2$, the savings account at time $t$ is the technical value of all future payments guaranteed at time $t$... Måske skal vi motivere dynamikken af $X$ mere grundigt. 
+The amount by which the savings surpass the first order reserve, is spent on $B_2$. The payment process $B(t)$ is thus given by
+$$
+dB(t)=b_1^{Z(t)}(t,X(t)) dt +\sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t))dN^k(t)
+$$
+where
+\begin{gather*}
+b^j(t,x)=b_1^j(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^j_2(t),
+\qquad \quad
+b^{jg}(t,x)=b_1^{jg}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^{jg}_2(t).
+\end{gather*}
+Dynamics of $X$
+\begin{align*}
+dX(t)=&
+r^*(t)X(t)dt
+ +\delta^{Z(t)}(t,X(t),Y(t))  dt- \sum_{g \neq Z(t-)} \rho^{Z(t-)g}(t,X(t-)) dt
+ \nonumber 
+\\
+\nonumber
+&- b^{Z(t)}(t,X(t)) dt
+\\
+&- \sum_{g\neq Z(t-)}\bigg(b^{Z(t-)g}(t,X(t-))+\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg) \mu^{Z(t)g}(t)dt
+\\
+&+ \sum_{g\neq Z(t-)}\bigg(\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg)  dN^g(t),
+\end{align*}
+and
+\begin{align*}
+dY(t)=Y(t)\frac{dS(t)}{S(t)}-\delta^{Z(t)}(t,X(t),Y(t)) + (r(t)-r^*(t)) X(t) + \sum_{g \neq Z(t-)} \rho^{Z(t)g}(t,X(t)),
+\end{align*}
+where
+\begin{align*}
+\rho^{jg}(t,x)=&(b^{jg}(t,x)+ \chi^{jg}(t,x)-x) (\mu^{*jg}(t)-\mu^{jg}(t))
+\\
+\chi^{jg}(t,x)=& V^{g*}_1(t) + \frac{x-V^{j*}_1(t)}{V^{j*}_2(t)}V^{g*}_2(t),
+\end{align*}
+\begin{equation}
+\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y+\delta_4^j(t)xy.
+\end{equation}
+
 \begin{itemize}
 \item Definition of $X$ and $Y$
 \item Deterministic second order basis, and discussion regarding simulation.
 \item remark on continuity of $b^i(t)$
 \item model limitations.
+\item Even though FMA's are one of the main reasons for considering the savings account, they are hidden in the dividend and surplus investment strategy.
 \end{itemize}
-The dynamics of $X$ are assumed to be affine
+Let $W$ be some possibly multidimensional process with $Z$-dependent dynamics
 \begin{align*}
-dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds\\
-&+\sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_2(s,Z(s-),h)\right) dN^h(s).
+dW(s)=& g(s,Z(s),W(s)) ds+ \sum_{k\neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s),
 \end{align*}
+for $g$ and $h$ functions that are linear in all elements of $W$. This multidemsional process can for instance represent the savings and surplus
+$$
+W(s)= \begin{pmatrix}
+X(s)\\
+Y(s)
+\end{pmatrix}.
+$$
+In practice, the surplus account is shared among policyholders, corresponding to $W\in \R^{N+1}$ for $N$ policies with a state process $Z$ on a state space of size $\# \{ \mathcal{J} \}^N$; one for each combination of all policy states. There are several ways to reduce the dimensionality of the problem, making it computationally feasible.
 
-In practice, the surplus account is shared among policyholders. The increased benefits are also guaranteed, which wi do not consider.
-
-Due to the fact that there are risk premiums on the bonus benefits, we get a system of two quantities that influence each other - the savings and the surplus. In the case of cash dividends, one simply has to find an expression for the expected surplus, as the reserves of the policies are unaffected by cash dividends.
-
-\subsection*{1 Active state model}
-We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with a non-zero savings-dependent payment process $b$. On transition to one of the inactive states, the savings are nullified. We need not specify what happens to the savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that the savings are zero in all inactive states. As there are no payments in the inactive states, $\chi^{0j}(t,x)=0$ for all inactive states $j$, implying that $h_x(t,0,j,x,y)=-x$. While the policy is in the active state, it contributes and receives dividend from a surplus account, $Y$. The survival model with and without surrender options are special cases of this model. Denote by $0$ the active state. The dynamics of $X$ are
+\subsection*{One-Active-state model}
+We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which may be non-linear. On transition to one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$. The survival model with and without surrender options are special cases of this model. Denote by $0$ the active state. The dynamics of $X$ and $Y$ are
 \begin{align*}
-dX(s)=& \indic{Z(s-)=0}g(s,0,X(s))ds - \sum_{h=1}^n X(s-)dN^h(s).
+dX(s)=& \indic{Z(s-)=0} g_x(s,0,X(s),Y(s))ds - \sum_{h=1}^n X(s-)dN^h(s)
+\\
+dY(s)=& \indic{Z(s-)=0} g_y(s,0,X(s),Y(s))ds - \sum_{h=1}^n Y(s-)dN^h(s).
 \end{align*}
-Note that there are no risk premiums, as there is no risk for the insurance company company related to the transitions of the policy. Therefore, the only risk carried by the insurance company, relates to the interest of the savings account.
+%Note that there are no risk premiums, as there is no risk for the insurance company company related to the transitions of the policy. Therefore, the only risk carried by the insurance company, relates to the interest of the savings account.
+Let $W(s)=(X(s),Y(s))^T$, and denote by $T_1$ the time of the first jump. For the deterministic function $W_a$ that solves
+$$
+W_a(t)=\int_0^t g(s,0,W_a(s)) ds,
+$$
+we see that
+$$
+\hat{W}(t):=\E[W(t)|Z(0)] = \E [  \indic{t<T_1} W_a(t)|Z(0)]  = p_{Z(0)0}(0,t) W_a(t),
+$$
+which comes at no surprise. In this case we know the past and present values of $W$ given the current state of $Z$, so the only stochastic element pertains to the state of the policy at time $t$. By differentiating w.r.t. $t$, and applying Kolmogorov's forward differential equation, we get the following differential equation for $\hat{W}$,
+\begin{align*}
+\hat{W}(0)=&\begin{pmatrix}
+X(0)\\
+Y(0)
+\end{pmatrix},
+\\
+\frac{d}{dt}\hat{W}(t)=&p_{aa}(0,t) g \left( s,0,\frac{\hat{W}(t)}{p_{aa}(0,t)}\right)
+-
+\frac{\hat{W}(t)}{p_{aa}(0,t)}\sum_{k=1}^n \mu_{0k}(t).
+\end{align*}
 
 
 
@@ -271,7 +313,44 @@ Remark: If the benefits are identical after age 65, the states 0,1,3 and 4 can b
 \end{figure}
 
 
-\subsection*{2 Active state model}
+\subsection*{Two-active-states model}
+We expand to a two-state hierarchical model.Illustrér at linaritet er nødvendig i transient model.
+
+\begin{align*}
+W_0(t)=&\int_0^t g(s,0,W_1(s)) ds
+\\
+W_1(T_1,t)=&\int_{T_1}^t g(s,1,W_1(T_1,s)) ds\\
+W_1(T_1,T_1)=&W_0(T_1)+h(T_1,0,1,W_0(T_1))\\
+q(s,t)=&\frac{p_{00}(0,s)p_{11}(s,t)}{p_{01}(0,t)}\mu_{01}(s)
+\end{align*}
+The function $q$ represents the intensity of transition at time $s$, given transition between $0$ and $t$. Let $T_1$ be the time of the first jump.
+\begin{align*}
+W(t)= \indic{Z(t)=0} W_0(t)+\indic{Z(t)=1}W_1(T_1,t) 
+\end{align*}
+
+\begin{align*}
+\E [ W(t)] = p_{00}(0,t)W_0(t)+ p_{01}(0,t)\int_0^t q(s,t) W_1(s,t) ds
+\end{align*}
+Now let
+\begin{align*}
+\hat{W}_i(t)=\E[W(t)|Z(t)=i]=
+\begin{dcases}
+W_0(t)\quad &\text{ for } Z(t)=0\\
+\int_0^t q(s,t) W_1(s,t) ds &\text{ for } Z(t)=1 \\
+0 &\text{ otherwise }, \\
+\end{dcases}
+\end{align*}
+denote the expectation of $W$ given the current state of the policy. When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $W_1(t)$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$.
+\\
+We could extend this method to hierarchical models of arbitrary size. The basic principle is the same: given all information about the past, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible state. These calculation very easily become very extensive, as there are many high-dimensional integrals to calculate, however, that is not the biggest weakness of this procedure. Hierarchical models cannot. The state uniquely defines the path, which is not the case in larger Hierarchical models, and definitely not the case in transient models. 
+\\
+For the sake of completeness we state the result
+\begin{align*}
+\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,\infty]^{L_i}} f_i(t,\Theta) dP_i(\Theta_{L_i})
+\end{align*} 
+where $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times.
+\\
+One could imagine that information about the jump time could be partially deduced from the intensities, thus almost allowing for non-linearity. Consider case where $\mu_{01}(t)= \kappa \indic{t \in (c_1,c_2]}$ for very small $c_2-c_1$ and very large $\kappa$, providing almost perfect information about the jump time, whereby non-linearity in $g(s,1,W(s))$ would be allowed for.
 
 \subsection*{$n$-state model}
 
@@ -369,11 +448,15 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \item Inclusion of surplus. Use independence when dividend is assigned on discrete points in time.
 \end{itemize}
 \item Deterministic intensities.
+\item General Hierarchical models do not need linearity. In general the variance increases as the number of states increase as the variance of the sum of transition times increases.
 \item Market dependent intensities - allowed when directly dependent on the market, making them deterministic.
 \item We are only concerned with the reserve.
 \item Maybe we should use a different wording? \textbf{Savings}/stash/backlog/accumulation/hoard/reservoir instead of reserve, to distinguish between the Danish words for "reserve" and "depot"
 \end{itemize}
 
+
+\appendix
+\section*{Proof of $q$}
 
 \newpage
 \bibliographystyle{plainnat}

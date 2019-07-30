@@ -196,8 +196,12 @@ From a mathematical point of view, they pose a problem as they depend on the ent
 In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a model where dividends are spent on increasing benefits.  
 
 
-\subsection*{"Life can only be understood backwards; but it must be lived forwards"}
-In its simplicity, the contribution of this article is to embrace the fact that we, as humans, make decisions based on our past. Even though I twist the wise words of Søren Kierkegaard, they 
+\subsection*{Prospective vs. Retrospective}
+When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. How to embrace the retrospective nature, is the main contribution of this paper.\\
+\begin{itemize}
+\item Something about Monte-carlo method
+\item Something about FMA's - perhaps an example?
+\end{itemize}
 
 \subsection*{Setup}
 We consider the classic multi-state life insurance setup, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. As all dividends are spent on increasing benefits $B_2$, the savings account at time $t$ is the technical value of all future payments guaranteed at time $t$... Måske skal vi motivere dynamikken af $X$ mere grundigt. 
@@ -257,10 +261,10 @@ X(s)\\
 Y(s)
 \end{pmatrix}.
 $$
-In practice, the surplus account is shared among policyholders, corresponding to $W\in \R^{N+1}$ for $N$ policies with a state process $Z$ on a state space of size $\# \{ \mathcal{J} \}^N$; one for each combination of all policy states. There are several ways to reduce the dimensionality of the problem, making it computationally feasible.
+In practice, the surplus account is shared among policyholders, corresponding to $W\in \R^{N+1}$ for $N$ policies with a state process $Z$ on a state space of size $\# \{ \mathcal{J} \}^N$; one for each combination of all policy states. There are several ways to reduce the dimensionality of the problem, making it computationally tractable.
 
-\subsection*{One-Active-state model}
-We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which may be non-linear. On transition to one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$. The survival model with and without surrender options are special cases of this model. Denote by $0$ the active state. The dynamics of $X$ and $Y$ are
+\subsection*{One Active State}
+We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which, in this setting, may be non-linear. Denote by $0$ the active state. On transition to any one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$, for $j=1,...,n$. The survival model with and without surrender options are special cases of this model.  The dynamics of $X$ and $Y$ are
 \begin{align*}
 dX(s)=& \indic{Z(s-)=0} g_x(s,0,X(s),Y(s))ds - \sum_{h=1}^n X(s-)dN^h(s)
 \\
@@ -273,25 +277,23 @@ W_a(t)=\int_0^t g(s,0,W_a(s)) ds,
 $$
 we see that
 $$
-\hat{W}(t):=\E[W(t)|Z(0)] = \E [  \indic{t<T_1} W_a(t)|Z(0)]  = p_{Z(0)0}(0,t) W_a(t),
+\hat{W}(t):=\E[W(t)|Z(0)=0] = \E [  \indic{t<T_1} W_a(t)|Z(0)=0]  = p_{00}(0,t) W_a(t),
 $$
-which comes at no surprise. In this case we know the past and present values of $W$ given the current state of $Z$, so the only stochastic element pertains to the state of the policy at time $t$. By differentiating w.r.t. $t$, and applying Kolmogorov's forward differential equation, we get the following differential equation for $\hat{W}$,
+which comes at no surprise. In this case we know the past and present values of $W$ given the current state of $Z$, so the only stochastic element pertains to the state of the policy at time $t$. By differentiating w.r.t. $t$, and applying Kolmogorov's forward differential equation, we get the following forward differential equation for $\hat{W}$,
 \begin{align*}
 \hat{W}(0)=&\begin{pmatrix}
 X(0)\\
 Y(0)
 \end{pmatrix},
 \\
-\frac{d}{dt}\hat{W}(t)=&p_{aa}(0,t) g \left( s,0,\frac{\hat{W}(t)}{p_{aa}(0,t)}\right)
+\frac{d}{dt}\hat{W}(t)=&p_{00}(0,t) g \left( s,0,\frac{\hat{W}(t)}{p_{00}(0,t)}\right)
 -
-\frac{\hat{W}(t)}{p_{aa}(0,t)}\sum_{k=1}^n \mu_{0k}(t).
+\frac{\hat{W}(t)}{p_{00}(0,t)}\sum_{k=1}^n \mu_{0k}(t).
 \end{align*}
+Even though it may seem very simple and perhaps even trivial, the model with one active state has great applicability.
 
-
-
-Remark: If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped, as well as 2,5 and 6, thus creating a survival model. If the dynamics in two states are identical, they can be viewed as one. Life annuity at age 65.
-
-
+\subsubsection*{Example With One Active State}
+If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped, as well as 2,5 and 6, thus creating a survival model. If the dynamics in two states are identical, they can be viewed as one. Life annuity at age 65.
 \def\PlA{(0,0)}
 \begin{figure}[H]
 \begin{center}
@@ -313,44 +315,74 @@ Remark: If the benefits are identical after age 65, the states 0,1,3 and 4 can b
 \end{figure}
 
 
-\subsection*{Two-active-states model}
-We expand to a two-state hierarchical model.Illustrér at linaritet er nødvendig i transient model.
+\subsection*{Two Active States}
+When expanding to a model where there are two active states, and $n$ inactive states, we need to use a different method to calculate $\hat{W}$, \textit{if the active states are transient}. There is an important difference between the hierarchical model with two active states, and the transient model with two active states. In the model with one active state, we know the entire history of the policy, given that the policy is in the active state. When we introduce a second active state in the hierarchical model, we also know where the policy has been given the active state, but we do not know when it transitioned from one active state to the other. In order to calculate the expectation of the savings and surplus, we simply have to integrate over all possible transition times. If there are two transient states, there is an infinite amount of paths to any of the transient states, and for each possible path there is an infinite amount of possible jump times.
+%Due to the large amount of possible paths and jump times, the naïve approach of calculating $\hat{W}$ is intractable. However, if the dynamics are affine, we can cut some very large corners.
+To illustrate the naïve method of calculating expected savings and surplus in a hierarchical model, consider the model depicted in figure \ref{fig:2}
+ \def\PlA{(0,0)}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,inner sep=10pt,minimum width=2cm,minimum height = 1cm},rounded corners=1mm]
+    \node (0) at \PlA {0, active};
+    \node (1) at ($(0.center) + (4.9,0)$) {1, active};
+    \node (2) at ($(0.center) + (0,-3)$) {inactive};    
+    \node (3) at ($(0.center) + (4.9,-3)$) {inactive};    
+\end{scope}
 
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge [bend left=0] node {$\mu_{01}$} (1);
+    \path [->] 	(0) edge [bend left=0] (2);
+    \path [->] 	(1) edge [bend left=0] (3);
+\end{scope}
+\end{tikzpicture}
+\caption{Two active state hierarchical model}
+\label{fig:2}
+\end{center}
+\end{figure}
+In this model, there are two states for which the savings and surplus are non-zero; $Z(t)\in \{ 0, 1\}$. As in the case with one active state, we know the value of $W(t)$ for $Z(t)=0$, but for $Z(t)=1$ we need to consider all possible transition times. Let $T_1$ be the time of the transition from 0 to 1. Define the quantity
 \begin{align*}
-W_0(t)=&\int_0^t g(s,0,W_1(s)) ds
-\\
+W_0(t)=&\int_0^t g(s,0,W_0(s)) ds,
+\intertext{characterizing the expected value of $W(t)$, given that $Z(t)=0$. Similarly, $W_1$ characterizes the expected value of $W(t)$ given $Z(t)=1$ and $dN_{01}(T_1)=1$, if it solves}
+W_1(T_1,T_1)=&W_0(T_1)+h(T_1,0,1,W_0(T_1)), \\
 W_1(T_1,t)=&\int_{T_1}^t g(s,1,W_1(T_1,s)) ds\\
-W_1(T_1,T_1)=&W_0(T_1)+h(T_1,0,1,W_0(T_1))\\
-q(s,t)=&\frac{p_{00}(0,s)p_{11}(s,t)}{p_{01}(0,t)}\mu_{01}(s)
+\intertext{Lastly we define the density of $T_1$, given that $Z(t)=1$ as}
+q(s,t)=&\frac{p_{00}(0,s)p_{11}(s,t)}{p_{01}(0,t)}\mu_{01}(s).
 \end{align*}
-The function $q$ represents the intensity of transition at time $s$, given transition between $0$ and $t$. Let $T_1$ be the time of the first jump.
+Let $T_1$ be the time of the first jump, then
 \begin{align*}
 W(t)= \indic{Z(t)=0} W_0(t)+\indic{Z(t)=1}W_1(T_1,t) 
 \end{align*}
-
+Implying that
 \begin{align*}
-\E [ W(t)] = p_{00}(0,t)W_0(t)+ p_{01}(0,t)\int_0^t q(s,t) W_1(s,t) ds
+\E [ W(t)] =& p_{00}(0,t) \E[W(t)|Z(t)=0] + p_{01}(0,t) \E[W(t)|Z(t)=1].
 \end{align*}
 Now let
 \begin{align*}
-\hat{W}_i(t)=\E[W(t)|Z(t)=i]=
+\hat{W}_i(t):=\E[W(t)|Z(t)=i]=
 \begin{dcases}
 W_0(t)\quad &\text{ for } Z(t)=0\\
 \int_0^t q(s,t) W_1(s,t) ds &\text{ for } Z(t)=1 \\
 0 &\text{ otherwise }, \\
 \end{dcases}
 \end{align*}
-denote the expectation of $W$ given the current state of the policy. When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $W_1(t)$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$.
+denote the expectation of $W$ given the current state of the policy. When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $\hat{W}_1(t)$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$. Thus
+$$
+\E [ W(t)]=p_{00}(0,t) W_0(t) + p_{01}(0,t) \int_0^t q(s,t) W_1(s,t) ds.
+$$
 \\
-We could extend this method to hierarchical models of arbitrary size. The basic principle is the same: given all information about the past, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible state. These calculation very easily become very extensive, as there are many high-dimensional integrals to calculate, however, that is not the biggest weakness of this procedure. Hierarchical models cannot. The state uniquely defines the path, which is not the case in larger Hierarchical models, and definitely not the case in transient models. 
+We could extend this method to hierarchical models of arbitrary size. The basic principle is the same: given all information about the past, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible state. These calculations very quickly become very extensive, as there are many high-dimensional integrals to calculate when the policy has made more than one transition.
+In general $\hat{W}$ can be calculated as
+\begin{align}
+\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,t]^{L_i}} W_i(t,\Theta_{L_i}) dP_i(\Theta_{L_i})
+\label{eq:AAA}
+\end{align} 
+where $\mathcal{P}$ is the set of possible policy paths, $L_i$ is the length of path $i$, $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times, $dP_i$ is the density of transition times for path $i$ and $W_i(t,\Theta_{L_i})$ is the value of $W(t)$ given the path and transition times.
 \\
-For the sake of completeness we state the result
-\begin{align*}
-\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,\infty]^{L_i}} f_i(t,\Theta) dP_i(\Theta_{L_i})
-\end{align*} 
-where $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times.
-\\
-One could imagine that information about the jump time could be partially deduced from the intensities, thus almost allowing for non-linearity. Consider case where $\mu_{01}(t)= \kappa \indic{t \in (c_1,c_2]}$ for very small $c_2-c_1$ and very large $\kappa$, providing almost perfect information about the jump time, whereby non-linearity in $g(s,1,W(s))$ would be allowed for.
+When the model is small and hierarchical, \eqref{eq:AAA} provides a tractable method to calculate the expected savings and surplus, as there are few possible paths and they are relatively short. When the model is transient the problem explodes, as there are infinitely many paths for the policy to take. 
+
 
 \subsection*{$n$-state model}
 
@@ -435,7 +467,6 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \subsection*{Thoughts}
 \begin{itemize}
 \item With-profit insurance! Expected reserve including accumulation of dividends.
-\item Same build-up as \citet{THM_BUC}. Hierarchical examples $\Rightarrow$ general transient.
 \item Refer to \citet{Norberg}
 \begin{itemize}
 \item Introduction and motivation - stochastic reserve, Monte Carlo method. A little comment on the fact that the problem is still hard to solve.
@@ -449,9 +480,11 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \end{itemize}
 \item Deterministic intensities.
 \item General Hierarchical models do not need linearity. In general the variance increases as the number of states increase as the variance of the sum of transition times increases.
-\item Market dependent intensities - allowed when directly dependent on the market, making them deterministic.
+\item Market dependent intensities - allowed when directly dependent on the market, making them deterministic. Or intensities that depend on the expected reserve - in a sense corresponding to intensities that depend on the group of similar policies.
 \item We are only concerned with the reserve.
 \item Maybe we should use a different wording? \textbf{Savings}/stash/backlog/accumulation/hoard/reservoir instead of reserve, to distinguish between the Danish words for "reserve" and "depot"
+\item One could imagine that information about the jump time could be partially deduced from the intensities, thus almost allowing for non-linearity. Consider case where $\mu_{01}(t)= \kappa \indic{t \in (c_1,c_2]}$ for very small $|c_2-c_1|$ and very large $\kappa$, providing almost perfect information about the jump time, whereby non-linearity in $g(s,1,W(s))$ would be allowed for.
+
 \end{itemize}
 
 

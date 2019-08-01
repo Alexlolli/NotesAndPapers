@@ -5,13 +5,14 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
-\bibitem[Buchardt et~al.(2015)Buchardt, Møller, and Schmidt]{THM_BUC}
-Kristian Buchardt, Thomas Møller, and Kristian Schmidt.
-\newblock Cash flows and policyholder behaviour in the semi-markov life
-  insurance setup.
-\newblock \emph{Scandinavian Actuarial Journal}, 2015\penalty0 (8), 2015.
-\newblock ISSN 03461238.
-\newblock URL \url{http://search.proquest.com/docview/1718994569/}.
+\bibitem[Christiansen et~al.(2014)Christiansen, Denuit, and
+  Dhaene]{Christiansen}
+MC~Christiansen, MM~Denuit, and J~Dhaene.
+\newblock Reserve-dependent benefits and costs in life and health insurance
+  contracts.
+\newblock \emph{Insurance Mathematics and Economics}, 57\penalty0 (1):\penalty0
+  132--137, 2014.
+\newblock ISSN 0167-6687.
 
 \bibitem[Møller and Steffensen(2007)]{Liv2}
 Thomas Møller and Mogens Steffensen.

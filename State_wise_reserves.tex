@@ -171,6 +171,20 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 }
 
 
+@article{Christiansen,
+issn = {0167-6687},
+journal = {Insurance Mathematics and Economics},
+pages = {132--137},
+volume = {57},
+publisher = {ELSEVIER SCIENCE BV},
+number = {1},
+year = {2014},
+title = {Reserve-dependent benefits and costs in life and health insurance contracts},
+language = {English},
+author = {Christiansen, MC and Denuit, MM and Dhaene, J},
+keywords = {Insurance ; Contracts ; Cost-Benefit Analysis ; Economic Analysis ; Economics;},
+}
+
 
 
 
@@ -184,7 +198,40 @@ keywords = {Key words: Safety margins, prospective reserves, retrospective reser
 
 \subsection*{Stuff to fix}
 \begin{itemize}
-\item Jeg kommer med flere påstande som jeg ikke er sikker på har hold i virkeligheden.
+\item Jeg kommer med flere påstande om industrien som jeg ikke er sikker på har hold i virkeligheden.
+\item Der er i princippet ikke nogen grund til at vi regner retrospektivt, når vi alligevel ikke bruger historikken... Skal vi udvidde, så X kan afhænge lineært af tidligere værdier? Vi kræver blot at
+$$
+\E[g(t,Z(t),\{ X(\tau) \}_{\tau\leq t})|Z(t)=i]=g(t,i,\{ \E[X(\tau)|Z(t)=i] \}_{\tau \leq t})$$
+fx ved
+$$
+g(t,i,\{X(\tau)\}_{\tau \leq t})=\int_0^t f^1_i(\tau) X(\tau) d\nu_1(\tau,t) + \int_0^t f^2_i(\tau) X(\tau) d\nu_2(\tau,t)
+$$
+for ét eller andet sigma-additivt mål $\nu_1$ (og $\nu_2$). Fx kunne $\nu_1$ være lebesque målet fra $t-1$ til $t$, mens $\nu_2$ kunne være punktmålet i $t$. Vi kan også lade $g$ afhænge ikke-lineært af tidligere værdier af $Z$, fx på følgende måde
+$$
+g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})=
+\int_0^t f(Z(\tau),\tau,t) X(\tau) d\nu(\tau)
+$$
+hvorved
+\begin{align*}
+&\E_{Z(0)}[g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})|Z(t-)=g]
+\\
+=&
+\int_0^t \E[ f(Z(\tau),\tau,t) X(\tau)|Z(t-)=g] d\nu(\tau)
+\\
+=&
+\int_0^t \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \E[X(\tau)|Z(\tau)=j,Z(t-)=g] \bigg| Z(t-)=g \right] d\nu(\tau)
+\\
+=&
+\int_0^t \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \frac{\E[X(\tau)\indic{Z(\tau)=j}]}{p_{0j}(0,\tau)} \bigg| Z(t-)=g \right] d\nu(\tau)
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}}  P(Z(\tau)=j|Z(0)=0,Z(t)=g) f(j,\tau,t) \frac{\tilde{X}^j(\tau)}{p_{0j}(0,\tau)}  d\nu(\tau)
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} \frac{p_{jg}(\tau,t)}{p_{0g}(0,t)} f(j,\tau,t) \tilde{X}^j(\tau) d\nu(\tau)
+\end{align*}
+where we have used that $X(\tau)|Z(\tau)$ is independent of $Z(t)|Z(\tau)$ for $\tau\leq t$
+
 \end{itemize}
 \section*{Introduction}
 With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk carried by the equity? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a financial Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected: the human element.
@@ -193,63 +240,50 @@ Insurance companies are governed by humans, and the decisions they make have an 
 %As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} \begin{displayquote} The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information. \end{displayquote}
 From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature.
 \\[12pt]
-In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a model where dividends are spent on increasing benefits.  
+In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics.  
 
 
 \subsection*{Prospective vs. Retrospective}
 When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. How to embrace the retrospective nature, is the main contribution of this paper.\\
+
 \begin{itemize}
 \item Something about Monte-carlo method
 \item Something about FMA's - perhaps an example?
+\item Deterministic second order basis, and discussion regarding simulation.
 \end{itemize}
 
-\subsection*{Setup}
-We consider the classic multi-state life insurance setup, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. As all dividends are spent on increasing benefits $B_2$, the savings account at time $t$ is the technical value of all future payments guaranteed at time $t$... Måske skal vi motivere dynamikken af $X$ mere grundigt. 
-The amount by which the savings surpass the first order reserve, is spent on $B_2$. The payment process $B(t)$ is thus given by
+\subsection*{Set-up}
+We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^k$ defined by $N^k(t)=\# \{ s; Z(s-)\neq k, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$. The benefits less premiums, for a certain contract $i$, develops in accordance with
 $$
-dB(t)=b_1^{Z(t)}(t,X(t)) dt +\sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t))dN^k(t)
+dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t),
 $$
-where
-\begin{gather*}
-b^j(t,x)=b_1^j(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^j_2(t),
-\qquad \quad
-b^{jg}(t,x)=b_1^{jg}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^{jg}_2(t).
-\end{gather*}
-Dynamics of $X$
+where $b_i^j(t)$ and $b_i^{jk}(t)$ are deterministic payment functions specifying payments during sojourns in state $j$ and on transition from state $j$ to state $k$, respectively. Even though single payments during sojourns in states pose no mathematical difficulty, we assume that payments during sojourns in states are continuous for notational simplicity. The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
+$$
+p_{ij}(s,t)= \P(Z(t)=j|Z(s)=i)
+$$
+for $s\leq t$. The corresponding transition intensities are denoted by
+$$
+\mu_{ij}(t)=\lim_{h \searrow 0} p_{ij}(t,t+h)/h
+$$
+for $i \neq j$. 
+\subsubsection*{Savings and Surplus}
+The savings $X$, and surplus $Y$, are the two quantities of interest. In practice, the dynamics of these accounts are very specific, and not a subject of debate. However, instead of working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
 \begin{align*}
-dX(t)=&
-r^*(t)X(t)dt
- +\delta^{Z(t)}(t,X(t),Y(t))  dt- \sum_{g \neq Z(t-)} \rho^{Z(t-)g}(t,X(t-)) dt
- \nonumber 
+dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t)\\
+&+g_{x2}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} h_{x2}(t,Z(t-),k,Y(t-)) dN^k(t),
 \\
-\nonumber
-&- b^{Z(t)}(t,X(t)) dt
+dY(t)=&Y(t)g_{y1}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} Y(t-) h_{y1}(t,Z(t-),k,X(t-)) dN^k(t)
 \\
-&- \sum_{g\neq Z(t-)}\bigg(b^{Z(t-)g}(t,X(t-))+\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg) \mu^{Z(t)g}(t)dt
-\\
-&+ \sum_{g\neq Z(t-)}\bigg(\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg)  dN^g(t),
+&+g_{y2}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} h_{y2}(t,Z(t-),k,X(t-)) dN^k(t).
 \end{align*}
-and
-\begin{align*}
-dY(t)=Y(t)\frac{dS(t)}{S(t)}-\delta^{Z(t)}(t,X(t),Y(t)) + (r(t)-r^*(t)) X(t) + \sum_{g \neq Z(t-)} \rho^{Z(t)g}(t,X(t)),
-\end{align*}
-where
-\begin{align*}
-\rho^{jg}(t,x)=&(b^{jg}(t,x)+ \chi^{jg}(t,x)-x) (\mu^{*jg}(t)-\mu^{jg}(t))
-\\
-\chi^{jg}(t,x)=& V^{g*}_1(t) + \frac{x-V^{j*}_1(t)}{V^{j*}_2(t)}V^{g*}_2(t),
-\end{align*}
-\begin{equation}
-\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y+\delta_4^j(t)xy.
-\end{equation}
+While it may not seem so, we work with $g$ and $h$ functions mainly for notational reasons. We refer to section \ref{seq:Dyn} for a practically relevant choice of the functions $g$ and $h$ - the notational advantage of using $g$ and $h$ is also apparent there. It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
+As stated in the introduction, management actions are one of the main motivators of this paper, but where are they evident in the dynamics of the savings and surplus? The answer is, the management actions are not evident. They are hidden in mainly two terms, the second order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers. Due to the very human and abstract nature of management actions, we do not incorporate them directly in the dynamics of the savings and surplus, but instead let them work in the shadows. It is important to 
+
 
 \begin{itemize}
-\item Definition of $X$ and $Y$
-\item Deterministic second order basis, and discussion regarding simulation.
-\item remark on continuity of $b^i(t)$
-\item model limitations.
 \item Even though FMA's are one of the main reasons for considering the savings account, they are hidden in the dividend and surplus investment strategy.
 \end{itemize}
+
 Let $W$ be some possibly multidimensional process with $Z$-dependent dynamics
 \begin{align*}
 dW(s)=& g(s,Z(s),W(s)) ds+ \sum_{k\neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s),
@@ -342,52 +376,76 @@ To illustrate the naïve method of calculating expected savings and surplus in a
 \label{fig:2}
 \end{center}
 \end{figure}
-In this model, there are two states for which the savings and surplus are non-zero; $Z(t)\in \{ 0, 1\}$. As in the case with one active state, we know the value of $W(t)$ for $Z(t)=0$, but for $Z(t)=1$ we need to consider all possible transition times. Let $T_1$ be the time of the transition from 0 to 1. Define the quantity
+\noin In this model, there are two states for which the savings and surplus are non-zero; $Z(t)\in \{ 0, 1\}$. As in the case with one active state, we know the value of $W(t)$ for $Z(t)=0$, but for $Z(t)=1$ we need to consider all possible transition times. Let $T_1$ be the time of the transition from 0 to 1. If $W_0$ solves
 \begin{align*}
 W_0(t)=&\int_0^t g(s,0,W_0(s)) ds,
-\intertext{characterizing the expected value of $W(t)$, given that $Z(t)=0$. Similarly, $W_1$ characterizes the expected value of $W(t)$ given $Z(t)=1$ and $dN_{01}(T_1)=1$, if it solves}
+\intertext{then it characterizes the expected value of $W(t)$, given that $Z(t)=0$. Similarly, $W_1$ characterizes the expected value of $W(t)$ given $Z(t)=1$ and $dN_{01}(T_1)=1$, if it solves}
 W_1(T_1,T_1)=&W_0(T_1)+h(T_1,0,1,W_0(T_1)), \\
-W_1(T_1,t)=&\int_{T_1}^t g(s,1,W_1(T_1,s)) ds\\
-\intertext{Lastly we define the density of $T_1$, given that $Z(t)=1$ as}
+W_1(T_1,t)=&\int_{T_1}^t g(s,1,W_1(T_1,s)) ds.\\
+\intertext{The density of $T_1$, given that $Z(t)=1$ is}
 q(s,t)=&\frac{p_{00}(0,s)p_{11}(s,t)}{p_{01}(0,t)}\mu_{01}(s).
 \end{align*}
 Let $T_1$ be the time of the first jump, then
 \begin{align*}
-W(t)= \indic{Z(t)=0} W_0(t)+\indic{Z(t)=1}W_1(T_1,t) 
+W(t)= \indic{Z(t)=0} W_0(t)+\indic{Z(t)=1}W_1(T_1,t),
 \end{align*}
-Implying that
+implying that
 \begin{align*}
-\E [ W(t)] =& p_{00}(0,t) \E[W(t)|Z(t)=0] + p_{01}(0,t) \E[W(t)|Z(t)=1].
+\E [ W(t)] =& p_{00}(0,t) \E[W_0(t)|Z(t)=0] + p_{01}(0,t) \E[W_1(T_1,t)|Z(t)=1].
 \end{align*}
-Now let
+Note that
 \begin{align*}
-\hat{W}_i(t):=\E[W(t)|Z(t)=i]=
+\E[W(t)|Z(t)=i]=
 \begin{dcases}
 W_0(t)\quad &\text{ for } Z(t)=0\\
 \int_0^t q(s,t) W_1(s,t) ds &\text{ for } Z(t)=1 \\
-0 &\text{ otherwise }, \\
+0 &\text{ otherwise }. \\
 \end{dcases}
 \end{align*}
-denote the expectation of $W$ given the current state of the policy. When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $\hat{W}_1(t)$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$. Thus
+When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $\E[W(t)|Z(t)=1]$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$. Thus
 $$
 \E [ W(t)]=p_{00}(0,t) W_0(t) + p_{01}(0,t) \int_0^t q(s,t) W_1(s,t) ds.
 $$
-\\
-We could extend this method to hierarchical models of arbitrary size. The basic principle is the same: given all information about the past, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible state. These calculations very quickly become very extensive, as there are many high-dimensional integrals to calculate when the policy has made more than one transition.
-In general $\hat{W}$ can be calculated as
+We could apply this method of calculating $\E[W(t)]$ to any model. The basic principle is simple: given all information about the past of $Z$, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible path of the policy. In general $\hat{W}$ can be calculated as
 \begin{align}
-\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,t]^{L_i}} W_i(t,\Theta_{L_i}) dP_i(\Theta_{L_i})
+\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,t]^{L_i}} W_i(t,\Theta_{L_i}) dP_i(\Theta_{L_i}),
 \label{eq:AAA}
 \end{align} 
 where $\mathcal{P}$ is the set of possible policy paths, $L_i$ is the length of path $i$, $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times, $dP_i$ is the density of transition times for path $i$ and $W_i(t,\Theta_{L_i})$ is the value of $W(t)$ given the path and transition times.
 \\
-When the model is small and hierarchical, \eqref{eq:AAA} provides a tractable method to calculate the expected savings and surplus, as there are few possible paths and they are relatively short. When the model is transient the problem explodes, as there are infinitely many paths for the policy to take. 
-
-
-\subsection*{$n$-state model}
-
+When the model is small and hierarchical, \eqref{eq:AAA} provides a tractable method to calculate the expected savings and surplus, as there are few possible paths and they are short. When the model is transient the problem explodes, as there are infinitely many paths for the policy to take. Fortunately, there are some very large corners to cut, under the simple assumption that $g$ and $h$ are affine in $W$. Udelad $h$ for simplicitetens skyld.
+\begin{align*}
+W(t)=& \int_0^{T_1} g(s,0)W(s) ds + \int_{T_1}^t g(s,1) W(s) ds \\
+%=& \int_0^t \indic{Z(s)=0} g(s,0)W(s) + \indic{Z(s)=1} g(s,1) W(s) ds
+%\\
+=& \int_0^t W(s) \left( \indic{Z(s)=0} g(s,0) + \indic{Z(s)=1} g(s,1) \right) ds
+\end{align*}
+now, for each state in the model
+\begin{align*}
+\E[W(t)|Z(t)=1] %Fubini
+=&
+\int_0^t \E[ W(s) \left( \indic{Z(s)=0} g(s,0) + \indic{Z(s)=1} g(s,1) \right)|Z(t)=1] ds
+\\
+=&
+\int_0^t \dfrac{\E[ W(s) \indic{Z(s)=0} \indic{Z(t)=1} ]g(s,0)}{P(Z(t)=0)} + \frac{\E [ W(s) \indic{Z(s)=1} \indic{Z(t)=1}  ]g(s,1)}{P(Z(t)=0)} ds
+\\
+=&
+\int_0^t \frac{\E[ W(s) \indic{Z(t)=1}|Z(s)=0 ]P(Z(s)=0)}{P(Z(t)=0)} g(s,0) ds
+\\
+&+ \int_0^t \frac{\E [ W(s)  \indic{Z(t)=1} |Z(s)=1 ]P(Z(s)=1)}{P(Z(t)=0)} g(s,1) ds
+\end{align*}
+due to the Markov property, $W(s)|Z(s)$ is independent of $Z(t)|Z(s)$. 
+\begin{align*}
+\E[W(t)|Z(t)=1]
+=&
+\int_0^t \frac{\E[ W(s) |Z(s)=0 ]P(Z(s)=0)P(Z(t)=1|Z(s)=0)}{P(Z(t)=0)} g(s,0) ds
+\\
+&+ \int_0^t \frac{\E [ W(s) |Z(s)=1 ]P(Z(s)=1)P(Z(t)=1|Z(s)=1)}{P(Z(t)=0)} g(s,1) ds
+\end{align*}
+leading to a differential equation for $\E[W(t)|Z(t)=0]$ and $\E[W(t)|Z(t)=1]$. This differential equation is invariant to the structure of the model, which is handled by the transition intensities.
 
 \section*{State-Wise Probability Weighted Reserve}
+In the previous section we presented a differential equation for a simple two state model, without any payments on transition. The same methodology can be applied for a general Markov model with affine dynamics.
 Define
 \begin{align*}
 \tilde{X}^j(t):=\E_{Z(0)}[X(t)\indic{Z(t)=j}]
@@ -398,19 +456,20 @@ and note that
 \end{align}
 by the definition of conditional expectation. We can think of $\tilde{X}^j$ as the probability weighted state-wise reserves. The relation between $\tilde{X}^j$ and $\E[X(t)]$ is
 \begin{align*}
-\E_{Z(0)}[X(t)] =& \E_{Z(0)}[\E_{Z(0)} [ X(t)|Z(t)]] 
-\\
-=&
-\E_{Z(0)} \left[ \sum_{j\in \mathcal{J}} \indic{Z(t)=j} \E_{Z(0)} [ X(t)|Z(t)=j] \right]
-\\
-=&
+\E_{Z(0)}[X(t)] =&
+% \E_{Z(0)}[\E_{Z(0)} [ X(t)|Z(t)]] 
+%\\
+%=&
+%\E_{Z(0)} \left[ \sum_{j\in \mathcal{J}} \indic{Z(t)=j} \E_{Z(0)} [ X(t)|Z(t)=j] \right]
+%\\
+%=&
 \E_{Z(0)} \left[ \sum_{j\in \mathcal{J}} \indic{Z(t)=j} \frac{\E_{Z(0)}[X(t)\indic{Z(t)=j}]}{p_{0j}(0,t)} \right]
 \\
+%=&
+%\sum_{j\in \mathcal{J}} p_{0j}(0,t) \frac{ \tilde{X}^j(t)}{p_{0j}(0,t)}
+%\\
 =&
-\sum_{j\in \mathcal{J}} p_{0j}(0,t) \frac{ \tilde{X}^j}{p_{0j}(0,t)}
-\\
-=&
-\sum_{j\in \mathcal{J}} \tilde{X}^j.
+\sum_{j\in \mathcal{J}} \tilde{X}^j(t).
 \end{align*}
 
 
@@ -489,7 +548,142 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 
 
 \appendix
-\section*{Proof of $q$}
+\section{Dynamics of $X$ and $Y$}\label{seq:Dyn}
+The savings account at time $t$ is the past net income compounded with the real interest, i.e.
+$$
+X(t):=\int_0^t e^{\int_s^t r} d(B(s)+D(s)-C(s)),
+$$
+while the surplus at time $t$ is the past contributions less dividends compounded with the real interest, i.e.
+$$
+Y(t):=\int_0^t e^{\int_s^t r} d(C(s)-D(s))
+$$
+
+
+The amount by which the savings surpass the first order reserve, is spent on $B_2$. 
+where
+\begin{gather*}
+b^j(t,x)=b_1^j(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^j_2(t),
+\qquad \quad
+b^{jg}(t,x)=b_1^{jg}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b^{jg}_2(t).
+\end{gather*}
+Dynamics of $X$
+\begin{align*}
+dX(t)=&
+r^*(t)X(t)dt
+ +\delta^{Z(t)}(t,X(t),Y(t))  dt- \sum_{g \neq Z(t-)} \rho^{Z(t-)g}(t,X(t-)) dt
+ \nonumber 
+\\
+\nonumber
+&- b^{Z(t)}(t,X(t)) dt
+\\
+&- \sum_{g\neq Z(t-)}\bigg(b^{Z(t-)g}(t,X(t-))+\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg) \mu^{Z(t)g}(t)dt
+\\
+&+ \sum_{g\neq Z(t-)}\bigg(\chi^{Z(t-)g}(t,X(t-))-X(t-) \bigg)  dN^g(t),
+\end{align*}
+and
+\begin{align*}
+dY(t)=Y(t)\frac{dS(t)}{S(t)}-\delta^{Z(t)}(t,X(t),Y(t)) + (r(t)-r^*(t)) X(t) + \sum_{g \neq Z(t-)} \rho^{Z(t)g}(t,X(t)),
+\end{align*}
+where
+\begin{align*}
+\rho^{jg}(t,x)=&(b^{jg}(t,x)+ \chi^{jg}(t,x)-x) (\mu^{*jg}(t)-\mu^{jg}(t))
+\\
+\chi^{jg}(t,x)=& V^{g*}_1(t) + \frac{x-V^{j*}_1(t)}{V^{j*}_2(t)}V^{g*}_2(t),
+\end{align*}
+\begin{equation}
+\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y+\delta_4^j(t)xy.
+\end{equation}
+
+\begin{align*}
+\tilde{W}^j(t):=
+\begin{pmatrix}
+\tilde{X}^j(t) \\
+\tilde{Y}^j(t)
+\end{pmatrix}
+=
+\begin{pmatrix}
+\E[ X(t) \indic{Z(t)=j}] \\
+\E[ Y(t) \indic{Z(t)=j}]
+\end{pmatrix}
+\end{align*}
+With differential equation
+\begin{align*}
+\frac{d}{dt}\tilde{W}^j(t)=&
+\sum_{g\neq j} \mu^{gj}(t) \tilde{W}^g(t) - \mu^{jg}(t) \tilde{W}^j(t)
+\\
+&+ \tilde{W}^j(t) \circ g_1(t,j,x,y)+p_{0j}(0,t) g_2(t,j)
+\\
+&+ \sum_{g \neq j} \mu^{gj}(t) \left( \tilde{W}^g(t) \circ h_1(t,g,j,x,y)+ p_{0g}(0,t) h_2(t,g,j) \right),
+\\
+\tilde{W}^j(0)=&\indic{Z(0)=j} \begin{pmatrix}
+X(0)\\
+Y(0)
+\end{pmatrix},
+\end{align*}
+where $\circ$ denotes the Hadamard product (element-wise multiplication) and
+\begin{gather*}
+g_1(t,j,x,y)=\begin{pmatrix}
+g_{x1}(t,j,y) \\
+g_{y1}(t,j,x)
+\end{pmatrix},
+\qquad 
+\quad
+h_1(t,j,g,x,y)=\begin{pmatrix}
+h_{x1}(t,j,g,y) \\
+h_{y1}(t,j,g,x)
+\end{pmatrix},
+\\
+g_2(t,j)=\begin{pmatrix}
+g_{x2}(t,j,y) \\
+g_{y2}(t,j,x)
+\end{pmatrix},
+\qquad 
+\quad
+h_2(t,j,g)=\begin{pmatrix}
+h_{x2}(t,j,g,y) \\
+h_{y2}(t,j,g,x)
+\end{pmatrix}.
+\end{gather*}
+For 
+\begin{align*}
+g_{x1}(t,j,y)=&r^*(t)  +\delta_2^j(t)+\delta_4^j(t)y\\
+&+\frac{b^j_2(t)}{V_2^{j*}(t)}
+-\sum_{g \neq j} \rho_1^{jg}(t)
+-\sum_{g \neq j} \left(\frac{b^{jg}_2(t)}{V_2^{j*}(t)} + \frac{V^{g*}_2(t)}{V^{j*}_2(t)}-1 \right) \mu^{jg}(t)
+\\
+g_{x2}(t,j,y)=& \delta_1^j(t)
++\delta_3^j(t)y
+-b_1^j(t)
+-\frac{V_1^{j*}(t)}{V_2^{j*}(t)}b^j_2(t)
+-\sum_{g \neq j} \rho_2^{jg}(t)
+\\
+&-\sum_{g \neq j} \left( b_1^{jg}(t)-\frac{V_1^{j*}(t)}{V_2^{j*}(t)}b^{jg}_2(t) -\frac{V^{j*}_1(t)}{V^{j*}_2(t)}V^{g*}_2(t)+V^{g*}_1(t) \right) \mu^{jg}(t).
+\end{align*}
+\begin{align*}
+h_x(t,j,g,x,y)=&\chi^{jg}(t,x) -x
+\\
+=&
+V^{g*}_1(t) + \frac{x-V^{j*}_1(t)}{V^{j*}_2(t)}V^{g*}_2(t) -x
+\\
+=&
+x
+\underbrace{\left( \frac{V^{g*}_2(t)}{V^{j*}_2(t)}-1 \right)}_{h_{x1}(t,j,g,y)}+\underbrace{V^{g*}_1(t) - \frac{V^{j*}_1(t)V^{g*}_2(t)}{V^{j*}_2(t)}}_{h_{x2}(t,j,g,y)}.
+\end{align*}
+For $g_y$ we get
+\begin{align*}
+g_y(t,j,x,y)=&y \frac{dS(t)}{S(t)} - \delta^j(t,x,y) + (r(t)-r^*(t)) x + \sum_{g \neq j} \rho^{jg}(t,x) 
+\\
+=&y\frac{dS(t)}{S(t)} - \delta_1^j(t)-\delta_2^j(t)x-\delta_3^j(t)y-\delta_4^j(t)xy
+\\
+&+ (r(t)-r^*(t)) x
++\sum_{g \neq j} \rho^{jg}(t,x)
+\\
+=& y \underbrace{\left( \frac{dS(t)}{S(t)}-\delta_3^j(t)-\delta_4^j(t)x\right)
+}_{g_{y1}(t,j,x)}\\
+& \underbrace{+\sum_{g \neq j} \rho^{jg}(t,x)- \delta_1^j(t)-\delta_2^j(t)x
++ (r(t)-r^*(t)) x }_{g_{y2}(t,j,x)}
+\end{align*}
+Finally, as $h_y=0$ we have $h_{y1}=h_{y2}=0$.
 
 \newpage
 \bibliographystyle{plainnat}

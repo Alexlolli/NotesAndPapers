@@ -206,31 +206,73 @@ fx ved
 $$
 g(t,i,\{X(\tau)\}_{\tau \leq t})=\int_0^t f^1_i(\tau) X(\tau) d\nu_1(\tau,t) + \int_0^t f^2_i(\tau) X(\tau) d\nu_2(\tau,t)
 $$
-for ét eller andet sigma-additivt mål $\nu_1$ (og $\nu_2$). Fx kunne $\nu_1$ være lebesque målet fra $t-1$ til $t$, mens $\nu_2$ kunne være punktmålet i $t$. Vi kan også lade $g$ afhænge ikke-lineært af tidligere værdier af $Z$, fx på følgende måde
+for ét eller andet sigma-additivt mål $\nu_1$ (og $\nu_2$). Fx kunne $\nu_1$ være lebesque målet fra $t-1$ til $t$, mens $\nu_2$ kunne være punktmålet i $t$ hvilket er specialtilfældet som vi i øjeblikket kigger på. Vi kan også lade $g$ afhænge af tidligere værdier af $Z$, fx på følgende måde
 $$
 g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})=
-\int_0^t f(Z(\tau),\tau,t) X(\tau) d\nu(\tau)
+\int_0^t f(Z(\tau),\tau,t) X(\tau) d\nu(\tau),
 $$
 hvorved
 \begin{align*}
-&\E_{Z(0)}[g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})|Z(t-)=g]
+&\E_{Z(0)}[\indic{Z(r)=i}g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})|Z(t-)=g]
 \\
 =&
-\int_0^t \E[ f(Z(\tau),\tau,t) X(\tau)|Z(t-)=g] d\nu(\tau)
+p_{gi}(t,r)\int_0^t \E[ f(Z(\tau),\tau,t) X(\tau)|Z(t-)=g] d\nu(\tau,t)
 \\
 =&
-\int_0^t \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \E[X(\tau)|Z(\tau)=j,Z(t-)=g] \bigg| Z(t-)=g \right] d\nu(\tau)
+\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \E[X(\tau)|Z(\tau)=j,Z(t-)=g] \bigg| Z(t-)=g \right] d\nu(\tau,t)
 \\
 =&
-\int_0^t \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \frac{\E[X(\tau)\indic{Z(\tau)=j}]}{p_{0j}(0,\tau)} \bigg| Z(t-)=g \right] d\nu(\tau)
+\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \frac{\E[X(\tau)\indic{Z(\tau)=j}]}{p_{0j}(0,\tau)} \bigg| Z(t-)=g \right] d\nu(\tau,t)
 \\
 =&
-\int_0^t \sum_{j \in \mathcal{J}}  P(Z(\tau)=j|Z(0)=0,Z(t)=g) f(j,\tau,t) \frac{\tilde{X}^j(\tau)}{p_{0j}(0,\tau)}  d\nu(\tau)
+\int_0^t p_{gi}(t,r) \sum_{j \in \mathcal{J}}  P(Z(\tau)=j|Z(0)=0,Z(t)=g) f(j,\tau,t) \frac{\tilde{X}^j(\tau)}{p_{0j}(0,\tau)}  d\nu(\tau,t)
 \\
 =&
-\int_0^t \sum_{j \in \mathcal{J}} \frac{p_{jg}(\tau,t)}{p_{0g}(0,t)} f(j,\tau,t) \tilde{X}^j(\tau) d\nu(\tau)
+\int_0^t \sum_{j \in \mathcal{J}} \frac{p_{jg}(\tau,t)}{p_{0g}(0,t)} p_{gi}(t,r) f(j,\tau,t) \tilde{X}^j(\tau) d\nu(\tau,t).
 \end{align*}
-where we have used that $X(\tau)|Z(\tau)$ is independent of $Z(t)|Z(\tau)$ for $\tau\leq t$
+hvor vi har brugt at $X(\tau)|Z(\tau)$ er uafhængig af $Z(t)|Z(\tau)$ for $\tau\leq t$. På denne måde kunne man fx. lade dividenden være en klumpbetaling svarende til det gennemsnitlige forventede bidrag over det sidste år, altså $f(j,\tau,t)X(\tau)=X(\tau)(r(\tau)-r^*(\tau))\sum_{k\neq j} \rho_1^{jk}(t)+\sum_{k\neq j} \rho_2^{jk}(t)$ for $\nu(\tau,t)$ værende lebesque målet for $(t-1,t]$ hvis $t$ er et heltal, og ellers 0. Da $\nu$ ikke nødvendigvis er absolut kontinuert, vil $g$ ikke svare til den kontinuerte udvikling af $X$ - vi tillader klump-betalinger på deterministiske tidspunkter.
+\item Tilsvarende for $h$
+$$
+h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})
+=\int_{(0,t]} \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) X(\tau-) dN^k\otimes\nu(\tau,t)
+$$
+Taking the expectation and conditioning on $Z(t-)=g$
+\begin{align*}
+&\E[\indic{Z(r)=j} h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau-)\}_{\tau\leq t})|Z(t-)=g]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j} X(\tau-) dN^k\otimes\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-), Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \E \left[ \sum_{k \neq i} \phi(\tau,t,i,k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k(\tau) |Z(\tau-)=i \right]\nu(\tau,t) \bigg| Z(t-)=g \right]
+\intertext{og da $X(\tau-)|Z(\tau-)$ er uafhænig af $\indic{Z(r)=j}dN^h(\tau)|Z(\tau-)$}
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[ X(\tau-) |Z(\tau-)=i \right] \E[ \indic{Z(r)=j} dN^k(\tau) |Z(\tau-)=i]\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \E[dN^k(\tau) |Z(\tau-)=i,Z(r)=j]p_{ij}(\tau,r)\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \E \left[\indic{Z(\tau)=i}  | Z(t-)=g \right] \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik}(\tau)\frac{p_{kj}(\tau,r)}{p_{ij}(\tau,r)} p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k)\tilde{X}^i(\tau) \mu_{ik}(\tau)p_{kj}(\tau,r) d\nu(\tau,t)
+\end{align*}
 
 \end{itemize}
 \section*{Introduction}

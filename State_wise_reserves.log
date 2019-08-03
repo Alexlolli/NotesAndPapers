@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.6.27)  2 AUG 2019 13:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.6.27)  3 AUG 2019 12:25
 entering extended mode
 **./State_wise_reserves.tex
 (State_wise_reserves.tex
@@ -1045,6 +1045,8 @@ Package: empheq 2017/03/31 v2.15 Emphasizing equations
 \EQ_tag_box=\box40
 \g_EQ_temprow_int=\count141
 )
+\c@thm=\count142
+
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\capti
 on.sty"
 Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
@@ -1061,29 +1063,29 @@ Package caption3 Info: TeX engine: e-TeX on input line 64.
 \caption@parindent=\dimen256
 \caption@hangindent=\dimen257
 )
-\c@ContinuedFloat=\count142
+\c@ContinuedFloat=\count143
 Package caption Info: hyperref package is loaded.
 )
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\list
 ings.sty"
-\lst@mode=\count143
+\lst@mode=\count144
 \lst@gtempboxa=\box41
 \lst@token=\toks41
-\lst@length=\count144
+\lst@length=\count145
 \lst@currlwidth=\dimen258
-\lst@column=\count145
-\lst@pos=\count146
+\lst@column=\count146
+\lst@pos=\count147
 \lst@lostspace=\dimen259
 \lst@width=\dimen260
-\lst@newlines=\count147
-\lst@lineno=\count148
+\lst@newlines=\count148
+\lst@lineno=\count149
 \lst@maxwidth=\dimen261
 
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstm
 isc.sty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count149
-\lst@skipnumbers=\count150
+\c@lstnumber=\count150
+\lst@skipnumbers=\count151
 \lst@framebox=\box42
 )
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\list
@@ -1096,10 +1098,10 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 autogobble.sty"
 Package: lstautogobble 2012/05/03 v0.1 Implements 'autogobble' option for 'list
 ings'
-\lstag@spacecount=\count151
+\lstag@spacecount=\count152
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count152
+\c@float@type=\count153
 \float@exts=\toks42
 \float@box=\box43
 \@float@everytoks=\toks43
@@ -1116,8 +1118,8 @@ x.sty"
 Package: suffix 2006/07/15 1.5a Variant command support
 )
 \CPT@WriteOut=\write4
-\c@CPT@WriteCount=\count153
-\c@CPT@numB=\count154
+\c@CPT@WriteCount=\count154
+\c@CPT@numB=\count155
 \CPT@commandatend@toks=\toks44
 )
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\natbib\natbib
@@ -1126,17 +1128,17 @@ Package: natbib 2010/09/13 8.31b (PWD, AO)
 \bibhang=\skip54
 \bibsep=\skip55
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count155
+\c@NAT@ctr=\count156
 )
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\csquotes\csqu
 otes.sty"
 Package: csquotes 2018/04/13 v5.2d context-sensitive quotations (JAW)
-\csq@reset=\count156
-\csq@gtype=\count157
-\csq@glevel=\count158
-\csq@qlevel=\count159
-\csq@maxlvl=\count160
-\csq@tshold=\count161
+\csq@reset=\count157
+\csq@gtype=\count158
+\csq@glevel=\count159
+\csq@qlevel=\count160
+\csq@maxlvl=\count161
+\csq@tshold=\count162
 \csq@ltx@everypar=\toks45
 
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\csquotes\csqu
@@ -1163,25 +1165,25 @@ Package csquotes Info: Redefining alias 'default' -> 'british'.
 (State_wise_reserves.aux)
 \openout1 = `State_wise_reserves.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 197.
-LaTeX Font Info:    ... okay on input line 197.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 209.
+LaTeX Font Info:    ... okay on input line 209.
 \AtBeginShipoutBox=\box45
-Package hyperref Info: Link coloring OFF on input line 197.
-LaTeX Info: Redefining \ref on input line 197.
-LaTeX Info: Redefining \pageref on input line 197.
-LaTeX Info: Redefining \nameref on input line 197.
+Package hyperref Info: Link coloring OFF on input line 209.
+LaTeX Info: Redefining \ref on input line 209.
+LaTeX Info: Redefining \pageref on input line 209.
+LaTeX Info: Redefining \nameref on input line 209.
  (State_wise_reserves.out) (State_wise_reserves.out)
 \@outlinefile=\write5
 \openout5 = `State_wise_reserves.out'.
@@ -1190,16 +1192,16 @@ LaTeX Info: Redefining \nameref on input line 197.
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-p
 df.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count162
+\scratchcounter=\count163
 \scratchdimen=\dimen262
 \scratchbox=\box46
-\nofMPsegments=\count163
-\nofMParguments=\count164
+\nofMPsegments=\count164
+\nofMParguments=\count165
 \everyMPshowfont=\toks46
-\MPscratchCnt=\count165
+\MPscratchCnt=\count166
 \MPscratchDim=\dimen263
-\MPnumerator=\count166
-\makeMPintoPDFobject=\count167
+\MPnumerator=\count167
+\makeMPintoPDFobject=\count168
 \everyMPtoPDFconversion=\toks47
 ) ("C:\Program Files\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1253,26 +1255,26 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count168
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 201.
+\c@lstlisting=\count169
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 213.
 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 201.
-LaTeX Font Info:    Try loading font information for U+msa on input line 203.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 213.
+LaTeX Font Info:    Try loading font information for U+msa on input line 215.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 203.
+LaTeX Font Info:    Try loading font information for U+msb on input line 215.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 232.
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 244.
 
 
 ("C:\Users\Alexander Lollike\AppData\Roaming\MiKTeX\2.9\tex\latex\doublestroke\
@@ -1282,52 +1284,62 @@ File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 
 {C:/Users/Alexander Lollike/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
-Overfull \hbox (96.84897pt too wide) detected at line 275
+Overfull \hbox (96.84897pt too wide) detected at line 287
 []
  []
 
 [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 289--290
+Underfull \hbox (badness 10000) in paragraph at lines 301--302
 
  []
 
 [4] [5] [6] [7] [8] [9] [10] [11]
-Overfull \hbox (41.00151pt too wide) in paragraph at lines 586--587
+Overfull \hbox (35.70279pt too wide) detected at line 599
+[]
+ []
+
+[12]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 607.
+
+[13] [14]
+Overfull \hbox (41.00151pt too wide) in paragraph at lines 721--722
 []\OT1/cmr/m/n/12 Maybe we should use a dif-fer-ent word-ing? \OT1/cmr/bx/n/12 
 Sav-ings\OT1/cmr/m/n/12 /stash/backlog/accumulation/hoard/reservoir
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 593.
+(hyperref)                removing `math shift' on input line 731.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 593.
+(hyperref)                removing `math shift' on input line 731.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 593.
+(hyperref)                removing `math shift' on input line 731.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 593.
+(hyperref)                removing `math shift' on input line 731.
 
-[12] [13] [14] [15] (State_wise_reserves.bbl) [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 734.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 734.
+[15] [16] [17] [18] (State_wise_reserves.bbl) [19]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 872.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 872.
  (State_wise_reserves.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 734.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 734.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 872.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 872.
 Package rerunfilecheck Info: File `State_wise_reserves.out' has not changed.
-(rerunfilecheck)             Checksum: F3AD2655F451FADE51D22B9C4C3C74EA;56.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 734.
+(rerunfilecheck)             Checksum: CB47C0BF7EA578F4A5D263E9F75854DB;1114.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 872.
  ) 
 Here is how much of TeX's memory you used:
- 22613 strings out of 493312
- 409653 string characters out of 3138861
- 506482 words of memory out of 3000000
- 25691 multiletter control sequences out of 15000+200000
+ 22643 strings out of 493312
+ 410059 string characters out of 3138861
+ 506594 words of memory out of 3000000
+ 25714 multiletter control sequences out of 15000+200000
  12765 words of font info for 52 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,17n,68p,1146b,1049s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1345,9 +1357,9 @@ nts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr
 iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb><C:/Users/Alexander Lollike
 /AppData/Roaming/MiKTeX/2.9/fonts/type1/public/doublestroke/dsrom12.pfb><C:/Pro
 gram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on State_wise_reserves.pdf (16 pages, 217188 bytes).
+Output written on State_wise_reserves.pdf (19 pages, 234943 bytes).
 PDF statistics:
- 196 PDF objects out of 1000 (max. 8388607)
- 43 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 50 named destinations out of 1000 (max. 500000)
+ 141 words of extra memory for PDF output out of 10000 (max. 10000000)
 

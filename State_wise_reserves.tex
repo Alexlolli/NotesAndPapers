@@ -44,6 +44,18 @@
 \def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
 \font\tt=rm-lmtl10
 
+\newtheoremstyle{my_thm}% name
+  {12pt}%         Space above, empty = `usual value'
+  {12pt}%         Space below
+  {\itshape}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {\newline}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+\theoremstyle{my_thm}
+\newtheorem{thm}{Theorem}[section]
+
 
 
 \usepackage{caption}
@@ -275,7 +287,7 @@ Taking the expectation and conditioning on $Z(t-)=g$
 \end{align*}
 
 \end{itemize}
-\section*{Introduction}
+\section{Introduction}
 With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk carried by the equity? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a financial Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected: the human element.
 \\[12pt]
 Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are accrued is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
@@ -285,7 +297,7 @@ From a mathematical point of view, they pose a problem as they depend on the ent
 In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics.  
 
 
-\subsection*{Prospective vs. Retrospective}
+\subsection{Prospective vs. Retrospective}
 When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. How to embrace the retrospective nature, is the main contribution of this paper.\\
 
 \begin{itemize}
@@ -294,7 +306,7 @@ When incorporating human decisions into the projection of balances and benefits 
 \item Deterministic second order basis, and discussion regarding simulation.
 \end{itemize}
 
-\subsection*{Set-up}
+\subsection{Set-up}
 We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^k$ defined by $N^k(t)=\# \{ s; Z(s-)\neq k, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$. The benefits less premiums, for a certain contract $i$, develops in accordance with
 $$
 dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t),
@@ -308,7 +320,7 @@ $$
 \mu_{ij}(t)=\lim_{h \searrow 0} p_{ij}(t,t+h)/h
 $$
 for $i \neq j$. 
-\subsubsection*{Savings and Surplus}
+\subsubsection{Savings and Surplus}
 The savings $X$, and surplus $Y$, are the two quantities of interest. In practice, the dynamics of these accounts are very specific, and not a subject of debate. However, instead of working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
 \begin{align*}
 dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t)\\
@@ -339,7 +351,7 @@ Y(s)
 $$
 In practice, the surplus account is shared among policyholders, corresponding to $W\in \R^{N+1}$ for $N$ policies with a state process $Z$ on a state space of size $\# \{ \mathcal{J} \}^N$; one for each combination of all policy states. There are several ways to reduce the dimensionality of the problem, making it computationally tractable.
 
-\subsection*{One Active State}
+\subsection{One Active State}
 We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which, in this setting, may be non-linear. Denote by $0$ the active state. On transition to any one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$, for $j=1,...,n$. The survival model with and without surrender options are special cases of this model.  The dynamics of $X$ and $Y$ are
 \begin{align*}
 dX(s)=& \indic{Z(s-)=0} g_x(s,0,X(s),Y(s))ds - \sum_{h=1}^n X(s-)dN^h(s)
@@ -368,7 +380,7 @@ Y(0)
 \end{align*}
 Even though it may seem very simple and perhaps even trivial, the model with one active state has great applicability.
 
-\subsubsection*{Example With One Active State}
+\subsubsection{Example With One Active State}
 If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped, as well as 2,5 and 6, thus creating a survival model. If the dynamics in two states are identical, they can be viewed as one. Life annuity at age 65.
 \def\PlA{(0,0)}
 \begin{figure}[H]
@@ -391,7 +403,7 @@ If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped
 \end{figure}
 
 
-\subsection*{Two Active States}
+\subsection{Two Active States}
 When expanding to a model where there are two active states, and $n$ inactive states, we need to use a different method to calculate $\hat{W}$, \textit{if the active states are transient}. There is an important difference between the hierarchical model with two active states, and the transient model with two active states. In the model with one active state, we know the entire history of the policy, given that the policy is in the active state. When we introduce a second active state in the hierarchical model, we also know where the policy has been given the active state, but we do not know when it transitioned from one active state to the other. In order to calculate the expectation of the savings and surplus, we simply have to integrate over all possible transition times. If there are two transient states, there is an infinite amount of paths to any of the transient states, and for each possible path there is an infinite amount of possible jump times.
 %Due to the large amount of possible paths and jump times, the naïve approach of calculating $\hat{W}$ is intractable. However, if the dynamics are affine, we can cut some very large corners.
 To illustrate the naïve method of calculating expected savings and surplus in a hierarchical model, consider the model depicted in figure \ref{fig:2}
@@ -435,15 +447,15 @@ implying that
 \begin{align*}
 \E [ W(t)] =& p_{00}(0,t) \E[W_0(t)|Z(t)=0] + p_{01}(0,t) \E[W_1(T_1,t)|Z(t)=1].
 \end{align*}
-Note that
-\begin{align*}
-\E[W(t)|Z(t)=i]=
-\begin{dcases}
-W_0(t)\quad &\text{ for } Z(t)=0\\
-\int_0^t q(s,t) W_1(s,t) ds &\text{ for } Z(t)=1 \\
-0 &\text{ otherwise }. \\
-\end{dcases}
-\end{align*}
+%Note that
+%\begin{align*}
+%\E[W(t)|Z(t)=i]=
+%\begin{dcases}
+%W_0(t)\quad &\text{ for } Z(t)=0\\
+%\int_0^t q(s,t) W_1(s,t) ds &\text{ for } Z(t)=1 \\
+%0 &\text{ otherwise }. \\
+%\end{dcases}
+%\end{align*}
 When $Z(t)=0$ all information about the history of the policy is known, and the value of $W$ is deterministic. Conditioning on $Z(t)=1$ does not provide full information about the history of the policy, as we do not know the time at which the transition from state 0 to state 1 was made. Therefore, to calculate $\E[W(t)|Z(t)=1]$ we have to integrate over all possible transition times, weighted by the transition intensity given that a jump happened prior to $t$. Thus
 $$
 \E [ W(t)]=p_{00}(0,t) W_0(t) + p_{01}(0,t) \int_0^t q(s,t) W_1(s,t) ds.
@@ -455,69 +467,192 @@ We could apply this method of calculating $\E[W(t)]$ to any model. The basic pri
 \end{align} 
 where $\mathcal{P}$ is the set of possible policy paths, $L_i$ is the length of path $i$, $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times, $dP_i$ is the density of transition times for path $i$ and $W_i(t,\Theta_{L_i})$ is the value of $W(t)$ given the path and transition times.
 \\
-When the model is small and hierarchical, \eqref{eq:AAA} provides a tractable method to calculate the expected savings and surplus, as there are few possible paths and they are short. When the model is transient the problem explodes, as there are infinitely many paths for the policy to take. Fortunately, there are some very large corners to cut, under the simple assumption that $g$ and $h$ are affine in $W$. Udelad $h$ for simplicitetens skyld.
+When the model is small and hierarchical, \eqref{eq:AAA} provides a tractable method to calculate the expected savings and surplus, as there are few possible paths and they are short. When the model is transient the problem explodes, as there are infinitely many paths for the policy to take. Fortunately, there are some very large corners to cut, under the simple assumption that $g$ and $h$ are affine in $W$. Consider the case where $W$ has dynamics
+$$
+dW(s)=g(s,Z(s))W(s) ds,
+$$
+then
 \begin{align*}
-W(t)=& \int_0^{T_1} g(s,0)W(s) ds + \int_{T_1}^t g(s,1) W(s) ds \\
+W(t)
+%=& \int_0^{T_1} g(s,0)W(s) ds + \int_{T_1}^t g(s,1) W(s) ds \\
 %=& \int_0^t \indic{Z(s)=0} g(s,0)W(s) + \indic{Z(s)=1} g(s,1) W(s) ds
 %\\
-=& \int_0^t W(s) \left( \indic{Z(s)=0} g(s,0) + \indic{Z(s)=1} g(s,1) \right) ds
+=& \int_0^t W(s) g(s,Z(s)) ds.
 \end{align*}
-now, for each state in the model
+Say we want to calculate 
+$$
+\tilde{W}^i(t):=\E_{Z(0)}[W(t)\indic{Z(t)=i}]
+%=\E_{Z(0)}[W(t)|Z(t)=i]p_{Z(0)i}(0,t),
+$$ 
+as we can use it to calculate $\E[W(t)]=\tilde{W}^0(t)+\tilde{W}^1(t)$. By the tower property and Fubinis theorem,
 \begin{align*}
-\E[W(t)|Z(t)=1] %Fubini
+\E_{Z(0)}[W(t)\indic{Z(t)=1}]
 =&
-\int_0^t \E[ W(s) \left( \indic{Z(s)=0} g(s,0) + \indic{Z(s)=1} g(s,1) \right)|Z(t)=1] ds
+\int_0^t \E[ \indic{Z(t)=1} W(s) g(s,Z(s))] ds
 \\
 =&
-\int_0^t \dfrac{\E[ W(s) \indic{Z(s)=0} \indic{Z(t)=1} ]g(s,0)}{P(Z(t)=0)} + \frac{\E [ W(s) \indic{Z(s)=1} \indic{Z(t)=1}  ]g(s,1)}{P(Z(t)=0)} ds
+\int_0^t \E_{Z(0)}[ \indic{Z(s)=1}\E_{Z(0)}[ \indic{Z(t)=1} W(s) g(s,Z(s))|Z(s)=1]] ds\\
+&+
+\int_0^t \E_{Z(0)}[ \indic{Z(s)=0}\E_{Z(0)}[ \indic{Z(t)=1} W(s) g(s,Z(s))|Z(s)=0]] ds
 \\
 =&
-\int_0^t \frac{\E[ W(s) \indic{Z(t)=1}|Z(s)=0 ]P(Z(s)=0)}{P(Z(t)=0)} g(s,0) ds
-\\
-&+ \int_0^t \frac{\E [ W(s)  \indic{Z(t)=1} |Z(s)=1 ]P(Z(s)=1)}{P(Z(t)=0)} g(s,1) ds
+\int_0^t p_{Z(0)1}(0,s) \E_{Z(0)}[ \indic{Z(t)=1} W(s) |Z(s)=1] g(s,1) ds\\
+&+
+\int_0^t p_{Z(0)0}(0,s)\E_{Z(0)}[ \indic{Z(t)=1} W(s) |Z(s)=0] g(s,0)ds.
+\intertext{By the Markov property $W(s)\independent Z(t)|Z(s)$, as $W(s)$ is $\mathcal{F}_s$-measurable.}
+=&
+\int_0^t p_{11}(s,t)\tilde{W}^1(s) g(s,1) ds\\
+&+
+\int_0^t p_{01}(s,t) \tilde{W}^0(s) g(s,0)ds.
 \end{align*}
-due to the Markov property, $W(s)|Z(s)$ is independent of $Z(t)|Z(s)$. 
+Differentiating with respect to $t$, and using Kolmogorov's forward differential equations yields the following system of differential equations
 \begin{align*}
-\E[W(t)|Z(t)=1]
-=&
-\int_0^t \frac{\E[ W(s) |Z(s)=0 ]P(Z(s)=0)P(Z(t)=1|Z(s)=0)}{P(Z(t)=0)} g(s,0) ds
+\frac{d}{dt} \tilde{W}^1(t)=& \mu_{01}(t)\tilde{W}^0(t)(t)-\mu_{10}(t)\tilde{W}^1(t)
++ \tilde{W}^1(t)g(t,1)
 \\
-&+ \int_0^t \frac{\E [ W(s) |Z(s)=1 ]P(Z(s)=1)P(Z(t)=1|Z(s)=1)}{P(Z(t)=0)} g(s,1) ds
+\frac{d}{dt} \tilde{W}^0(t)=& \mu_{10}(t)\tilde{W}^1(t)(t)-\mu_{01}(t)\tilde{W}^0(t)
++ \tilde{W}^0(t)g(t,0)
+\\
+\tilde{W}^i(0)=&\indic{Z(0)=i}W(0).
 \end{align*}
-leading to a differential equation for $\E[W(t)|Z(t)=0]$ and $\E[W(t)|Z(t)=1]$. This differential equation is invariant to the structure of the model, which is handled by the transition intensities.
+It is crucial to note that this differential equation is invariant to whether or not the model is transient, in contrast to the naive approach where all possible paths need to be considered individually. In the following section we generalise the result, 
 
-\section*{State-Wise Probability Weighted Reserve}
-In the previous section we presented a differential equation for a simple two state model, without any payments on transition. The same methodology can be applied for a general Markov model with affine dynamics.
-Define
+\section{State-Wise Probability Weighted Reserve}
+In the previous section we presented a differential equation for a simple two state model, without any payments on transition. The same methodology can be applied for a general Markov model with affine dynamics. We are interested in $\tilde{W}^i(t)$ for $i \in \mathcal{J}$, noting by the tower property that the relation between $\tilde{W}^i$ and $\E_{Z(0)}[W(t)]$ is given by
 \begin{align*}
-\tilde{X}^j(t):=\E_{Z(0)}[X(t)\indic{Z(t)=j}]
-\end{align*}
-and note that
-\begin{align}
-\E_{Z(0)}[X(t)\indic{Z(t)=j}]= \E_{Z(0)}[X(t)|Z(t)=j]p_{Z(0),j}(0,t), \label{eq:1}
-\end{align}
-by the definition of conditional expectation. We can think of $\tilde{X}^j$ as the probability weighted state-wise reserves. The relation between $\tilde{X}^j$ and $\E[X(t)]$ is
-\begin{align*}
-\E_{Z(0)}[X(t)] =&
+\E_{Z(0)}[W(t)] =&
 % \E_{Z(0)}[\E_{Z(0)} [ X(t)|Z(t)]] 
 %\\
 %=&
 %\E_{Z(0)} \left[ \sum_{j\in \mathcal{J}} \indic{Z(t)=j} \E_{Z(0)} [ X(t)|Z(t)=j] \right]
 %\\
 %=&
-\E_{Z(0)} \left[ \sum_{j\in \mathcal{J}} \indic{Z(t)=j} \frac{\E_{Z(0)}[X(t)\indic{Z(t)=j}]}{p_{0j}(0,t)} \right]
+\E_{Z(0)} \left[ \sum_{i\in \mathcal{J}} \indic{Z(t)=i} \frac{\E_{Z(0)}[W(t)\indic{Z(t)=i}]}{p_{0i}(0,t)} \right]
 \\
 %=&
 %\sum_{j\in \mathcal{J}} p_{0j}(0,t) \frac{ \tilde{X}^j(t)}{p_{0j}(0,t)}
 %\\
 =&
-\sum_{j\in \mathcal{J}} \tilde{X}^j(t).
+\sum_{i\in \mathcal{J}} \tilde{W}^i(t).
+\end{align*}
+By using the tower property and the fact that $W(s-)\independent Z(t)|Z(s-)$, we get the following theorem
+\begin{thm}[]
+\label{thm:Diff_1}
+Let $Z(t)$ be a Markov process on the state space $\mathcal{J}$, and let $W(t)$ be a $\mathcal{F}_t$ measurable process with dynamics
+\begin{align*}
+dW(s)=  g(s,Z(s),W(s))ds+
+ \sum_{k \neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s) 
+\end{align*}
+for $g$ and $h$ of the form
+\begin{align*}
+g(s,Z(s),W(s))=&g_1(s,Z(s)) W(s)+g_2(s,Z(s))
+\\
+h(s,Z(s-),k,W(s-))=&h_1(s,Z(s-),k) W(s-)+h_2(s,Z(s),k)
+\end{align*}
+for some measures $\nu_g,\nu_h,\eta_g$ and $\eta_h$.
+Then
+\begin{align*}
+\frac{d}{dt}\tilde{W}^i(t)=&
+\sum_{j \neq i} \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
+\\
+&+
+\tilde{W}^i(t)g_1(t,i)+p_{Z(0)i}(0,t)g_2(s,Z(s))
+\\
+&+
+\sum_{j\neq i} \mu_{ji}(t) \left( \tilde{W}^j(t) h_1(t,j,i)+ p_{Z(0)j}(0,t)h_2(t,j,i)\right)
+\end{align*}
+\end{thm}
+
+\begin{proof}[Proof of theorem \ref{thm:Diff_1}]
+By the tower property
+\begin{align*}
+\tilde{W}^i(t):=&\E_{Z(0)}[W(t) \indic{Z(t)=i}]
+\\
+=&
+\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} dW(s) \right]
+\\
+=&
+\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} g(s,Z(s),W(s))ds \right]
+\\
+&+
+\E_{Z(0)} \left[ \int_0^t \sum_{k \neq Z(s-)} \indic{Z(t)=i} h(s,Z(s-),k,W(s-)) dN^k(s)  \right].
+\end{align*}
+Note that $h(s,Z(s-),k,W(s-)$ is predictable, and we may therefore replace the integrator $dN^k(s)$ with its predictable compensator $\indic{Z(s-)\neq k}\mu^{Z(s-)k}(t)$. Using the tower property
+\begin{align*}
+\tilde{W}^i(t)=&
+\int_0^t \E_{Z(0)} \left[ \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s) \right]\right] ds
+\\
+&+
+ \int_0^t\E_{Z(0)} \left[ \E_{Z(0)} \left[ \sum_{k \neq Z(s-)}\indic{Z(t)=i} h(s,Z(s-),k,W(s-))  \mu^{Z(s-)k}(t) |Z(s-) \right] \right] ds
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s) \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s)=j\right] ds
+\\
+&+
+ \int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)  \E_{Z(0)} \left[ \sum_{k \neq Z(s-)} \indic{Z(t)=i} h(s,Z(s-),k,W(s-))  \mu^{Z(s-)k}(t) |Z(s-)=j \right] ds
+ \\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)\left( \E_{Z(0)} \left[ \indic{Z(t)=i} W(s))|Z(s)=j\right]g_1(j,s)+g_2(j,s)\right) ds
+\\
+&+
+\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)  \left( \sum_{k \neq j}  \mu^{jk}(t) \left(  \E_{Z(0)} \left[\indic{Z(t)=i} W(s-)|Z(s-)=j \right] h_1(s,j,k)+h_2(s,j,k)  \right) \right) ds
+\end{align*}
+By the Markov property
+$$
+\E_{Z(0)}[\indic{Z(t)=i}W(s)|Z(s)=j]=\frac{\tilde{W}^j(t)}{p_{Z(0)j}(0,s)}p_{ji}(s,t)
+$$
+\end{proof}
+
+The functions $g$ and $h$ respectively describe the continuous and discrete dynamics of $W(s)$. Skriv noget om antagelser og signifikans. Eksempel.
+\subsubsection{Free Policy}
+
+\subsection{General Path dependent dynamics}
+Even though theorem \ref{thm:Diff_1} provides a powerful too for calculating future values of the savings and surplus, it is restricted to dynamics that only depends on the current value of $Z$ and $W$. It is not unreasonable to assume that the dividend strategy depends on the history of $Z$ and $W$. It turns out, that for certain dynamics that, in some sense, are linearly dependent on the past we can 
+
+
+\begin{thm}[]
+\label{thm:Diff_2}
+Let $Z(t)$ be a Markov process on the state space $\mathcal{J}$, and let $W(t)$ be a $\mathcal{F}_t$ measurable process with dynamics
+\begin{align*}
+dW(s)= d g(s,\{Z(\tau)\}_{\tau\leq s},\{W(\tau)\}_{\tau\leq s})+
+ d h(s,\{Z(\tau)\}_{\tau\leq s},\{W(\tau)\}_{\tau\leq s})
+\end{align*}
+for $g$ and $h$ of the form
+\begin{align*}
+g(s,\{Z(\tau)\}_{\tau\leq s},\{W(\tau)\}_{\tau\leq s})=&\int_{(0,s]} \varphi_1(s,\tau,Z(\tau))W(\tau) d\nu_g(\tau,t)
+\\
+&+
+\int_{(0,s]} \varphi_2(s,\tau,Z(\tau)) d\eta_g(\tau,t)
+\\
+h(s,\{Z(\tau)\}_{\tau\leq s},\{W(\tau)\}_{\tau\leq s})=&\int_{(0,s]} \sum_{k\neq Z(\tau-)} \psi_1(s,\tau,Z(\tau-),k) W(\tau-)  dN^k\otimes\nu_h(\tau,t)
+\\
+&+
+\int_{(0,s]} \sum_{k\neq Z(\tau-)} \psi_2(s,\tau,Z(\tau-),k)  dN^k\otimes\eta_h(\tau,t),
+\end{align*}
+for some measures $\nu_g,\nu_h,\eta_g$ and $\eta_h$.
+Then
+\begin{align*}
+\frac{d}{dt}\tilde{W}^i(t)=&
+\sum_{j \neq i} \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
+\\
+&+
+\int_{(0,t]} \sum_{k \in \mathcal{J}} p_{ki}(\tau,t) \varphi_1(t,\tau,k) \tilde{W}^k(\tau) d\nu_g(\tau,t) ds
+\\
+&+
+p_{Z(0)i}(0,t)\int_{(0,t]} \sum_{k \in \mathcal{J}} p_{ki}(\tau,t) \varphi_2(t,\tau,k) d\eta_g(\tau,t) ds
+\\
+\tilde{W}^i(0)=&\indic{Z(0)=i}W(0)
 \end{align*}
 
+\end{thm}
+We see that theorem \ref{thm:Diff_1} is a special case of theorem \ref{thm:Diff_2} with $\nu_g,\nu_h,\eta_g$ and $\eta_h$ being the Dirac measures in $t$, i.e 
+$$
+\nu_g(\tau,t)=\nu_h(\tau,t)=\eta_g(\tau,t)=\eta_h(\tau,t)=\indic{\tau=t}
+$$
 
 
 
-\subsection*{Life-Death-Surrender}
+\subsection{Life-Death-Surrender}
 \def\PlA{(0,0)}
 \begin{center}
 \begin{tikzpicture}
@@ -538,7 +673,7 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 
 
 
-\subsection*{Life-Death-Surrender With Free Policy}
+\subsection{Life-Death-Surrender With Free Policy}
 \def\PlA{(0,0)}
 \def\PlB{(0,-3)}
 \begin{center}
@@ -563,9 +698,9 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \end{scope}
 \end{tikzpicture}
 \end{center}
-\subsection*{Use of Savings account}
+\subsection{Use of Savings account}
 
-\subsection*{Thoughts}
+\subsection{Thoughts}
 \begin{itemize}
 \item With-profit insurance! Expected reserve including accumulation of dividends.
 \item Refer to \citet{Norberg}
@@ -589,7 +724,10 @@ by the definition of conditional expectation. We can think of $\tilde{X}^j$ as t
 \end{itemize}
 
 
+
 \appendix
+
+\section{Proof of Theorem \ref{thm:Diff_1} }
 \section{Dynamics of $X$ and $Y$}\label{seq:Dyn}
 The savings account at time $t$ is the past net income compounded with the real interest, i.e.
 $$

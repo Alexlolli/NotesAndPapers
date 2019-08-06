@@ -285,7 +285,7 @@ Taking the expectation and conditioning on $Z(t-)=g$
 =&
 \int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k)\tilde{X}^i(\tau) \mu_{ik}(\tau)p_{kj}(\tau,r) d\nu(\tau,t)
 \end{align*}
-
+\item Meget i beviserne skal slettes. De er for lange
 \end{itemize}
 \section{Introduction}
 With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk carried by the equity? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a financial Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected: the human element.
@@ -547,9 +547,8 @@ for $g$ and $h$ of the form
 \begin{align*}
 g(s,Z(s),W(s))=&g_1(s,Z(s)) W(s)+g_2(s,Z(s))
 \\
-h(s,Z(s-),k,W(s-))=&h_1(s,Z(s-),k) W(s-)+h_2(s,Z(s),k)
+h(s,Z(s-),k,W(s-))=&h_1(s,Z(s-),k) W(s-)+h_2(s,Z(s),k).
 \end{align*}
-for some measures $\nu_g,\nu_h,\eta_g$ and $\eta_h$.
 Then
 \begin{align*}
 \frac{d}{dt}\tilde{W}^i(t)=&
@@ -563,45 +562,7 @@ Then
 \end{align*}
 \end{thm}
 
-\begin{proof}[Proof of theorem \ref{thm:Diff_1}]
-By the tower property
-\begin{align*}
-\tilde{W}^i(t):=&\E_{Z(0)}[W(t) \indic{Z(t)=i}]
-\\
-=&
-\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} dW(s) \right]
-\\
-=&
-\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} g(s,Z(s),W(s))ds \right]
-\\
-&+
-\E_{Z(0)} \left[ \int_0^t \sum_{k \neq Z(s-)} \indic{Z(t)=i} h(s,Z(s-),k,W(s-)) dN^k(s)  \right].
-\end{align*}
-Note that $h(s,Z(s-),k,W(s-)$ is predictable, and we may therefore replace the integrator $dN^k(s)$ with its predictable compensator $\indic{Z(s-)\neq k}\mu^{Z(s-)k}(t)$. Using the tower property
-\begin{align*}
-\tilde{W}^i(t)=&
-\int_0^t \E_{Z(0)} \left[ \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s) \right]\right] ds
-\\
-&+
- \int_0^t\E_{Z(0)} \left[ \E_{Z(0)} \left[ \sum_{k \neq Z(s-)}\indic{Z(t)=i} h(s,Z(s-),k,W(s-))  \mu^{Z(s-)k}(t) |Z(s-) \right] \right] ds
-\\
-=&
-\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s) \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s)=j\right] ds
-\\
-&+
- \int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)  \E_{Z(0)} \left[ \sum_{k \neq Z(s-)} \indic{Z(t)=i} h(s,Z(s-),k,W(s-))  \mu^{Z(s-)k}(t) |Z(s-)=j \right] ds
- \\
-=&
-\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)\left( \E_{Z(0)} \left[ \indic{Z(t)=i} W(s))|Z(s)=j\right]g_1(j,s)+g_2(j,s)\right) ds
-\\
-&+
-\int_0^t \sum_{j \in \mathcal{J}} p_{0j}(0,s)  \left( \sum_{k \neq j}  \mu^{jk}(t) \left(  \E_{Z(0)} \left[\indic{Z(t)=i} W(s-)|Z(s-)=j \right] h_1(s,j,k)+h_2(s,j,k)  \right) \right) ds
-\end{align*}
-By the Markov property
-$$
-\E_{Z(0)}[\indic{Z(t)=i}W(s)|Z(s)=j]=\frac{\tilde{W}^j(t)}{p_{Z(0)j}(0,s)}p_{ji}(s,t)
-$$
-\end{proof}
+
 
 The functions $g$ and $h$ respectively describe the continuous and discrete dynamics of $W(s)$. Skriv noget om antagelser og signifikans. Eksempel.
 \subsubsection{Free Policy}
@@ -728,6 +689,111 @@ $$
 \appendix
 
 \section{Proof of Theorem \ref{thm:Diff_1} }
+\begin{proof}[Proof of theorem \ref{thm:Diff_1}]
+The proof consists of two steps. First, we derive an integral equation for $\tilde{W}^i(t)$. Second, we differentiate this integral equation. \\
+By the tower property
+\begin{align*}
+\tilde{W}^i(t):=&\E_{Z(0)}[W(t) \indic{Z(t)=i}]
+\\
+=&
+\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} dW(s) \right]
+\\
+=&
+\E_{Z(0)} \left[ \int_0^t \indic{Z(t)=i} g(s,Z(s),W(s))ds \right]
+\\
+&+
+\E_{Z(0)} \left[ \int_0^t \sum_{k \neq Z(s-)} \indic{Z(t)=i} h(s,Z(s-),k,W(s-)) dN^k(s)  \right].
+\end{align*}
+Based on the calculations in section C of \citet{Norberg}, note that the intensity process of the predictable compensator for $N^{jk}(s)|Z(s-)=j, Z(t)=i$ is given by
+$$
+\mu_{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)}.
+$$
+As $h(s,Z(s-),k,W(s-)$ is predictable, we may replace the integrator $dN^k(s)$ with its predictable compensator. Using the tower property once more,
+\begin{align*}
+\tilde{W}^i(t)=&
+\int_0^t \E_{Z(0)} \left[ \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s) \right]\right] ds
+\\
+&+
+\E_{Z(0)} \left[ \E_{Z(0)} \left[ \int_0^t \sum_{k \neq Z(s-)}\indic{Z(t)=i} h(s,Z(s-),k,W(s-)) dN^k(s) |Z(s-) \right] \right] 
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s) \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s)=j\right] ds
+\\
+&+
+  \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)   \E_{Z(0)} \left[\int_0^t \sum_{k \neq j} \indic{Z(t)=i} h(s,j,k,W(s-))  dN^k(s) |Z(s-)=j \right]
+ \\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s) \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s)=j\right] ds
+\\
+&+
+  \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s) p_{ji}(s,t)  \E_{Z(0)} \left[\int_0^t \sum_{k \neq j}  h(s,j,k,W(s-))  dN^k(s) |Z(s-)=j,Z(t)=i \right]
+ \\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s) \E_{Z(0)} \left[ \indic{Z(t)=i} g(s,Z(s),W(s))|Z(s)=j\right] ds
+\\
+&+
+\sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)  \int_0^t \sum_{k \neq j }   \E_{Z(0)} \left[ h(s,j,k,W(s-))  |Z(s-)=j,Z(t)=i \right] \mu_{jk}(s)p_{ki}(s,t) ds.
+\end{align*}
+Since $W(s)$ is $\mathcal{F}_s$-measurable, the Markov property gives us
+$$
+\E_{Z(0)}[\indic{Z(t)=i}W(s)|Z(s)=j]=\frac{\tilde{W}^j(s)}{p_{Z(0)j}(0,s)}p_{ji}(s,t), 
+$$
+and by the continuity of $\tilde{W}^i(t)$ we get
+\begin{align*}
+\tilde{W}^i(t)=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)\left( \frac{\tilde{W}^j(s)}{p_{Z(0)j}(0,s)}g_1(j,s)+g_2(j,s)\right)p_{ji}(s,t) ds
+\\
+&+
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)  \left( \sum_{k \neq j}  \mu_{jk}(t)p_{ki}(s,t) \left(  \frac{\tilde{W}^j(s)}{p_{Z(0)j}(0,s)} h_1(s,j,k)+h_2(s,j,k)  \right) \right) ds
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} p_{ji}(s,t) \tilde{W}^j(s)g_1(j,s) ds
+\\
+&+
+\int_0^t \sum_{j \in \mathcal{J}} \sum_{k \neq j}  \mu_{jk}(t) p_{ki}(s,t) \tilde{W}^j(s) h_1(s,j,k)  ds
+\\
+&+
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)g_2(j,s)p_{ji}(s,t) ds
+\\
+&+
+\int_0^t \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)  \sum_{k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h_2(s,j,k) ds.
+\end{align*}
+Differentiating with respect to $t$ gives
+\begin{align*}
+\frac{d}{dt}\tilde{W}^i(t)=&
+ \tilde{W}^i(t)g_1(i,t)+p_{Z(0)i}(0,t)g_2(i,t)\\
+&+
+\sum_{k \neq i} \mu_{ki}(t) \left( \tilde{W}^k(t) h_1(t,k,i) + p_{Z(0)k}(0,t)h_2(t,k,i) \right)
+\\
+&+
+\int_0^t \frac{\partial}{\partial t}  \sum_{j \in \mathcal{J}} p_{ji}(s,t) \tilde{W}^j(s)g_1(j,s) ds
+\\
+&+
+\int_0^t \frac{\partial}{\partial t}  \sum_{j \in \mathcal{J}} \sum_{k \neq j}  \mu_{jk}(t) p_{ki}(s,t) \tilde{W}^j(s) h_1(s,j,k)  ds
+\\
+&+
+\int_0^t \frac{\partial}{\partial t}  \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)g_2(j,s)p_{ji}(s,t) ds
+\\
+&+
+\int_0^t \frac{\partial}{\partial t} \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)  \sum_{k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h_2(s,j,k) ds.
+\end{align*}
+By the Kolmogorov forward differential equations we arrive at
+\begin{align*}
+\frac{d}{dt}\tilde{W}^i(t)=&
+ \tilde{W}^i(t)g_1(i,t)+p_{Z(0)i}(0,t)g_2(i,t)\\
+&+
+\sum_{k \neq i} \mu_{ki}(t) \left( \tilde{W}^k(t) h_1(t,k,i) + p_{Z(0)k}(0,t)h_2(t,k,i) \right)
+\\
+&+
+\sum_{k \neq i} \mu_{ki}(t) \tilde{W}^k(t)-\mu_{ik}(t)\tilde{W}^i(t).
+\end{align*}
+Combined with the initial condition
+$$
+\tilde{W}^i(0)=\E_{Z(0)}[\indic{Z(0)=i}W(0)]=\indic{Z(0)=i}W(0),
+$$
+the proof is complete.
+\end{proof}
+
 \section{Dynamics of $X$ and $Y$}\label{seq:Dyn}
 The savings account at time $t$ is the past net income compounded with the real interest, i.e.
 $$

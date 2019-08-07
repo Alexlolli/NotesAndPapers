@@ -287,24 +287,20 @@ Taking the expectation and conditioning on $Z(t-)=g$
 \end{align*}
 \item Meget i beviserne skal slettes. De er for lange
 \end{itemize}
+\newpage
 \section{Introduction}
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that develops due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? what is the risk carried by the equity? how should it be invested? One might look for answers in the existing literature e.g. \citet{Liv2}, \citet{NorbergB}, \citet{Steffensen0} or \citet{Steffensen1}, where partial differential equations are used to describe the prospective second order reserve and its interplay with surplus. While these PDE's provide a conceptually powerful tool, they are limited to simple market dynamics, and they do not provide realistic models for long term financial markets. \citet{NorbergB} considers the development of the surplus in a financial Markov chain environment, allowing for great model flexibility but even still, an important element is completely neglected: the human element.
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance. The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the retrospective second order reserve, also called the savings account. 
 \\[12pt]
-Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are accrued is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
+The expected future value of the savings account is of particular interest, as it embodies the accumulation of dividends as well as the use of these dividends to increase benefits or decrease premiums. In the existing literature, very little attention is paid to a very significant element of the with-profit insurance contract: the human element.
+\\[12pt]
+Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are paid out is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
 %As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} \begin{displayquote} The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information. \end{displayquote}
-From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature.
+From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies in a possibly non-linear fashion, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature. In this paper, we do not incorporate FMA's to their full extent, but rather lay the groundwork on which models including FMA's can be built.
 \\[12pt]
-In this paper we derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics.  
+We derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics. We devote special attention to a realistic model with affine dynamics, where dividends are used to increase future benefits. 
 
 
-\subsection{Prospective vs. Retrospective}
-When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. How to embrace the retrospective nature, is the main contribution of this paper.\\
 
-\begin{itemize}
-\item Something about Monte-carlo method
-\item Something about FMA's - perhaps an example?
-\item Deterministic second order basis, and discussion regarding simulation.
-\end{itemize}
 
 \subsection{Set-up}
 We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^k$ defined by $N^k(t)=\# \{ s; Z(s-)\neq k, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$. The benefits less premiums, for a certain contract $i$, develops in accordance with
@@ -321,7 +317,7 @@ $$
 $$
 for $i \neq j$. 
 \subsubsection{Savings and Surplus}
-The savings $X$, and surplus $Y$, are the two quantities of interest. In practice, the dynamics of these accounts are very specific, and not a subject of debate. However, instead of working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
+The savings $X$, and surplus $Y$, are the main quantities of interest. In practice, the dynamics of these accounts are very specific, and not a subject of debate. However, instead of working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
 \begin{align*}
 dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t)\\
 &+g_{x2}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} h_{x2}(t,Z(t-),k,Y(t-)) dN^k(t),
@@ -379,6 +375,29 @@ Y(0)
 \frac{\hat{W}(t)}{p_{00}(0,t)}\sum_{k=1}^n \mu_{0k}(t).
 \end{align*}
 Even though it may seem very simple and perhaps even trivial, the model with one active state has great applicability.
+
+\subsection{Prospective vs. Retrospective}
+The expected value of the prospective reserve is of monumental interest for insurance companies, and for good reason - they describe their liabilities. So why should we pay any concern to the savings account, that only pertains to the past? The past and future are connected through the principle of equivalence, stating that under the first order basis the expected premiums and benefits should be equal. However, under the first order basis, surplus only grows due to financial returns and not due to the difference between
+The savings account stands on the verge between the surplus dependent past, and a future where no benefits are increased.
+
+
+. So the savings account 
+
+While it may seem obvious that the prospective reserve must depend solely on information available today, it may not be evident that the retrospective
+
+When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. The fact that the savings account is retrospective, in the sense that it is $\mathcal{F}_t$ measurable, is the manifestation of the retrospective nature of the FMA's. If one imagines a world where the FMA's are prospective, 
+
+The definition and differential equation for the retrospective reserve without bonus, can be found in \citet{Norberg}. 
+
+There is an important distinction between the savings account, and the market value of future guaranteed benefits. The savings account is $\mathcal{F}_{[0,t]}$-measurable whereas the market value of future guaranteed benefits is $\mathcal{F}_{[t,n]}$-measurable.
+
+ Even though FMA's are one of the main reasons for considering retrospective quantities, they are not going to be evident in this paper, but are instead hidden from view under a veil of notation. 
+
+\begin{itemize}
+\item Something about Monte-carlo method
+\item Something about FMA's - perhaps an example?
+\item Deterministic second order basis, and discussion regarding simulation.
+\end{itemize}
 
 \subsubsection{Example With One Active State}
 If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped, as well as 2,5 and 6, thus creating a survival model. If the dynamics in two states are identical, they can be viewed as one. Life annuity at age 65.

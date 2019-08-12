@@ -286,16 +286,17 @@ Taking the expectation and conditioning on $Z(t-)=g$
 \int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k)\tilde{X}^i(\tau) \mu_{ik}(\tau)p_{kj}(\tau,r) d\nu(\tau,t)
 \end{align*}
 \item Meget i beviserne skal slettes. De er for lange
+\item Flere steder skriver jeg at dividende også kan bruges til at nedskrive præmier. Det skaber mere forvirring end nytte at holde styr på begge muligheder. Omskriv dette så vi kun kan bruge dividende til at opskrive ydelser.
 \end{itemize}
 \newpage
 \section{Introduction}
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance. The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the retrospective second order reserve, also called the savings account. 
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance. The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the surplus and the retrospective second order reserve, also called the savings account. 
 \\[12pt]
-The expected future value of the savings account is of particular interest, as it embodies the accumulation of dividends as well as the use of these dividends to increase benefits or decrease premiums. In the existing literature, very little attention is paid to a very significant element of the with-profit insurance contract: the human element.
+The expected future value of the savings account is of particular interest, as it embodies the accumulation of dividends as well as the use of these dividends to increase benefits or decrease premiums. Due to the retrospective nature of the savings account and surplus, we may also take other retrospective considerations into account. In the existing literature, very little attention is paid to a very significant retrospective element of the with-profit insurance contract: the human element.
 \\[12pt]
 Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are paid out is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
 %As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} \begin{displayquote} The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information. \end{displayquote}
-From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies in a possibly non-linear fashion, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature. In this paper, we do not incorporate FMA's to their full extent, but rather lay the groundwork on which models including FMA's can be built.
+From a mathematical point of view, they pose a problem as they depend on the entire history of the portfolio of policies in a possibly non-linear fashion, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace it's retrospective nature. In this paper, we do not incorporate FMA's to their full extent, but rather lay the retrospective groundwork on which models including FMA's can be built.
 \\[12pt]
 We derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics. We devote special attention to a realistic model with affine dynamics, where dividends are used to increase future benefits. 
 
@@ -303,11 +304,7 @@ We derive a retrospective differential equation for the expected savings account
 
 
 \subsection{Set-up}
-We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^k$ defined by $N^k(t)=\# \{ s; Z(s-)\neq k, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$. The benefits less premiums, for a certain contract $i$, develops in accordance with
-$$
-dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t),
-$$
-where $b_i^j(t)$ and $b_i^{jk}(t)$ are deterministic payment functions specifying payments during sojourns in state $j$ and on transition from state $j$ to state $k$, respectively. Even though single payments during sojourns in states pose no mathematical difficulty, we assume that payments during sojourns in states are continuous for notational simplicity. The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
+We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^{k}$ defined by $N^{k}(t)=\# \{ s; Z(s-)= i, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$.  The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
 $$
 p_{ij}(s,t)= \P(Z(t)=j|Z(s)=i)
 $$
@@ -315,9 +312,102 @@ for $s\leq t$. The corresponding transition intensities are denoted by
 $$
 \mu_{ij}(t)=\lim_{h \searrow 0} p_{ij}(t,t+h)/h
 $$
-for $i \neq j$. 
+for $i \neq j$. The predictable process $ \indic{Z(t-)\neq k }\mu_{Z(t-)k}(t)$ is the intensity process for $N^{k}(t)$, i.e
+$$
+M^{k}(t):=N^k(t)-\int_0^t \indic{Z(s-)\neq k } \mu_{Z(s-)k}(s) ds,
+$$
+forms a martingale. The state process $Z$ encapsulates the biometric risks involved with the insurance contract. Apart from the biometric risk, there is a financial risk connected to with-profit insurance contracts through the return on investment of the surplus. We make assumptions regarding the financial risk, by specifying the expected return on investment, $r$. Together, the transition intensities and expected return on investment form the second order basis, which describes the best guess on future development of the insurance portfolio. We take this second order basis as exogenously given. Note that a Monte-Carlo method can be used as a proxy for evaluation under the second order basis; perform evaluation under $n$ simulated second order basis and take the mean. The Monte-Carlo approach for evaluation allows for great model flexibility, which is particularly appealing regarding the expected return on investment. 
+
+While the second order basis forms the best guess on future developments of the relevant technical elements, it would be far too risky for an insurance company to use these assumptions when signing contracts. What if a cure for cancer is invented in 10 years, or if the stock market crashes? To allow for events that make it difficult to meet the obligations to the insured, a much less risky set of assumptions are used when guarantees are given. These prudent assumptions form the first order (technical) basis. Using the standard notation, a $"*"$ symbolises first-order basis elements. It is precisely due to the difference between the first order basis and the realised (third order) basis that a surplus emerges. We have no way of knowing what the future is going to bring, so we cannot know how the surplus is going to evolve. We can however make an estimate by using the second order basis as a stand-in for the third order basis.
+
+
 \subsubsection{Savings and Surplus}
-The savings $X$, and surplus $Y$, are the main quantities of interest. In practice, the dynamics of these accounts are very specific, and not a subject of debate. However, instead of working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
+The savings and surplus denoted by $X$ and $Y$ respectively, are the main quantities of interest. Three payment streams affect the savings and surplus, namely the benefits, dividends and contributions. The benefits are the contractual payments between the insurer and the insured. That is, the benefits are the state dependent premiums and benefits agreed upon on initialization of the policy. In order to incorporate the possibility of increasing benefits or decreasing premiums by spending dividends, we introduce two benefit processes $B_1$ and $B_2$ with dynamics
+$$
+dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t).
+$$
+The deterministic payment functions $b_i^j(t)$ and $b_i^{jk}(t)$ specify payments during sojourns in state $j$ and on transition from state $j$ to state $k$, respectively. Even though single payments during sojourns in states pose no mathematical difficulty, we assume that payments during sojourns in states are continuous for notational simplicity. The benefits specified by $B_1$ are the benefits which are fixed, and $B_2$ specifies the benefits which are increased when dividend is paid out. Accompanying the payment streams $B_1$ and $B_2$, are the technical reserves given by
+$$
+V_i^{*j}(t)=\E \left[ \int_t^n e^{-\int_t^s r^*} dB_i(s) \big| Z(t)=j \right].
+$$
+The savings account is used to buy one unit of the payment stream $B_1$, and whatever remains, is spent on $B_2$. By the equivalence principle, the quantity $Q$, of $B_2$ cashflows that can be bought, is equal to
+$$
+Q(t)=\frac{X(t-)-V_1^{Z(t-)*}(t-)}{V_2^{Z(t-)*}(t-)},
+$$
+as the savings account has to meet the obligations of the $B_1$ cashflow, before any $B_2$ cashflow is bought and both $B_1$ and $B_2$ are priced under the first order basis. The payment stream experienced by the policyholder therefore has dynamics
+\begin{align*}
+dB(t)=&dB_1(t)+\frac{X(t-)-V_1^{Z(t-)*}(t-)}{V_2^{Z(t-)*}(t-)}dB_2(t)
+\\
+=&b^{Z(t)}(t,X(t)) dt +\sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-))dN^k(t),
+\end{align*}
+for
+\begin{gather*}
+b^j(t,x)=b_1^j(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b_2^j(t)
+\\
+b^{jk}(t,x)=b_1^{jk}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b_2^{jk}(t).
+\end{gather*}
+Note at initialisation of the policy where no dividends are accrued and $X(0)=V_1^{Z(0)*}(0)$, then $b^j(0,x)=b_1(0)$. In general, if the savings account never receives any dividends, then $X(t)=V_1^{Z(t)*}(t)$ which is a special case of particular interest as it falls into the framework of \citet{Norberg}. To ease notation, we define the risk premium, $\rho$, as the sum at risk for a transition from $j$ to $k$, $R^{jk}$, multiplied by the difference in intensity of the transition on the first- and second order basis
+\begin{gather*}
+\rho^{jk}(t,x)=R^{jk}(t,x)(\mu_{jk}^*(t)-\mu_{jk}(t)),
+\\
+R^{jk}(t,x)=b^{jk}(t,x)-x+\chi^{jk}(t,x).
+\end{gather*}
+The three terms in the sum at risk describe what happens to the savings account on transition from $j$ to $k$. A benefit $b^{jk}(t,x)$ is paid out, and the entire savings account are given to the insurance company as they no longer have any obligations for the policy in the state $j$. However, now the insurance company have other obligations for the policy in state $k$, and to be fair, the amount of extra benefits the policy could afford in state $j$ are now carried over to state $k$. Therefore there is a deposit of
+$$
+\chi^{jk}(t,x)=V_1^{k*}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}V_2^{k*}(t),
+$$
+to the savings account.
+\\
+The dividend payment stream flows from the surplus to the savings account, and we assume the dynamics are given by
+$$
+dD(t)=\delta^{Z(t)}(t,X(t),Y(t)) dt,
+$$
+for some deterministic function $\delta^j$ on the form
+\begin{equation*}
+\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y+\delta_4^j(t)xy.
+\end{equation*}
+In this paper, the form of $\delta$ is probably the assumption most eligible for criticism. In practice, the dividend is determined by an actuary who takes much more information into account than simply the value of the savings and surplus. Furthermore the dividend-deciding actuary is most likely going to take past development of the savings and surplus into account. The specification of the dynamics of $D$ is at the heart of what a future management action is, and, as stated earlier, we do not fully incorporate these FMA's in all their generality and glory, but suffice with crude surrogates. Some of these crude surrogates can actually perform a decent job at describing real world dividend strategies, for instance by defining the dividend as some linear function of the contribution.
+
+The contributions are the safety contributions which ensure that the insurer can meet their liabilities. They represent the difference between the first and second order basis, and the artificial premium paid by the insured to cover the indiversifiable risk carried by the insurer. The contract is signed on the prudent first order basis, and as such, the contract is expected to generate a systematic surplus. This systematic surplus arises precisely because $C$ is positive. The dynamics of $C$ are defined to be
+$$
+dC(t)=(r(t)-r^*(t))X(t)dt + \sum_{k\neq Z(t)} \rho^{Z(t)k}(t,X(t))dt.
+$$
+By the principle of equivalence, the amount of $B_2$ cashflow that can be bought for the dividend implies that
+\begin{align*}
+dD(t)=&V_2^{Z(t)*}(t) dQ(t) .
+\end{align*}
+Using Itô's lemma for FV-functions and integration by parts for FV-functions, we find the dynamics of $X$ as
+\begin{align*}
+dX(t)=&
+r^*(t)X(t)dt
+ +\delta^{Z(t)}(t,X(t),Y(t))  dt
+ -b^{Z(t)}(t,X(t)) dt
+- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
+\\
+&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}^*(t)dt)
+\\
+=&
+r^*(t)X(t)dt
+ +\delta^{Z(t)}(t,X(t),Y(t))  dt
+ -b^{Z(t)}(t,X(t)) dt
+- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
+\\
+&- \sum_{k \neq Z(t-)} \rho^{Z(t-)k}(t,X(t-))dt
+\\
+&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt).
+\end{align*}
+Note that the predictable compensator for $dN^k$ when $k\neq Z(t-)$ is $\mu_{Z(t-)k}(t)$, under the second order basis, while $\mu^*_{Z(t-)k}(t)$ is the predictable compensator under the first order basis. We can now define the surplus of the accumulated contract as
+$$
+Y(t)= - \int_0^t e^{\int_s^t r} dB(s)-X(t),
+$$
+and derive the dynamics to be
+\begin{align*}
+dY(t)=&rY(t) dt + dC(t)-dD(t)-
+\sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t).
+\end{align*}
+This concludes the formal set-up needed to work with the savings and surplus. However, as the dynamics of $X$ and $Y$ are imperative in order to understand the real-world  we take a moment to reflect over these dynamics
+
+For the sake of generality and notational ease, we use the following notation working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
 \begin{align*}
 dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t)\\
 &+g_{x2}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} h_{x2}(t,Z(t-),k,Y(t-)) dN^k(t),
@@ -326,7 +416,9 @@ dY(t)=&Y(t)g_{y1}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} Y(t-) h_{y1}(t,Z(t-),k,X(
 \\
 &+g_{y2}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} h_{y2}(t,Z(t-),k,X(t-)) dN^k(t).
 \end{align*}
-While it may not seem so, we work with $g$ and $h$ functions mainly for notational reasons. We refer to section \ref{seq:Dyn} for a practically relevant choice of the functions $g$ and $h$ - the notational advantage of using $g$ and $h$ is also apparent there. It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
+While it may not seem so, we work with $g$ and $h$ functions mainly for notational reasons. We refer to section \ref{seq:Dyn} for a practically relevant choice of the functions $g$ and $h$ - the notational advantage of using $g$ and $h$ is also apparent there.
+\\[12pt]
+It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
 As stated in the introduction, management actions are one of the main motivators of this paper, but where are they evident in the dynamics of the savings and surplus? The answer is, the management actions are not evident. They are hidden in mainly two terms, the second order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers. Due to the very human and abstract nature of management actions, we do not incorporate them directly in the dynamics of the savings and surplus, but instead let them work in the shadows. It is important to 
 
 
@@ -814,15 +906,6 @@ the proof is complete.
 \end{proof}
 
 \section{Dynamics of $X$ and $Y$}\label{seq:Dyn}
-The savings account at time $t$ is the past net income compounded with the real interest, i.e.
-$$
-X(t):=\int_0^t e^{\int_s^t r} d(B(s)+D(s)-C(s)),
-$$
-while the surplus at time $t$ is the past contributions less dividends compounded with the real interest, i.e.
-$$
-Y(t):=\int_0^t e^{\int_s^t r} d(C(s)-D(s))
-$$
-
 
 The amount by which the savings surpass the first order reserve, is spent on $B_2$. 
 where

@@ -208,87 +208,6 @@ keywords = {Insurance ; Contracts ; Cost-Benefit Analysis ; Economic Analysis ; 
 
 \begin{document}
 
-\subsection*{Stuff to fix}
-\begin{itemize}
-\item Jeg kommer med flere påstande om industrien som jeg ikke er sikker på har hold i virkeligheden.
-\item Der er i princippet ikke nogen grund til at vi regner retrospektivt, når vi alligevel ikke bruger historikken... Skal vi udvidde, så X kan afhænge lineært af tidligere værdier? Vi kræver blot at
-$$
-\E[g(t,Z(t),\{ X(\tau) \}_{\tau\leq t})|Z(t)=i]=g(t,i,\{ \E[X(\tau)|Z(t)=i] \}_{\tau \leq t})$$
-fx ved
-$$
-g(t,i,\{X(\tau)\}_{\tau \leq t})=\int_0^t f^1_i(\tau) X(\tau) d\nu_1(\tau,t) + \int_0^t f^2_i(\tau) X(\tau) d\nu_2(\tau,t)
-$$
-for ét eller andet sigma-additivt mål $\nu_1$ (og $\nu_2$). Fx kunne $\nu_1$ være lebesque målet fra $t-1$ til $t$, mens $\nu_2$ kunne være punktmålet i $t$ hvilket er specialtilfældet som vi i øjeblikket kigger på. Vi kan også lade $g$ afhænge af tidligere værdier af $Z$, fx på følgende måde
-$$
-g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})=
-\int_0^t f(Z(\tau),\tau,t) X(\tau) d\nu(\tau),
-$$
-hvorved
-\begin{align*}
-&\E_{Z(0)}[\indic{Z(r)=i}g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})|Z(t-)=g]
-\\
-=&
-p_{gi}(t,r)\int_0^t \E[ f(Z(\tau),\tau,t) X(\tau)|Z(t-)=g] d\nu(\tau,t)
-\\
-=&
-\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \E[X(\tau)|Z(\tau)=j,Z(t-)=g] \bigg| Z(t-)=g \right] d\nu(\tau,t)
-\\
-=&
-\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \frac{\E[X(\tau)\indic{Z(\tau)=j}]}{p_{0j}(0,\tau)} \bigg| Z(t-)=g \right] d\nu(\tau,t)
-\\
-=&
-\int_0^t p_{gi}(t,r) \sum_{j \in \mathcal{J}}  P(Z(\tau)=j|Z(0)=0,Z(t)=g) f(j,\tau,t) \frac{\tilde{X}^j(\tau)}{p_{0j}(0,\tau)}  d\nu(\tau,t)
-\\
-=&
-\int_0^t \sum_{j \in \mathcal{J}} \frac{p_{jg}(\tau,t)}{p_{0g}(0,t)} p_{gi}(t,r) f(j,\tau,t) \tilde{X}^j(\tau) d\nu(\tau,t).
-\end{align*}
-hvor vi har brugt at $X(\tau)|Z(\tau)$ er uafhængig af $Z(t)|Z(\tau)$ for $\tau\leq t$. På denne måde kunne man fx. lade dividenden være en klumpbetaling svarende til det gennemsnitlige forventede bidrag over det sidste år, altså $f(j,\tau,t)X(\tau)=X(\tau)(r(\tau)-r^*(\tau))\sum_{k\neq j} \rho_1^{jk}(t)+\sum_{k\neq j} \rho_2^{jk}(t)$ for $\nu(\tau,t)$ værende lebesque målet for $(t-1,t]$ hvis $t$ er et heltal, og ellers 0. Da $\nu$ ikke nødvendigvis er absolut kontinuert, vil $g$ ikke svare til den kontinuerte udvikling af $X$ - vi tillader klump-betalinger på deterministiske tidspunkter.
-\item Tilsvarende for $h$
-$$
-h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})
-=\int_{(0,t]} \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) X(\tau-) dN^k\otimes\nu(\tau,t)
-$$
-Taking the expectation and conditioning on $Z(t-)=g$
-\begin{align*}
-&\E[\indic{Z(r)=j} h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau-)\}_{\tau\leq t})|Z(t-)=g]
-\\
-=&
-\int_{(0,t]} \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j} X(\tau-) dN^k\otimes\nu(\tau,t) \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]} \E \left[ \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-), Z(t-)=g \right] \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \E \left[ \sum_{k \neq i} \phi(\tau,t,i,k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k(\tau) |Z(\tau-)=i \right]\nu(\tau,t) \bigg| Z(t-)=g \right]
-\intertext{og da $X(\tau-)|Z(\tau-)$ er uafhænig af $\indic{Z(r)=j}dN^h(\tau)|Z(\tau-)$}
-=&
-\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[ X(\tau-) |Z(\tau-)=i \right] \E[ \indic{Z(r)=j} dN^k(\tau) |Z(\tau-)=i]\nu(\tau,t) \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \E[dN^k(\tau) |Z(\tau-)=i,Z(r)=j]p_{ij}(\tau,r)\nu(\tau,t) \bigg| Z(t-)=g \right]
-\\
-=&
-\int_{(0,t]}  \sum_{i \in \mathcal{J}} \E \left[\indic{Z(\tau)=i}  | Z(t-)=g \right] \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
-\\
-=&
-\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
-\\
-=&
-\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik}(\tau)\frac{p_{kj}(\tau,r)}{p_{ij}(\tau,r)} p_{ij}(\tau,r) d\nu(\tau,t)
-\\
-=&
-\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k)\tilde{X}^i(\tau) \mu_{ik}(\tau)p_{kj}(\tau,r) d\nu(\tau,t)
-\end{align*}
-\item Meget i beviserne skal slettes. De er for lange
-\item Flere steder skriver jeg at dividende også kan bruges til at nedskrive præmier. Det skaber mere forvirring end nytte at holde styr på begge muligheder. Omskriv dette så vi kun kan bruge dividende til at opskrive ydelser.
-\end{itemize}
-\newpage
 \section{Introduction}
 With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance. The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the surplus and the retrospective second order reserve, also called the savings account. 
 \\[12pt]
@@ -304,7 +223,7 @@ We derive a retrospective differential equation for the expected savings account
 
 
 \subsection{Set-up}
-We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. The counting process $N^{k}$ defined by $N^{k}(t)=\# \{ s; Z(s-)= i, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$.  The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
+We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. We denote the filtration generated by $Z$  . The counting process $N^{k}$ defined by $N^{k}(t)=\# \{ s; Z(s-)= i, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$.  The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
 $$
 p_{ij}(s,t)= \P(Z(t)=j|Z(s)=i)
 $$
@@ -377,70 +296,93 @@ By the principle of equivalence, the amount of $B_2$ cashflow that can be bought
 dD(t)=&V_2^{Z(t)*}(t) dQ(t) .
 \end{align*}
 Using Itô's lemma for FV-functions and integration by parts for FV-functions, we find the dynamics of $X$ as
-\begin{align*}
+\begin{align}
 dX(t)=&
 r^*(t)X(t)dt
  +\delta^{Z(t)}(t,X(t),Y(t))  dt
  -b^{Z(t)}(t,X(t)) dt
 - \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
-\\
+\nonumber \\
 &+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}^*(t)dt)
-\\
+\nonumber \\
 =&
 r^*(t)X(t)dt
  +\delta^{Z(t)}(t,X(t),Y(t))  dt
  -b^{Z(t)}(t,X(t)) dt
 - \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
-\\
+\nonumber \\
 &- \sum_{k \neq Z(t-)} \rho^{Z(t-)k}(t,X(t-))dt
-\\
-&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt).
-\end{align*}
+\nonumber \\
+&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt).\label{eq:AAB}
+\end{align}
 Note that the predictable compensator for $dN^k$ when $k\neq Z(t-)$ is $\mu_{Z(t-)k}(t)$, under the second order basis, while $\mu^*_{Z(t-)k}(t)$ is the predictable compensator under the first order basis. We can now define the surplus of the accumulated contract as
 $$
 Y(t)= - \int_0^t e^{\int_s^t r} dB(s)-X(t),
 $$
 and derive the dynamics to be
-\begin{align*}
+\begin{align}
 dY(t)=&rY(t) dt + dC(t)-dD(t)-
-\sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t).
-\end{align*}
-This concludes the formal set-up needed to work with the savings and surplus. However, as the dynamics of $X$ and $Y$ are imperative in order to understand the real-world  we take a moment to reflect over these dynamics
-
-For the sake of generality and notational ease, we use the following notation working with the explicit dynamics of $X$ and $Y$, we choose to use the more general affine dynamics given by
-\begin{align*}
-dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t)\\
+\sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t). \label{eq:AAC}
+\end{align}
+Note that the dynamics of $X$ and $Y$ are affine, and that for suitable $g$ and $h$ we can write \eqref{eq:AAB} and \eqref{eq:AAC} respectively as
+\begin{align}
+dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t) \nonumber \\
 &+g_{x2}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} h_{x2}(t,Z(t-),k,Y(t-)) dN^k(t),
-\\
+\label{eq:AAD} \\
 dY(t)=&Y(t)g_{y1}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} Y(t-) h_{y1}(t,Z(t-),k,X(t-)) dN^k(t)
-\\
-&+g_{y2}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} h_{y2}(t,Z(t-),k,X(t-)) dN^k(t).
-\end{align*}
-While it may not seem so, we work with $g$ and $h$ functions mainly for notational reasons. We refer to section \ref{seq:Dyn} for a practically relevant choice of the functions $g$ and $h$ - the notational advantage of using $g$ and $h$ is also apparent there.
-\\[12pt]
-It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
-As stated in the introduction, management actions are one of the main motivators of this paper, but where are they evident in the dynamics of the savings and surplus? The answer is, the management actions are not evident. They are hidden in mainly two terms, the second order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers. Due to the very human and abstract nature of management actions, we do not incorporate them directly in the dynamics of the savings and surplus, but instead let them work in the shadows. It is important to 
-
-
-\begin{itemize}
-\item Even though FMA's are one of the main reasons for considering the savings account, they are hidden in the dividend and surplus investment strategy.
-\end{itemize}
-
-Let $W$ be some possibly multidimensional process with $Z$-dependent dynamics
-\begin{align*}
-dW(s)=& g(s,Z(s),W(s)) ds+ \sum_{k\neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s),
-\end{align*}
-for $g$ and $h$ functions that are linear in all elements of $W$. This multidemsional process can for instance represent the savings and surplus
+\nonumber \\
+&+g_{y2}(t,Z(t),X(t))dt + \sum_{k \neq Z(t-)} h_{y2}(t,Z(t-),k,X(t-)) dN^k(t) \label{eq:AAE}.
+\end{align}
+We refer to section \ref{seq:Dyn} of the appendix for the specification of $g$ and $h$ leading to the dynamics given in \eqref{eq:AAB} and \eqref{eq:AAC}. Apart from notational ease, the use of arbitrary $g$ and $h$ functions serve to generalise the results of the paper to any FV-process with affine dynamics of the form given by \eqref{eq:AAD} and \eqref{eq:AAE}. Even though we work with the dynamics given by \eqref{eq:AAD} and \eqref{eq:AAE}, we think of the $g$ and $h$ functions as the ones required to achieve the dynamics of \eqref{eq:AAB} and \eqref{eq:AAC}. As we are interested in the interconnected dynamics of $X$ and $Y$, we introduce the two-dimensional process 
 $$
 W(s)= \begin{pmatrix}
 X(s)\\
 Y(s)
 \end{pmatrix}.
 $$
-In practice, the surplus account is shared among policyholders, corresponding to $W\in \R^{N+1}$ for $N$ policies with a state process $Z$ on a state space of size $\# \{ \mathcal{J} \}^N$; one for each combination of all policy states. There are several ways to reduce the dimensionality of the problem, making it computationally tractable.
+with dynamics given by
+\begin{align*}
+dW(s)=& g(s,Z(s),W(s)) ds+ \sum_{k\neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s),
+\end{align*}
+for $g$ and $h$ functions that are affine in $W$.
+%In practice, the surplus account is shared among, say $N$, policyholders, implying that we need a system of $\# \{ \mathcal{J} \}^N+1$ differential equations; one for each combination of all policy states, and one for the common surplus. There are several ways to reduce the dimensionality of the problem, making it computationally tractable. However, 
+\\[12pt]
+It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
+As stated in the introduction, management actions are one of the main motivators of this paper, but they are hidden in mainly two terms; the second order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers. Due to the very human and abstract nature of management actions, we do not incorporate them directly in the dynamics of the savings and surplus, but instead let them work in the shadows.
 
+\iffalse
+\subsection{Prospective vs. Retrospective}
+The expected value of the prospective reserve is of monumental interest for insurance companies, and for good reason - they describe their liabilities. So why should we pay any concern to the savings account, that only pertains to the past? The past and future are connected through the principle of equivalence, stating that under the first order basis the expected premiums and benefits should be equal. However, under the first order basis, surplus only grows due to financial returns and not due to the difference between
+The savings account stands on the verge between the surplus dependent past, and a future where no benefits are increased.
+
+
+. So the savings account 
+
+While it may seem obvious that the prospective reserve must depend solely on information available today, it may not be evident that the retrospective
+
+When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. The fact that the savings account is retrospective, in the sense that it is $\mathcal{F}_t$ measurable, is the manifestation of the retrospective nature of the FMA's. If one imagines a world where the FMA's are prospective, 
+
+The definition and differential equation for the retrospective reserve without bonus, can be found in \citet{Norberg}. 
+
+There is an important distinction between the savings account, and the market value of future guaranteed benefits. The savings account is $\mathcal{F}_{[0,t]}$-measurable whereas the market value of future guaranteed benefits is $\mathcal{F}_{[t,n]}$-measurable.
+
+ Even though FMA's are one of the main reasons for considering retrospective quantities, they are not going to be evident in this paper, but are instead hidden from view under a veil of notation. 
+
+\begin{itemize}
+\item Something about Monte-carlo method
+\item Something about FMA's - perhaps an example?
+\item Deterministic second order basis, and discussion regarding simulation.
+\end{itemize}
+
+\fi
 \subsection{One Active State}
-We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which, in this setting, may be non-linear. Denote by $0$ the active state. On transition to any one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$, for $j=1,...,n$. The survival model with and without surrender options are special cases of this model.  The dynamics of $X$ and $Y$ are
+We consider a simple model where the expected future savings are described by an easily derived differential equation. The model consists of $n$ inactive states where there are no payments, and one active state with continuous dynamics $g$ which, in this setting, may be non-linear. Denote by $0$ the active state. On transition to any one of the inactive states, the surplus and savings are nullified. We need not specify what happens to the surplus and savings on a transition - they may be paid out to the customer or the insurance company, or any combination of the two - the only important requirement is that they are zero in all inactive states. The eradication of surplus and savings on transition corresponds to the relation $h_x(t,0,j,x,y)+h_y(t,0,j,x,y)=-x-y$, for $j=1,...,n$. For notational ease, we assume that 
+\begin{gather*}
+h_x(t,0,j,x,y)=-x
+\\
+h_y(t,0,j,x,y)=-y,
+\end{gather*}
+for all $j$. The survival model with and without surrender options are special cases of this model.  The dynamics of $X$ and $Y$ are
 \begin{align*}
 dX(s)=& \indic{Z(s-)=0} g_x(s,0,X(s),Y(s))ds - \sum_{h=1}^n X(s-)dN^h(s)
 \\
@@ -467,30 +409,6 @@ Y(0)
 \frac{\hat{W}(t)}{p_{00}(0,t)}\sum_{k=1}^n \mu_{0k}(t).
 \end{align*}
 Even though it may seem very simple and perhaps even trivial, the model with one active state has great applicability.
-
-\subsection{Prospective vs. Retrospective}
-The expected value of the prospective reserve is of monumental interest for insurance companies, and for good reason - they describe their liabilities. So why should we pay any concern to the savings account, that only pertains to the past? The past and future are connected through the principle of equivalence, stating that under the first order basis the expected premiums and benefits should be equal. However, under the first order basis, surplus only grows due to financial returns and not due to the difference between
-The savings account stands on the verge between the surplus dependent past, and a future where no benefits are increased.
-
-
-. So the savings account 
-
-While it may seem obvious that the prospective reserve must depend solely on information available today, it may not be evident that the retrospective
-
-When incorporating human decisions into the projection of balances and benefits in life insurance, we need to embrace the fact that these decisions are based on the past. The fact that the savings account is retrospective, in the sense that it is $\mathcal{F}_t$ measurable, is the manifestation of the retrospective nature of the FMA's. If one imagines a world where the FMA's are prospective, 
-
-The definition and differential equation for the retrospective reserve without bonus, can be found in \citet{Norberg}. 
-
-There is an important distinction between the savings account, and the market value of future guaranteed benefits. The savings account is $\mathcal{F}_{[0,t]}$-measurable whereas the market value of future guaranteed benefits is $\mathcal{F}_{[t,n]}$-measurable.
-
- Even though FMA's are one of the main reasons for considering retrospective quantities, they are not going to be evident in this paper, but are instead hidden from view under a veil of notation. 
-
-\begin{itemize}
-\item Something about Monte-carlo method
-\item Something about FMA's - perhaps an example?
-\item Deterministic second order basis, and discussion regarding simulation.
-\end{itemize}
-
 \subsubsection{Example With One Active State}
 If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped, as well as 2,5 and 6, thus creating a survival model. If the dynamics in two states are identical, they can be viewed as one. Life annuity at age 65.
 \def\PlA{(0,0)}
@@ -514,10 +432,12 @@ If the benefits are identical after age 65, the states 0,1,3 and 4 can be lumped
 \end{figure}
 
 
+
+
+
+
 \subsection{Two Active States}
-When expanding to a model where there are two active states, and $n$ inactive states, we need to use a different method to calculate $\hat{W}$, \textit{if the active states are transient}. There is an important difference between the hierarchical model with two active states, and the transient model with two active states. In the model with one active state, we know the entire history of the policy, given that the policy is in the active state. When we introduce a second active state in the hierarchical model, we also know where the policy has been given the active state, but we do not know when it transitioned from one active state to the other. In order to calculate the expectation of the savings and surplus, we simply have to integrate over all possible transition times. If there are two transient states, there is an infinite amount of paths to any of the transient states, and for each possible path there is an infinite amount of possible jump times.
-%Due to the large amount of possible paths and jump times, the naïve approach of calculating $\hat{W}$ is intractable. However, if the dynamics are affine, we can cut some very large corners.
-To illustrate the naïve method of calculating expected savings and surplus in a hierarchical model, consider the model depicted in figure \ref{fig:2}
+When expanding to a model where there are two active states, and $n$ inactive states, we need to use a different method to calculate $\hat{W}$, \textit{if the active states are transient}. There is an important difference between the hierarchical model with two active states, and the transient model with two active states. In the model with one active state, we know the entire history of the policy, given that the policy is in the active state. When we introduce a second active state in the hierarchical model, we also know where the policy has been given the active state, but we do not know when it transitioned from one active state to the other. In order to calculate the expectation of the savings and surplus, we simply have to integrate over all possible transition times. If there are two transient states, there is an infinite amount of paths to any of the transient states, and for each possible path we have to integrate over all possible jump times. As it serves an informational purpose, we consider the naive method of calculating expected savings and surplus in a hierarchical model. Consider the model depicted in figure \ref{fig:2}
  \def\PlA{(0,0)}
 \begin{figure}[H]
 \begin{center}
@@ -573,7 +493,7 @@ $$
 $$
 We could apply this method of calculating $\E[W(t)]$ to any model. The basic principle is simple: given all information about the past of $Z$, we can calculate the value of $W(t)$, and the expected past can be calculated for each possible path of the policy. In general $\hat{W}$ can be calculated as
 \begin{align}
-\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i) \int_{(0,t]^{L_i}} W_i(t,\Theta_{L_i}) dP_i(\Theta_{L_i}),
+\E[W(t)]= \sum_{i \in \mathcal{P}}  P(\text{path }i \text{ at time } t) \int_{(0,t]^{L_i}} W_i(t,\Theta_{L_i}) dP_i(\Theta_{L_i}),
 \label{eq:AAA}
 \end{align} 
 where $\mathcal{P}$ is the set of possible policy paths, $L_i$ is the length of path $i$, $\Theta_{L_i}$ is an $L_i$-dimensional vector of jump-times, $dP_i$ is the density of transition times for path $i$ and $W_i(t,\Theta_{L_i})$ is the value of $W(t)$ given the path and transition times.
@@ -593,43 +513,34 @@ W(t)
 Say we want to calculate 
 $$
 \tilde{W}^i(t):=\E_{Z(0)}[W(t)\indic{Z(t)=i}]
-%=\E_{Z(0)}[W(t)|Z(t)=i]p_{Z(0)i}(0,t),
+=\E_{Z(0)}[W(t)|Z(t)=i]p_{Z(0)i}(0,t),
 $$ 
-as we can use it to calculate $\E[W(t)]=\tilde{W}^0(t)+\tilde{W}^1(t)$. By the tower property and Fubinis theorem,
+as we can use it to calculate $\E_{Z(0)}[W(t)]$. By the tower property and Fubinis theorem,
 \begin{align*}
-\E_{Z(0)}[W(t)\indic{Z(t)=1}]
+\tilde{W}^i(t)
 =&
-\int_0^t \E[ \indic{Z(t)=1} W(s) g(s,Z(s))] ds
+\int_0^t \E[ \indic{Z(t)=i} W(s) g(s,Z(s))] ds
 \\
 =&
-\int_0^t \E_{Z(0)}[ \indic{Z(s)=1}\E_{Z(0)}[ \indic{Z(t)=1} W(s) g(s,Z(s))|Z(s)=1]] ds\\
-&+
-\int_0^t \E_{Z(0)}[ \indic{Z(s)=0}\E_{Z(0)}[ \indic{Z(t)=1} W(s) g(s,Z(s))|Z(s)=0]] ds
-\\
+\int_0^t \E_{Z(0)} \left[ \sum_{j \in \mathcal{J}} \indic{Z(s)=j}\E_{Z(0)}[ \indic{Z(t)=i} W(s) g(s,Z(s))|Z(s)=j] \right] ds\\
 =&
-\int_0^t p_{Z(0)1}(0,s) \E_{Z(0)}[ \indic{Z(t)=1} W(s) |Z(s)=1] g(s,1) ds\\
-&+
-\int_0^t p_{Z(0)0}(0,s)\E_{Z(0)}[ \indic{Z(t)=1} W(s) |Z(s)=0] g(s,0)ds.
-\intertext{By the Markov property $W(s)\independent Z(t)|Z(s)$, as $W(s)$ is $\mathcal{F}_s$-measurable.}
+\int_0^t  \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)\E_{Z(0)}[ \indic{Z(t)=i} W(s) g(s,Z(s))|Z(s)=j]] ds\\
 =&
-\int_0^t p_{11}(s,t)\tilde{W}^1(s) g(s,1) ds\\
-&+
-\int_0^t p_{01}(s,t) \tilde{W}^0(s) g(s,0)ds.
+\int_0^t  \sum_{j \in \mathcal{J}} p_{Z(0)j}(0,s)g(s,j) \E_{Z(0)}[ \indic{Z(t)=i} W(s)|Z(s)=j]] ds\\
+\intertext{By the Markov property $W(s)\independent Z(t)|Z(s)$, as $W(s)$ is $\mathcal{F}_s$-measurable, and therefore}
+\tilde{W}^i(t)=&
+\int_0^t  \sum_{j \in \mathcal{J}} g(s,j) \tilde{W}^j(t) p_{ji}(s,t)ds.
 \end{align*}
 Differentiating with respect to $t$, and using Kolmogorov's forward differential equations yields the following system of differential equations
 \begin{align*}
-\frac{d}{dt} \tilde{W}^1(t)=& \mu_{01}(t)\tilde{W}^0(t)(t)-\mu_{10}(t)\tilde{W}^1(t)
-+ \tilde{W}^1(t)g(t,1)
-\\
-\frac{d}{dt} \tilde{W}^0(t)=& \mu_{10}(t)\tilde{W}^1(t)(t)-\mu_{01}(t)\tilde{W}^0(t)
-+ \tilde{W}^0(t)g(t,0)
+\frac{d}{dt} \tilde{W}^i(t)=&\tilde{W}^i(t)g(t,i)+ \sum_{j\neq i} \mu_{ji}(t)\tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
 \\
 \tilde{W}^i(0)=&\indic{Z(0)=i}W(0).
 \end{align*}
-It is crucial to note that this differential equation is invariant to whether or not the model is transient, in contrast to the naive approach where all possible paths need to be considered individually. In the following section we generalise the result, 
+It is crucial to note that this differential equation is invariant to whether or not the model is transient, in contrast to the naive approach where all possible paths need to be considered individually. In the next section we generalise the result, 
 
 \section{State-Wise Probability Weighted Reserve}
-In the previous section we presented a differential equation for a simple two state model, without any payments on transition. The same methodology can be applied for a general Markov model with affine dynamics. We are interested in $\tilde{W}^i(t)$ for $i \in \mathcal{J}$, noting by the tower property that the relation between $\tilde{W}^i$ and $\E_{Z(0)}[W(t)]$ is given by
+In the previous section we presented a differential equation for a simple model, without any payments on transition. The same methodology can be applied for a general Markov model with affine dynamics. We are interested in $\tilde{W}^i(t)$ for $i \in \mathcal{J}$, noting that the relation between $\tilde{W}^i$ and $\E_{Z(0)}[W(t)]$ is given by
 \begin{align*}
 \E_{Z(0)}[W(t)] =&
 % \E_{Z(0)}[\E_{Z(0)} [ X(t)|Z(t)]] 
@@ -649,7 +560,7 @@ In the previous section we presented a differential equation for a simple two st
 By using the tower property and the fact that $W(s-)\independent Z(t)|Z(s-)$, we get the following theorem
 \begin{thm}[]
 \label{thm:Diff_1}
-Let $Z(t)$ be a Markov process on the state space $\mathcal{J}$, and let $W(t)$ be a $\mathcal{F}_t$ measurable process with dynamics
+Let $Z(t)$ be a Markov process on the state space $\mathcal{J}$, and let $W(t)$ be a $\mathcal{F}_t$-measurable process with dynamics
 \begin{align*}
 dW(s)=  g(s,Z(s),W(s))ds+
  \sum_{k \neq Z(s-)} h(s,Z(s-),k,W(s-)) dN^k(s) 
@@ -661,17 +572,21 @@ g(s,Z(s),W(s))=&g_1(s,Z(s)) W(s)+g_2(s,Z(s))
 h(s,Z(s-),k,W(s-))=&h_1(s,Z(s-),k) W(s-)+h_2(s,Z(s),k).
 \end{align*}
 Then
-\begin{align*}
+\begin{align}
 \frac{d}{dt}\tilde{W}^i(t)=&
 \sum_{j \neq i} \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
-\\
+\nonumber \\
 &+
-\tilde{W}^i(t)g_1(t,i)+p_{Z(0)i}(0,t)g_2(s,Z(s))
-\\
+\tilde{W}^i(t)g_1(t,i)+p_{Z(0)i}(0,t)g_2(s,i)
+\nonumber \\
 &+
-\sum_{j\neq i} \mu_{ji}(t) \left( \tilde{W}^j(t) h_1(t,j,i)+ p_{Z(0)j}(0,t)h_2(t,j,i)\right)
-\end{align*}
+\sum_{j\neq i} \mu_{ji}(t) \left( \tilde{W}^j(t) h_1(t,j,i)+ p_{Z(0)j}(0,t)h_2(t,j,i)\right) \label{eq:AAF}
+\\
+\tilde{W}^i(0)=&\indic{Z(0)=i}W(0) \label{eq:AAG}
+\end{align}
 \end{thm}
+The differential equations given by \eqref{eq:AAF}-\eqref{eq:AAG} bear close resemblance to the differential equation for the retrospective reserve derived by \citet{Norberg}. In contrast to \citet{Norberg} we allow for dynamics of the process to depend on the process itself. To get a feel for the individual terms of \eqref{eq:AAF}, we write out the differential equation for $\tilde{W}^i$ when $W(t)=(X(t),Y(t))^T$ and the dynamics of $X$ and $Y$ are given by \eqref{eq:AAB}-\eqref{eq:AAC}.
+
 
 
 
@@ -794,7 +709,88 @@ $$
 \item One could imagine that information about the jump time could be partially deduced from the intensities, thus almost allowing for non-linearity. Consider case where $\mu_{01}(t)= \kappa \indic{t \in (c_1,c_2]}$ for very small $|c_2-c_1|$ and very large $\kappa$, providing almost perfect information about the jump time, whereby non-linearity in $g(s,1,W(s))$ would be allowed for.
 
 \end{itemize}
+\newpage
 
+\subsection*{Stuff to fix}
+\begin{itemize}
+\item Jeg kommer med flere påstande om industrien som jeg ikke er sikker på har hold i virkeligheden.
+\item Der er i princippet ikke nogen grund til at vi regner retrospektivt, når vi alligevel ikke bruger historikken... Skal vi udvidde, så X kan afhænge lineært af tidligere værdier? Vi kræver blot at
+$$
+\E[g(t,Z(t),\{ X(\tau) \}_{\tau\leq t})|Z(t)=i]=g(t,i,\{ \E[X(\tau)|Z(t)=i] \}_{\tau \leq t})$$
+fx ved
+$$
+g(t,i,\{X(\tau)\}_{\tau \leq t})=\int_0^t f^1_i(\tau) X(\tau) d\nu_1(\tau,t) + \int_0^t f^2_i(\tau) X(\tau) d\nu_2(\tau,t)
+$$
+for ét eller andet sigma-additivt mål $\nu_1$ (og $\nu_2$). Fx kunne $\nu_1$ være lebesque målet fra $t-1$ til $t$, mens $\nu_2$ kunne være punktmålet i $t$ hvilket er specialtilfældet som vi i øjeblikket kigger på. Vi kan også lade $g$ afhænge af tidligere værdier af $Z$, fx på følgende måde
+$$
+g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})=
+\int_0^t f(Z(\tau),\tau,t) X(\tau) d\nu(\tau),
+$$
+hvorved
+\begin{align*}
+&\E_{Z(0)}[\indic{Z(r)=i}g(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})|Z(t-)=g]
+\\
+=&
+p_{gi}(t,r)\int_0^t \E[ f(Z(\tau),\tau,t) X(\tau)|Z(t-)=g] d\nu(\tau,t)
+\\
+=&
+\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \E[X(\tau)|Z(\tau)=j,Z(t-)=g] \bigg| Z(t-)=g \right] d\nu(\tau,t)
+\\
+=&
+\int_0^t p_{gi}(t,r) \E \left[ \sum_{j \in \mathcal{J}}  \indic{Z(\tau)=j} f(j,\tau,t) \frac{\E[X(\tau)\indic{Z(\tau)=j}]}{p_{0j}(0,\tau)} \bigg| Z(t-)=g \right] d\nu(\tau,t)
+\\
+=&
+\int_0^t p_{gi}(t,r) \sum_{j \in \mathcal{J}}  P(Z(\tau)=j|Z(0)=0,Z(t)=g) f(j,\tau,t) \frac{\tilde{X}^j(\tau)}{p_{0j}(0,\tau)}  d\nu(\tau,t)
+\\
+=&
+\int_0^t \sum_{j \in \mathcal{J}} \frac{p_{jg}(\tau,t)}{p_{0g}(0,t)} p_{gi}(t,r) f(j,\tau,t) \tilde{X}^j(\tau) d\nu(\tau,t).
+\end{align*}
+hvor vi har brugt at $X(\tau)|Z(\tau)$ er uafhængig af $Z(t)|Z(\tau)$ for $\tau\leq t$. På denne måde kunne man fx. lade dividenden være en klumpbetaling svarende til det gennemsnitlige forventede bidrag over det sidste år, altså $f(j,\tau,t)X(\tau)=X(\tau)(r(\tau)-r^*(\tau))\sum_{k\neq j} \rho_1^{jk}(t)+\sum_{k\neq j} \rho_2^{jk}(t)$ for $\nu(\tau,t)$ værende lebesque målet for $(t-1,t]$ hvis $t$ er et heltal, og ellers 0. Da $\nu$ ikke nødvendigvis er absolut kontinuert, vil $g$ ikke svare til den kontinuerte udvikling af $X$ - vi tillader klump-betalinger på deterministiske tidspunkter.
+\item Tilsvarende for $h$
+$$
+h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau)\}_{\tau\leq t})
+=\int_{(0,t]} \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) X(\tau-) dN^k\otimes\nu(\tau,t)
+$$
+Taking the expectation and conditioning on $Z(t-)=g$
+\begin{align*}
+&\E[\indic{Z(r)=j} h(t,\{Z(\tau)\}_{\tau\leq t},\{X(\tau-)\}_{\tau\leq t})|Z(t-)=g]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j} X(\tau-) dN^k\otimes\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \E \left[ \sum_{k \neq Z(\tau-)} \phi(\tau,t,Z(\tau-),k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-), Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \E \left[ \sum_{k \neq i} \phi(\tau,t,i,k) \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k\otimes\nu(\tau,t) |Z(\tau-)=i, Z(t-)=g \right] \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[  \indic{Z(r)=j}X(\tau-) dN^k(\tau) |Z(\tau-)=i \right]\nu(\tau,t) \bigg| Z(t-)=g \right]
+\intertext{og da $X(\tau-)|Z(\tau-)$ er uafhænig af $\indic{Z(r)=j}dN^h(\tau)|Z(\tau-)$}
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \E \left[ X(\tau-) |Z(\tau-)=i \right] \E[ \indic{Z(r)=j} dN^k(\tau) |Z(\tau-)=i]\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]} \E \left[ \sum_{i \in \mathcal{J}}\indic{Z(\tau)=i} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \E[dN^k(\tau) |Z(\tau-)=i,Z(r)=j]p_{ij}(\tau,r)\nu(\tau,t) \bigg| Z(t-)=g \right]
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \E \left[\indic{Z(\tau)=i}  | Z(t-)=g \right] \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik|ij}(\tau|\tau,r) p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{0i}(0,\tau)p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k) \frac{\tilde{X}^i(\tau)}{p_{0i}(0,\tau)} \mu_{ik}(\tau)\frac{p_{kj}(\tau,r)}{p_{ij}(\tau,r)} p_{ij}(\tau,r) d\nu(\tau,t)
+\\
+=&
+\int_{(0,t]}  \sum_{i \in \mathcal{J}} \frac{p_{ig}(\tau,t)}{p_{0g}(0,t)} \sum_{k \neq i} \phi(\tau,t,i,k)\tilde{X}^i(\tau) \mu_{ik}(\tau)p_{kj}(\tau,r) d\nu(\tau,t)
+\end{align*}
+\item Meget i beviserne skal slettes. De er for lange
+\item Flere steder skriver jeg at dividende også kan bruges til at nedskrive præmier. Det skaber mere forvirring end nytte at holde styr på begge muligheder. Omskriv dette så vi kun kan bruge dividende til at opskrive ydelser.
+\end{itemize}
 
 
 \appendix
@@ -905,8 +901,8 @@ $$
 the proof is complete.
 \end{proof}
 
-\section{Dynamics of $X$ and $Y$}\label{seq:Dyn}
-
+\section{Dynamics of $X$ and $Y$}
+\label{seq:Dyn}
 The amount by which the savings surpass the first order reserve, is spent on $B_2$. 
 where
 \begin{gather*}

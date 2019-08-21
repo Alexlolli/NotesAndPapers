@@ -5,6 +5,13 @@
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Buchardt and Møller(2015)]{THM_BUC}
+Kristian Buchardt and Thomas Møller.
+\newblock Life insurance cash flows with policyholder behavior.
+\newblock \emph{Risks}, 3\penalty0 (3):\penalty0 290--317, 2015.
+\newblock ISSN 22279091.
+\newblock URL \url{http://search.proquest.com/docview/1721901184/}.
+
 \bibitem[Christiansen et~al.(2014)Christiansen, Denuit, and
   Dhaene]{Christiansen}
 MC~Christiansen, MM~Denuit, and J~Dhaene.
@@ -13,13 +20,6 @@ MC~Christiansen, MM~Denuit, and J~Dhaene.
 \newblock \emph{Insurance Mathematics and Economics}, 57\penalty0 (1):\penalty0
   132--137, 2014.
 \newblock ISSN 0167-6687.
-
-\bibitem[Møller and Steffensen(2007)]{Liv2}
-Thomas Møller and Mogens Steffensen.
-\newblock \emph{Market-valuation methods in life and pension insurance}.
-\newblock International Series on Actuarial Science. Cambridge University
-  Press, Cambridge, 2007.
-\newblock ISBN 0521868777.
 
 \bibitem[Norberg(1991)]{Norberg}
 Ragnar Norberg.

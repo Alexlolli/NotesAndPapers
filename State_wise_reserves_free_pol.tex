@@ -625,9 +625,9 @@ However, we cannot calculate the present value of all future benefits including 
 as it involves $\E[X(s)|Z(s)=j,Z(t)=i]$.
 \newpage
 \section{Dealing With Free Policy}
-Syvtilstandsmodel. Forklar hvad der sker ved overgang til fripolice. Bemærk $V^{3*}(t)=V^{0*+}(t)$.\\
+Syvtilstandsmodel. Forklar hvad der sker ved overgang til fripolice. Bemærk $V^{3*}(t,u)=V^{0*+}(t)f(t-u)$ når intensiteterne er ens.\\
 
-The free policy option is the option for the insured to cease all future premiums in exchange all future benefits being scaled accordingly. In the case where benefits are not scaled according to the savings account, there is a natural way to calculate the scaling factor, also called the free policy factor, as the factor that solves
+The free policy option is the option for the insured to cease all future premiums in exchange all future benefits being scaled accordingly. In the case where benefits are not scaled according to the savings account, there is a natural way to calculate the scaling factor, also called the free policy factor, as the function $f$ that solves
 \begin{align*}
 \E^* \left[ \int_t^n e^{-\int_t^s r*} dB(s)|Z(t)=0 \right]
 =&\E^* \left[ \int_t^n e^{-\int_t^s r*} f(t) dB^+(s)|Z(t)=3 \right]
@@ -668,13 +668,13 @@ f(t)V_1^{0*+}(t)+ \frac{X(t)-V_1^{0*+}(t)}{V_2^{0*+}(t)}V_2^{0*+}(t)f(t)
 \\
 \Leftrightarrow
 \\
-f(t)=\frac{X(t)V_2^{0*}(t)}{V_1^{0*+}(t)V_2^{0*}(t)+(X(t)-V_1^{0*}(t))V_2^{0*+}(t)}.
+f(t)=\frac{X(t)V_2^{0*}(t)}{V_1^{0*+}(t)V_2^{0*}(t)+(X(t)-V_1^{0*}(t))V_2^{0*+}(t)},
 \end{gather*}
-It is worth noting that this choice of free policy factor leads to $R^{03}(t,x)=b^{03}(t,x)=0$. As we assume that the benefits are defined $dB_2^+=dB_2$,
+implying that $f$ is now not a function, but a process. It is worth noting that this choice of free policy factor leads to $R^{03}(t,X(t))=b^{03}(t,X(t))=0$. As we assume defined benefits i.e $dB_2^+=dB_2$, we see that
 $$
 f(t)=\frac{X(t)}{X(t)-V_1^{0*-}(t)}.
 $$
-Furthermore, the only duration dependent part of the benefit pertains to the payments that are not scaled by the savings account
+To our dismay this free policy factor is not affine in $X$, which causes some trouble as we shall see. Note that the only duration dependent part of the benefit pertains to the payments that are not scaled by the savings account,
 \begin{align*}
 dB^i(t,x,u)=&f(t-u)dB^{i+}_1(t)+\frac{x-V_1^{i*}(t,u)}{V_2^{i*}(t,u)}dB_2^{i+}(t)f(t-u)
 \\
@@ -685,47 +685,52 @@ f(t-u)dB^{i+}_1(t)+\frac{x-V_1^{i*+}(t)f(t-u)}{V_2^{i*+}(t)f(t-u)}dB_2^{i+}(t)f(
 f(t-u)\left( dB^{i+}_1(t) - \frac{V_1^{i*+}(t)}{V_2^{i*+}(t)}dB_2^{i+}(t) \right)  +\frac{x}{V_2^{i*+}(t)}dB_2^{i+}(t),
 \end{align*}
 implying that the dynamics of $X$ are on the form
-\begin{align*}
-dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds +  \indic{Z(s)\in \mathbb{F}} f(s-U(s)) g_3(s,Z(s))ds \\
+\begin{align}
+dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds +  \indic{Z(s)\in \mathbb{F}} f(s-U(s)) g_3(s,Z(s))ds \label{eq:AAK} \\
 &+
 \sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_2(s,Z(s-),h) + \right) dN^h(s)
-\\
+\nonumber \\
 &+
-\sum_{h\neq Z(s-)} \left(  \indic{Z(s)\in \mathbb{F}} f(s-U(s))h_3(s,Z(s-),h)\right) dN^h(s).
-\end{align*}
-Note the very important special cases where $g_3=0$, when $dB_1^{Z(t)+}(t)=dB_2^{Z(t)+}(t)$ or $dB_1^{Z(t)+}(t)=0$. In these cases, the dynamics of $X$ are independent of the free-policy duration. This is true because the otherwise duration dependent terms of the dynamics of $X$, $dB$ and $\chi$ can be written as
+\sum_{h\neq Z(s-)}  \indic{Z(s)\in \mathbb{F}} f(s-U(s))h_3(s,Z(s-),h) dN^h(s),
+\nonumber
+\end{align}
+where $\mathbb{F} \subseteq \mathcal{J}$ are the set of free policy states. Note the two very important special cases;
+\begin{itemize}
+\item $dB_1^{Z(t)+}(t)=dB_2^{Z(t)+}(t)$, corresponding to the assumption that whatever benefits the insured has already bought, are the same benefits he wants to buy using his dividend.
+\item $dB_1^{Z(t)+}(t)=0$, which is the case when $B_1$ only relates to the premium of the policy. 
+\end{itemize}  In these cases, the dynamics of $X$ are independent of the free-policy duration. This is because the otherwise duration dependent terms of the dynamics of $X$, $dB$ and $\chi^{jk}$, can be written as
 \begin{align*}
 dB^i(t,x,u)=&
-f(t-u) \underbrace{\left( dB^{i+}_2(t) - dB_2^{i+}(t) \right)}_{=0}  +\frac{x}{V_2^{i*+}(t)}dB_2^{i+}(t)
+f(t-u) \underbrace{\left( dB^{i+}_1(t) - dB_1^{i+}(t) \right)}_{=0}  +\frac{x}{V_1^{i*+}(t)}dB_1^{i+}(t)
 \\
 \chi^{jk}(t,x,u)=&V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_2^{j*+}(t)f(t-u)}V_2^{k*+}(t)f(t-u)
 \\
 =&
-V_2^{k*+}(t)f(t-u)+\frac{x-V_2^{j*+}(t)f(t-u)}{V_2^{j*+}(t)f(t-u)}V_2^{k*+}(t)f(t-u)
+V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_1^{j*+}(t)f(t-u)}V_1^{k*+}(t)f(t-u)
 \\
 =&
-\frac{x}{V_2^{j*+}(t)}V_2^{k*+}(t),
+\frac{x}{V_1^{j*+}(t)}V_1^{k*+}(t).
 \end{align*}
-when the free policy intensities are identical to the premium paying intensities.
-\newpage
+Pleasing as these special cases may be, they are not general enough to encompass the real-world complexity we need. Instead we should try to derive a differential equation for the expectation of the savings account when it has dynamics given by \eqref{eq:AAK}.
+\\
 For general $B_1$ and $B_2$, the extra terms when taking expectation of dynamics of $X$ compared to the case without duration dependence, are
 \begin{gather}
-\E_{Z(0)} [ \indic{Z(s) \in \mathbb{F}} \indic{Z(t)=j} g_3(s,Z(s-)) f(s-U(s))|Z(s-)=g] \label{eq:AAI}
+\E_{Z(0)} [ \indic{Z(s) \in \mathbb{F}} \indic{Z(t)=j} g_3(s,Z(s-)) f(s-U(s))|Z(s-)=g] \label{eq:AAL}
 \intertext{and}
 \sum_{h \neq g} \E_{Z(0)} [ \indic{Z(s) \in \mathbb{F}} \indic{Z(t)=j} h_3(s,Z(s-),h) dN^h(s) f(s-U(s))|Z(s-)=g]
 \label{eq:AAJ}
 \end{gather}
-We assume that $f$ is deterministic. Commencing with \eqref{eq:AAI},
+Commencing with \eqref{eq:AAL},
 \begin{align*}
 &\E_{Z(0)} [ \indic{Z(s) \in \mathbb{F}} \indic{Z(t)=j} g_3(s,Z(s-)) f(s-U(s))|Z(s-)=g]
 \\
-&= \E_{Z(0)} [  \indic{Z(t)=j} f(s-U(s))|Z(s-)=g] \indic{g \in \mathbb{F}} g_3(s,g)
-\intertext{and by conditioning on the indicator function and multiplying with its probability we get}
-&= \E_{Z(0)} [ f(s-U(s))|Z(s-)=g, Z(t)=j] P(Z(t)=j|Z(s-)=g,Z(0)=0) \indic{g \in \mathbb{F}} g_3(s,g)
-\\
+&= \E_{Z(0)} [  \indic{Z(t)=j} f(s-U(s))|Z(s-)=g] \indic{g \in \mathbb{F}} g_3(s,g).
+\intertext{By conditioning on the indicator function and multiplying with its probability we get}
+%&= \E_{Z(0)} [ f(s-U(s))|Z(s-)=g, Z(t)=j] P(Z(t)=j|Z(s-)=g,Z(0)=0) \indic{g \in \mathbb{F}} g_3(s,g)
+%\\
 &= \E_{Z(0)} [ f(s-U(s))|Z(s-)=g, Z(t)=j] p_{gj}(s,t) \indic{g \in \mathbb{F}} g_3(s,g).
 \end{align*}
-Because of the indicator function $\indic{g \in \mathbb{F}}$ and $p_{gj}(s,t)=0$ for $j\notin \mathbb{F}$, the only interesting values of $g$ and $j$ are the ones where both $g$ and $j$ are free policy states. When calculating the expected free policy factor at time $s$ given $Z(s-)=g$, then $Z(t)=j$ provides no extra information. We can disregard the condition on $Z(t)$ as $f(s-U(s))$ only depends on $Z(s-)$ by the Markov property. In other words, $U(s)$ given $Z(s-) \in \mathbb{F}$ is independent of $Z(t)$ for $s<t$. Therefore
+Note that $f(s-U(s))$ is $\mathcal{F}_s$-measurable, and by the Markov property independent of $Z(t)$ given $Z(s)$, for $t>s$. Therefore
 \begin{align*}
 &\E_{Z(0)} [ f(s-U(s))|Z(s-)=g, Z(t)=j] p_{gj}(s,t) \indic{g \in \mathbb{F}} g_3(s,g)
 \\
@@ -733,22 +738,58 @@ Because of the indicator function $\indic{g \in \mathbb{F}}$ and $p_{gj}(s,t)=0$
 \E_{Z(0)} [ f(s-U(s))|Z(s-)=g] p_{gj}(s,t) \indic{g \in \mathbb{F}} g_3(s,g)
 \\
 &=
-\E[ \indic{Z(s-)=g} f(s-U(s))|Z(0)] \frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} g_3(s,g)
+\E_{Z(0)}[ \indic{Z(s-)=g} f(s-U(s))] \frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} g_3(s,g)
 \\
-&= g_3(s,g) \frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s f(\tau) E[\indic{Z(s-)=g}|Z(0),s-U(s)=\tau] dP(s-U(s)\leq \tau | Z(0)).
+&= g_3(s,g) \frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s  \E_{Z(0)}[f(\tau) \indic{Z(s-)=g}|s-U(s)=\tau] dP(s-U(s)\leq \tau | Z(0)).
 \end{align*}
-Perfoming the same calculations as in section A.2 of \citet{THM_BUC} we get
+Performing the same calculations as in section A.2 of \citet{THM_BUC}, and noting that $f(\tau)\independent \indic{Z(s-)=g}|s-U(s)$, we get
 \begin{align*}
-g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s f(\tau) E[\indic{Z(s-)=g}|Z(0),s-U(s)=\tau] dP(s-U(s)\leq \tau | Z(0))
+g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s  \E[f(\tau)\indic{Z(s-)=g}|Z(0),s-U(s)=\tau] dP(s-U(s)\leq \tau | Z(0))
 \\
 =
-g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s p_{Z(0)0}(0,\tau) \mu_{03}(\tau) f(\tau) p_{3g}(\tau,s) d\tau,
+g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s p_{Z(0)0}(0,\tau) \mu_{03}(\tau) \E_{Z(0)}[ f(\tau)|Z(\tau)=0] p_{3g}(\tau,s) d\tau,
 \end{align*}
-and since we have proved that
+As $f(\tau)$ is not affine in $X(\tau)$, we cannot simply replace $X$ with its expectation given $Z(\tau)$. We can however perform a second order Taylor expansion of $f$ around $\tilde{X}^0(\tau)$, and get
+\begin{align*}
+\E_{Z(0)}[f(\tau) |Z(\tau)=0]
+=&
+\E_{Z(0)}[\tilde{f}(\tau) |Z(\tau)=0]+ 
+\E_{Z(0)} \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right) ^2 \right) \bigg| Z(\tau)=0 \right]
+\end{align*}
+where 
 $$
-\int_0^s p_{j0}(0,\tau) \mu^{03}(\tau) f(\tau) p_{0g}(\tau,s) d\tau = p^{\text{lost}}_{jg}(0,s),
+\tilde{f}(\tau)=
+\frac{
+	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
+}{
+	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
+	-V_1^{0*-}(\tau)
+}
++
+\frac{
+	V_1^{0*-}(\tau)
+	}{
+	\left( V_1^{0*-}(\tau)-
+	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
+	\right)^2
+}
+\left( \frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}-X(\tau)\right),
 $$
-we have
+which is affine in $X$. As $\E_{Z(0)}[X(\tau)|Z(\tau)=0]=\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}$, the second term vanishes and
+\begin{align*}
+\E_{Z(0)}[f(\tau) |Z(\tau)=0]
+=&
+\frac{
+	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
+}{
+	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
+	-V_1^{0*-}(\tau)
+}
+\\
+&+
+\E_{Z(0)} \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right) ^2 \right) \bigg| Z(\tau)=0 \right].
+\end{align*}
+Now we perform an approximation by disregarding the expectation of the $O$-function, leaving us with a deterministic approximated free policy factor, and as the duration dependent benefits are independent of $X$, we may use the lost-all trick to conclude
 \begin{align*}
 \E_{Z(0)} [ \indic{Z(s) \in \mathbb{F}} \indic{Z(t)=j} g_3(s,Z(s-)) f(s-U(s))|Z(s-)=g]
 =
@@ -758,17 +799,13 @@ Now, consider \eqref{eq:AAJ}
 \begin{align*}
 \E_{Z(0)} [  \indic{Z(t)=j}  dN^h(s) f(s-U(s))|Z(s-)=g] h_3(s,g,h) \indic{g \in \mathbb{F}}.
 \end{align*}
-Note that $U(s)|Z(s-) \independent \indic{Z(t)=j}dN^h(s)|Z(s-)$ \textbf{OBS!} Use same argument to prove \eqref{eq:AAI}.
+Note that $U(s)|Z(s-) \independent \indic{Z(t)=j}dN^h(s)|Z(s-)$ \textbf{OBS!} By the same arguments used to prove \eqref{eq:AAL}.
 \begin{align*}
 \E_{Z(0)}[f(s-U(s))|Z(s-)=g] \E[ \indic{Z(t)=j}dN^h(s) |Z(s-)=g] h_3(s,g,h) \indic{g \in \mathbb{F}}.
 \\
 =\frac{p_{0g}^\text{lost}(0,s)}{p_{0g}(0,s)} p_{hj}(s,t) \mu_{gh}(s) h_3(s,g,h) \indic{g \in \mathbb{F}}.
 \end{align*}
-Performing the same procedure as in the case without duration dependence brings us to the differential equation for
-$$
-\tilde{X}^j(t)=\E[X(t)\indic{Z(t)=j}|Z(0),X(0)].
-$$
-given by
+Performing the same procedure as in the case without duration dependence brings us to the differential given by
 \begin{subequations}
 \begin{empheq}[box=\widefbox]{align*}
 \vspace*{2em}
@@ -787,24 +824,6 @@ given by
 \end{empheq}
 \end{subequations}
 
-
-\begin{lem}[Invariance of Free policy]
-If $dB_1^+=dB_2^+$ or $dB_1^+=0$ and 
-$$
-b^j(t,x,u)=f(t-u)b_1^{j+}(t)+ \frac{x-V_1^{j*}(t,u)}{V_2^{j*}(t,u)}b_2^{j+}(t)f(t-u)
-$$
-then
-$$
-b^j(t,x,u)=b_2^{j+}(t)\frac{x}{V_2^{j*+}(t)}
-$$
-$$
-dB(t,X(t),U(t))=dB_2^{+}(t)\frac{X(t)}{V_2^{Z(t)*+}(t)}
-$$
-\end{lem}
-\begin{proof}
-From $V_1^{j*}(t,u)=V_1^{j*+}(t)f(t-u)$ the result follows.
-\end{proof}
-It is reasonable to assume that $dB_1^+=dB_2^+$, as it corresponds to saying that the insured wants to buy more of what he has already bought. 
 
 \newpage
 

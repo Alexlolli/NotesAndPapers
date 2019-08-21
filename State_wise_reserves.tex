@@ -625,9 +625,9 @@ However, we cannot calculate the present value of all future benefits including 
 as it involves $\E[X(s)|Z(s)=j,Z(t)=i]$.
 \newpage
 \section{Dealing With Free Policy}
-Syvtilstandsmodel. Forklar hvad der sker ved overgang til fripolice. Bemærk $V^{3*}(t)=V^{0*+}(t)$.\\
+Syvtilstandsmodel. Forklar hvad der sker ved overgang til fripolice. Bemærk $V^{3*}(t,u)=V^{0*+}(t)f(t-u)$ når intensiteterne er ens.\\
 
-The free policy option is the option for the insured to cease all future premiums in exchange all future benefits being scaled accordingly. In the case where benefits are not scaled according to the savings account, there is a natural way to calculate the scaling factor, also called the free policy factor, as the factor that solves
+The free policy option is the option for the insured to cease all future premiums in exchange all future benefits being scaled accordingly. In the case where benefits are not scaled according to the savings account, there is a natural way to calculate the scaling factor, also called the free policy factor, as the function $f$ that solves
 \begin{align*}
 \E^* \left[ \int_t^n e^{-\int_t^s r*} dB(s)|Z(t)=0 \right]
 =&\E^* \left[ \int_t^n e^{-\int_t^s r*} f(t) dB^+(s)|Z(t)=3 \right]
@@ -668,13 +668,13 @@ f(t)V_1^{0*+}(t)+ \frac{X(t)-V_1^{0*+}(t)}{V_2^{0*+}(t)}V_2^{0*+}(t)f(t)
 \\
 \Leftrightarrow
 \\
-f(t)=\frac{X(t)V_2^{0*}(t)}{V_1^{0*+}(t)V_2^{0*}(t)+(X(t)-V_1^{0*}(t))V_2^{0*+}(t)}.
+f(t)=\frac{X(t)V_2^{0*}(t)}{V_1^{0*+}(t)V_2^{0*}(t)+(X(t)-V_1^{0*}(t))V_2^{0*+}(t)},
 \end{gather*}
-It is worth noting that this choice of free policy factor leads to $R^{03}(t,x)=b^{03}(t,x)=0$. As we assume that the benefits are defined $dB_2^+=dB_2$,
+implying that $f$ is now not a function, but a process. It is worth noting that this choice of free policy factor leads to $R^{03}(t,X(t))=b^{03}(t,X(t))=0$. As we assume defined benefits i.e $dB_2^+=dB_2$, we see that
 $$
 f(t)=\frac{X(t)}{X(t)-V_1^{0*-}(t)}.
 $$
-Furthermore, the only duration dependent part of the benefit pertains to the payments that are not scaled by the savings account
+Note that the only duration dependent part of the benefit pertains to the payments that are not scaled by the savings account,
 \begin{align*}
 dB^i(t,x,u)=&f(t-u)dB^{i+}_1(t)+\frac{x-V_1^{i*}(t,u)}{V_2^{i*}(t,u)}dB_2^{i+}(t)f(t-u)
 \\
@@ -693,18 +693,22 @@ dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds +  \indic{Z(s)\in \mathbb{F}} f(s-U(s)) g
 &+
 \sum_{h\neq Z(s-)} \left(  \indic{Z(s)\in \mathbb{F}} f(s-U(s))h_3(s,Z(s-),h)\right) dN^h(s).
 \end{align*}
-Note the very important special cases where $g_3=0$, when $dB_1^{Z(t)+}(t)=dB_2^{Z(t)+}(t)$ or $dB_1^{Z(t)+}(t)=0$. In these cases, the dynamics of $X$ are independent of the free-policy duration. This is true because the otherwise duration dependent terms of the dynamics of $X$, $dB$ and $\chi$ can be written as
+Note the two very important special cases;
+\begin{itemize}
+\item $dB_1^{Z(t)+}(t)=dB_2^{Z(t)+}(t)$, corresponding to the reasonable assumption that whatever benefits the insured has already bought, are the same benefits he wants to buy using his dividend.
+\item $dB_1^{Z(t)+}(t)=0$, which is the case when $B_1$ only relates to the premium of the policy. 
+\end{itemize}  In these cases, the dynamics of $X$ are independent of the free-policy duration, corresponding to $g_3=0$. This is because the otherwise duration dependent terms of the dynamics of $X$, $dB$ and $\chi^{jk}$, can be written as
 \begin{align*}
 dB^i(t,x,u)=&
-f(t-u) \underbrace{\left( dB^{i+}_2(t) - dB_2^{i+}(t) \right)}_{=0}  +\frac{x}{V_2^{i*+}(t)}dB_2^{i+}(t)
+f(t-u) \underbrace{\left( dB^{i+}_1(t) - dB_1^{i+}(t) \right)}_{=0}  +\frac{x}{V_1^{i*+}(t)}dB_1^{i+}(t)
 \\
 \chi^{jk}(t,x,u)=&V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_2^{j*+}(t)f(t-u)}V_2^{k*+}(t)f(t-u)
 \\
 =&
-V_2^{k*+}(t)f(t-u)+\frac{x-V_2^{j*+}(t)f(t-u)}{V_2^{j*+}(t)f(t-u)}V_2^{k*+}(t)f(t-u)
+V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_1^{j*+}(t)f(t-u)}V_1^{k*+}(t)f(t-u)
 \\
 =&
-\frac{x}{V_2^{j*+}(t)}V_2^{k*+}(t),
+\frac{x}{V_1^{j*+}(t)}V_1^{k*+}(t),
 \end{align*}
 when the free policy intensities are identical to the premium paying intensities.
 \newpage

@@ -240,93 +240,278 @@ $$
 forms a martingale. The state process $Z$ encapsulates the biometric risks involved with the insurance contract. Apart from the biometric risk, there is a financial risk connected to with-profit insurance contracts through the return on investment of the surplus. We make assumptions regarding the financial risk, by specifying the expected return on investment, $r$. Together, the transition intensities and expected return on investment form the second order basis, which describes the best guess on future development of the insurance portfolio. We take this second order basis as exogenously given. Note that a Monte-Carlo method can be used as a proxy for evaluation under the second order basis; perform evaluation under $n$ simulated second order basis and take the mean. The Monte-Carlo approach for evaluation allows for great model flexibility, which is particularly appealing regarding the expected return on investment. 
 
 While the second order basis forms the best guess on future developments of the relevant technical elements, it would be far too risky for an insurance company to use these assumptions when signing contracts. What if a cure for cancer is invented in 10 years, or if the stock market crashes? To allow for events that make it difficult to meet the obligations to the insured, a much less risky set of assumptions are used when guarantees are given. These prudent assumptions form the first order (technical) basis. Using the standard notation, a $"*"$ symbolises first-order basis elements. It is precisely due to the difference between the first order basis and the realised (third order) basis that a surplus emerges. We have no way of knowing what the future is going to bring, so we cannot know how the surplus is going to evolve. We can however make an estimate by using the second order basis as a stand-in for the third order basis.
-
-
-\subsubsection{Savings and Surplus}
-The savings and surplus denoted by $X$ and $Y$ respectively, are the main quantities of interest. Three payment streams affect the savings and surplus, namely the benefits, dividends and contributions. The benefits are the contractual payments between the insurer and the insured. That is, the benefits are the state dependent premiums and benefits agreed upon on initialization of the policy. In order to incorporate the possibility of increasing benefits or decreasing premiums by spending dividends, we introduce two benefit processes $B_1$ and $B_2$ with dynamics
+\\
+\textbf{Missing}
+\begin{itemize}
+\item Payment stream, B.
+dynamics
 $$
 dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t).
 $$
-The deterministic payment functions $b_i^j(t)$ and $b_i^{jk}(t)$ specify payments during sojourns in state $j$ and on transition from state $j$ to state $k$, respectively. Even though single payments during sojourns in states pose no mathematical difficulty, we assume that payments during sojourns in states are continuous for notational simplicity. The benefits specified by $B_1$ are the benefits which are fixed, and $B_2$ specifies the benefits which are increased when dividend is paid out. Accompanying the payment streams $B_1$ and $B_2$, are the technical reserves given by
+The deterministic payment functions $b_i^j(t)$ and $b_i^{jk}(t)$ specify payments during sojourns in state $j$ and on transition from state $j$ to state $k$, respectively. Even though single payments during sojourns in states pose no mathematical difficulty, we assume that payments during sojourns in states are continuous for notational simplicity.
+\item Filtration for Z, $\mathcal{F}_t$
+\item without loss of generality assume $Z(0)=0$
+\item Consider single policy
+\item Dynamics of reserve?
+\item "+" denoting benefits and "-" denoting premiums.
+\item The second order basis is assumed to form a predictable compensator for the actual dynamics.
+\item The dynamics of the technical reserves are found using Itô's lemma for FV-functions to be
+\begin{align}
+dV_i^{Z(t)*}(t)=&r^*(t)V_i^{Z(t)*}(t)dt - b_i^{Z(t)}(t) -\sum_{k\neq Z(t-)}b_i^{Z(t-)k}(t) dN^k(t)\nonumber
+\\
+-&\sum_{k\neq Z(t-)} \rho_i^{Z(t-)k}(t) dt
++
+\sum_{k\neq Z(t-)} R_i^{Z(t-)k}(t)(dN^k(t)-\mu_{Z(t-)k}(t) dt), \label{eq:AAP}
+\end{align}
+where $\rho_i^{jk}$ is the so-called risk premium for a transition from state $j$ to state $k$, and $R_i^{jk}$ is the so-called sum-at-risk for a transition from $j$ to $k$. The sum-at-risk $R_i^{jk}$ describes the required injection of capital on a transition from $j$ to $k$ in order to meet the future liabilities of the contract in state $k$, evaluated under the first-order basis. The sum-at-risk is given by
 $$
-V_i^{*j}(t)=\E \left[ \int_t^n e^{-\int_t^s r^*} dB_i(s) \big| Z(t)=j \right].
+R_i^{jk}(t)=b_i^{jk}(t)+V_i^{k*}(t)-V_i^{j*}(t).
 $$
-The savings account is used to buy one unit of the payment stream $B_1$, and whatever remains, is spent on $B_2$. By the equivalence principle, the quantity $Q$, of $B_2$ cashflows that can be bought, is equal to
+As the name suggests, the risk premium is the premium paid by the policyholder to cover the risk carried by the insurer that can not be diversified, such as medical advancements. Naturally the risk premium is the sum-at-risk multiplied by the difference in intensity for a transition from $j$ to $k$ between the first-order basis and the second-order basis, i.e
 $$
-Q(t-)=\frac{X(t-)-V_1^{Z(t-)*}(t-)}{V_2^{Z(t-)*}(t-)},
+\rho_i^{jk}(t)=R_i^{jk}(t)(\mu^*_{jk}(t)-\mu_{jk}(t)).
 $$
-as the savings account has to meet the obligations of the $B_1$ cashflow, before any $B_2$ cashflow is bought and both $B_1$ and $B_2$ are priced under the first order basis. The payment stream experienced by the policyholder therefore has dynamics
+\end{itemize}
+\section*{Retrospective Reserve Without Bonus}
+One of the main contributions of \citet{Norberg} is a definition of the retrospective reserve, as a conditional expected value of a past payments, in much the same manner as the prospective reserve is a conditional expected value of future payments. Formally \citet{Norberg} defines the retrospective first order reserve, as
+\begin{align*}
+V^*_\mathbb{E}(t)=&\E^* \left[ \int_0^t e^{\int_s^t r^*} dB(s) \big| \mathcal{E}_t \right] 
+%\\
+%=&
+%\E^* \left[ \int_0^t e^{\int_s^t r*}  \left( \sum_{i \in \mathcal{J}} \indic{Z(s)=i} %b^i(s)ds+ \sum_{k \neq Z(s-)} b^{ik}(t) dN^k(s) \right) \big| \mathcal{E}_t \right]
+\end{align*} 
+for some family of sigmaalgrebras $\mathbb{E}=\{\mathcal{E}_t \}_{0\leq t}$, where $\mathcal{E}_t$ represents the information available at time $t$. It is for an actuary very natural to assume that $\mathcal{E}_t=\sigma\{ Z(s), 0 \leq s\leq t \}$, implying that all information about the past is accounted for. As noted by \citet{Norberg} the family of sigmaalgebras may be increasing, i.e $\mathcal{E}_s \subseteq \mathcal{E}_t$ for $s<t$, but it is not required. So with this very general definition of the retrospective reserve, we may discard information, for instance by defining $\mathcal{E}_t=\sigma \{Z(0), Z(t) \}$. But why should we ever choose to discard information that is available to us? Because it is intractable to use $\mathcal{E}_t=\mathcal{F}_t$ when we want to calculate the expected value of $V^*_\mathbb{E}(t)$ and $\{ Z(s) \}_{s\leq t}$ has not yet been realised. Computationally it is simply too demanding to take the expectation over $\mathcal{F}_t$ - all possible paths and all possible transition times have to be considered. Instead we therefore let $\mathcal{E}_t=\sigma \{Z(0), Z(t) \}$, implying that we only use the state at initialization and time $t$ to evaluate the retrospective reserve. Using this formulation of $\mathcal{E}_t$, the retrospective reserve can be interpreted as the average reserve of a group of policies that all start in $Z(0)$ and end in $Z(t)$. In order to actually calculate this retrospective reserve, we note by the markov property that
+\begin{equation}
+P(Z(s)=j| Z(0)=0, Z(t)=i )=\frac{p_{0j}(0,s)p_{ji}(0,t)}{p_{0i}(s,t)},
+\label{eq:AAM}
+\end{equation}
+and that the predictable compensator for $N^{jk}(s)| (Z(0)=0, Z(t)=i )$ has intensity given by
+\begin{equation}
+\indic{Z(s-)=j}\mu_{jk|0i}(s|0,t)=\indic{Z(s-)=j}\mu_{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)}. \label{eq:AAN}
+\end{equation}
+Define
+$$
+V_i^*(t)= \E^* \left[ \int_0^t e^{\int_s^t r*} dB(s) \big|Z(0)=0, Z(t)=i \right],
+$$
+which by \eqref{eq:AAM} and \eqref{eq:AAN} is equal to
+\begin{align}
+V_i^*(t)=& \int_0^t e^{\int_s^t r*} \sum_{j \in \mathcal{J}} \frac{p_{0j}(0,s)p_{ji}(s,t)}{p_{0i}(0,t)} \left(  b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)} \right) ds
+%\\ =& \frac{1}{p_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j \in \mathcal{J}} p_{0j}(0,s)p_{ji}(s,t) \left(  b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s)b^{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)} \right) ds
+ \nonumber \\
+=&
+ \frac{1}{p_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds \label{eq:AAO}
+\end{align}
+as also derived by \citet{Norberg}. In itself \eqref{eq:AAO} provides an interpretation of the retrospective reserve; it is the accumulated payments on transition and sojourn payments at all times prior to $t$, weighted by the corresponding probability of transition between states and sojourns in states, given the initial and terminal state of the policy. For sufficiently nice intensities and payment functions, analytical solutions for $V_i^*(t)$ can be derived. In general, we cannot provide a closed form expression for $V_i^*(t)$, and instead we have to rely on numerical methods, for instance by a numerical solution to the differential equation solved by $V_i^*(t)$. As it is a nuisance to directly derive a differential equation for $V_i^*$, due to the division by the probability of entering state $i$ at time $t$, we define
+\begin{align*}
+\tilde{V}_i^*(t)= \E^* \left[ \indic{Z(t)=i} \int_0^t e^{\int_s^t r^*} dB(s) \big|Z(0)=0\right] = V_i^*(t)p_{0i}(0,t).
+\end{align*}
+Using the Kolmogorov differential equations, $p_{0i}(0,t)$ can be calculated for all $i$ and $t$, and thus $V_i^*(t)$ can easily be calculated once $\tilde{V}_i^*(t)$ is available. Differentiating $\tilde{V}_i^*(t)$ with respect to $t$ gives
+\begin{align*}
+\frac{d}{dt} \tilde{V}_i^*(t)=& \frac{d}{dt} 
+\int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds
+\\
+=&
+\sum_{j \in \mathcal{J}} p_{0j}(0,t) \left( \indic{j=i}   b^{j}(t) + \sum_{k \neq j}  \mu_{jk}(t) b^{jk}(t) \indic{k=i}  \right) 
+\\
+&+
+\int_0^t \frac{d}{dt} e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds
+\\
+=&
+p_{0i}(0,t) b^{i}(t) + \sum_{j \neq i} p_{0j}(0,t) \mu_{ji}(t) b^{ji}(t) 
++
+r^*(t)\tilde{V}_i^*(t)
+\\
+&+
+\int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left( \frac{d}{dt}p_{ji}(s,t)   b^{j}(s) + \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) \frac{d}{dt} p_{ki}(s,t) \right) ds.
+\end{align*}
+The Kolmogorov forward differential equations state that
+$$
+\frac{d}{dt}p_{ji}(s,t)=\sum_{g \neq i} p_{jg}(s,t)\mu_{gi}(t) - \mu_{ig}(t)p_{ji}(s,t)
+$$
+which imply that
+\begin{align*}
+\frac{d}{dt}\tilde{V}_i^*(t)=&
+p_{0i}(0,t) b^{i}(t) + \sum_{j \neq i} p_{0j}(0,t) \mu_{ji}(t) b^{ji}(t) 
++
+r^*(t)\tilde{V}_i^*(t)
+\\
+&+
+\sum_{g \neq i} \mu_{gi}(t) \int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) p_{jg}(s,t)   b^{j}(s) ds
+\\
+&-
+\sum_{g \neq i} \mu_{ig}(t) \int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s)  p_{ji}(s,t)   b^{j}(s)  ds
+\\
+&+
+\sum_{g \neq j} \mu_{gi}(t) \int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) p_{kg}(s,t) ds
+\\
+&-
+\sum_{g \neq i} \mu_{ig}(t) \int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s)  p_{kj}(s,t) ds
+\\
+=&
+p_{0i}(0,t) b^{i}(t) + \sum_{j \neq i} p_{0j}(0,t) \mu_{ji}(t) b^{ji}(t) 
++
+r^*(t)\tilde{V}_i^*(t)
+\\
+&+
+\sum_{g \neq i} \mu_{gi}(t) \underbrace{ \int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left( p_{jg}(s,t)   b^{j}(s) \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s) p_{kg}(s,t)\right)  ds}_{\tilde{V}_g^*(t)}
+\\
+&-
+\sum_{g \neq i} \mu_{ig}(t) \underbrace{\int_0^t e^{\int_s^t r^*} \sum_{j \in \mathcal{J}} p_{0j}(0,s) \left( p_{ji}(s,t)   b^{j}(s) \sum_{k \neq j}  \mu_{jk}(s) b^{jk}(s)  p_{ki}(s,t)\right) ds}_{\tilde{V}_i^*(t)}
+\\
+=&
+p_{0i}(0,t) b^{i}(t) + \sum_{j \neq i} p_{0j}(0,t) \mu_{ji}(t) b^{ji}(t) 
++
+r^*(t)\tilde{V}_i^*(t)
+\\
+&+
+\sum_{g \neq i} \mu_{gi}(t) \tilde{V}_g^*(t)-\mu_{ig}(t) \tilde{V}_i^*(t),
+\end{align*}
+which is a differential equation that bears a close resemblance to the prospective Thiele differential equation. The retrospective probability weighted reserve $\tilde{V}_i^*(t)$ develops in accordance with the probability weighted payments, the first order interest, and a diffusion between the reserves. These differential equations are generalisations of the Kolmogorov forward differential equations, that emerge when the payment stream is defined by
+$$
+dB(t)=\indic{t=u}\indic{Z(t)=j},
+$$
+that has a payout of one unit at time $u$, if $Z(t)=j$. ... Allowed for payments that depend on the retrospective reserve itself, as it is deterministic.
+\\
+\citet{Norberg} defined the retrospective reserve, and derived some of its important properties. At the time, the retrospective reserve was perhaps more of a mathematical curiosity than an actuarial tool, as the prospective reserves at the time provided all the information you could ask for. However, the retrospective reserve definitely deserves recognition when surplus and dividends are introduced. \citet{NorbergB} defines the individual surplus as a retrospective reserve, and derives a differential equation hereof in a simple model where no dividends are allotted.
+\\
+With an understanding of the development of the retrospective reserve, we now expand our set-up to allow for realistic modelling of benefits and balances, by introducing the notion of surplus and dividends.
+
+
+
+\subsubsection{Set-Up Including Surplus and Dividends}
+In this section we expand our set-up such that we can accurately describe the benefits and balances in a model where surplus and dividends are included. The first order basis on which insurance contracts are signed, are a set of prudent assumptions regarding interest and transition intensities. Knowing that the assumptions are prudent, the insurer and insured agree that when surplus has emerged as a consequence of the realized interest and transition intensities, this surplus should be given back to the insured. The surplus is returned to the insured through a dividend payment stream. What the insured chooses to do with his dividend can vary, but a very standard product design is to use the dividends to buy more insurance. In a sense, the dividend payment stream becomes a premium for a bonus benefit payment stream. We introduce two payment streams $B_1$ and $B_2$ with dynamics
+$$
+dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t).
+$$
+The payments specified by $B_1$ are the benefits which are fixed, and part of the original contract. The payments of $B_2$ specify the profile of the benefit stream that the dividend is converted into. When the contract is signed, both $B_1$ and $B_2$ are agreed upon, and while there is practically no restriction on their design, we assume that $B_2$ contains benefits only, implying that dividends are used to increase benefits, and not to decrease premiums. The payment streams $B_1$ and $B_2$, have corresponding technical reserves given by
+$$
+V_i^{j*}(t)=\E \left[ \int_t^n e^{-\int_t^s r^*} dB_i(s) \big| Z(t)=j \right].
+$$
+We assume $V_2^{0*}(0)>0$. In order to keep track of how much dividend has been materialized into the $B_2$ payment stream, we introduce the process $Q(t)$, whose dynamics we do not yet specify. Intuitively we think of $Q(t)$ as the quantity of $B_2$ payment stream purchased at time $t$. The payment process experienced by the policyholder, $B$, consists of one unit $B_1$ payment stream and $Q$ units of $B_2$ payment stream, thus having dynamics
+$$
+dB(t)=dB_1(t)+ Q(t-)dB_2(t).
+$$
+Where the left-limit version of $Q$ is used in order to ensure that $B$ is adapted to $\mathcal{F}_t$. We now define the savings account as the technical value of future guaranteed payments, given a certain quantity of $B_2$ payment stream,
+\begin{align*}
+X(t)=&\E^*\left[ \int_t^n e^{\int_t^s r*} d\left( B_1(s) + Q(t) B_2(s) \right) \right]
+\\
+=&
+V_1^{Z(t)*}(t)+Q(t)V_2^{Z(t)*}(t). 
+\end{align*}
+Noting that
+$$
+Q(t)=\frac{X(t)-V_1^{Z(t)*}(t)}{V_2^{Z(t)*}(t)}
+$$
+we see that the payment stream experienced by the policyholder has dynamics
 \begin{align*}
 dB(t)=&dB_1(t)+\frac{X(t-)-V_1^{Z(t-)*}(t-)}{V_2^{Z(t-)*}(t-)}dB_2(t)
 \\
 =&b^{Z(t)}(t,X(t)) dt +\sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-))dN^k(t),
 \end{align*}
-for
+for deterministic functions $b^j$ and $b^{jk}$ corresponding to sojourn payments and payments on transition, given by
 \begin{gather*}
 b^j(t,x)=b_1^j(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b_2^j(t)
 \\
 b^{jk}(t,x)=b_1^{jk}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}b_2^{jk}(t).
 \end{gather*}
-Note at initialisation of the policy where no dividends are accrued and $X(0)=V_1^{Z(0)*}(0)$, then $b^j(0,x)=b_1(0)$. In general, if the savings account never receives any dividends, then $X(t)=V_1^{Z(t)*}(t)$ which is a special case of particular interest as it falls into the framework of \citet{Norberg}. To ease notation, we define the risk premium, $\rho$, as the sum at risk for a transition from $j$ to $k$, $R^{jk}$, multiplied by the difference in intensity of the transition on the first- and second order basis
-\begin{gather*}
-\rho^{jk}(t,x)=R^{jk}(t,x)(\mu_{jk}^*(t)-\mu_{jk}(t)),
+By introducing subscripts, the dynamics of $V_1^{Z(t)*}$ and $V_2^{Z(t)*}$ are given by \eqref{eq:AAP}. Using integration by parts for FV-functions we find the dynamics of $X$ to be
+\begin{align}
+dX(t)=&
+dV_1^{Z(t)*}(t)+Q(t-)dV_2^{Z(t)*}(t)+V_2^{Z(t)*}(t)dQ(t) \nonumber
 \\
-R^{jk}(t,x)=b^{jk}(t,x)+\chi^{jk}(t,x)-x.
+=&
+r^*(t)X(t)dt
+ +V_2^{Z(t)*}(t) dQ(t)
+ -b^{Z(t)}(t,X(t)) dt
+- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
+\nonumber \\
+&- \sum_{k \neq Z(t-)} \rho^{Z(t-)k}(t,X(t-))dt
+\nonumber \\
+&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt),\label{eq:AAB}
+\end{align}
+where
+\begin{align*}
+\rho^{jk}(t,X(t-))=&\rho_1^{jk}(t)+Q(t-)\rho_2^{jk}(t)=\rho_1^{jk}(t)+\frac{X(t-)-V_1^{j*}(t-)}{V_2^{j*}(t-)}\rho_2^{jk}(t),
+\\
+R^{jk}(t,X(t-))=&R_1^{jk}(t)+Q(t-)R_2^{jk}(t)=R_1^{jk}(t)+\frac{X(t-)-V_1^{j*}(t-)}{V_2^{j*}(t-)}R_2^{jk}(t),
+\end{align*}
+respectively can be interpreted as the risk premium and sum-at-risk for the savings account. The savings account plays a crucial role in the understanding of the with-profit insurance contract, just as the first order reserve plays a crucial role in the model without dividends. Given the savings account, we can readily define the surplus as
+$$
+Y(t)= - \int_0^t e^{\int_s^t r} dB(s)-X(t),
+$$
+corresponding to the accumulated premiums less benefits excess over the savings account. It is clear from the definition of the surplus that the savings account has an influence on $Y$, but the surplus also has an influence on the savings account though the dividends. The dividends flow from the surplus to the savings account, according to some dividend strategy determined by the insurer. These dividends are instantaneously used to increase benefits, by buying more of the $B_2$ payment stream. These additional benefits are, like the fixed benefits, priced under the first order basis, which means that one unit of $B_2$ has a value of $V_2^{Z(t)*}(t)$. The total amount of accrued dividends at time $t$ are denoted by $D(t)$, and as the dividends are used to buy $B_2$, we must have that
+\begin{align}
+dD(t)=V_2^{Z(t)*}(t)dQ(t). \label{eq:AAQ}
+\end{align}
+By the principle of equivalence
+\begin{gather*}
+0=X(0)=V_1^{0*}(0)+Q(0-)V_2^{0*}(0)
+\\
+\Leftrightarrow
+\\
+Q(0-)=-\frac{V_1^{0*}(0)}{V_2^{0*}(0)}
 \end{gather*}
-The three terms in the sum at risk describe what happens to the savings account on transition from $j$ to $k$. The first term $b^{jk}(t,x)$ is paid out to the insured. The second term describes the value of the payment stream of $B_1$ and $B_2$ when in state $k$, given the amount of extra $B_2$ payment stream purchased in state $j$. Therefore the second term is given by
-$$
-\chi^{jk}(t,x)=V_1^{k*}(t)+\frac{x-V_1^{j*}(t)}{V_2^{j*}(t)}V_2^{k*}(t),
-$$
-and describes the risk linked to the payment stream of $B_1$ and $B_2$ when in state $k$. However, as $\chi^{jk}$ is the total risk in state $k$, we have to subtract the savings account available when in state $j$, taking account for the last term, $-x$.
-
-
+providing us with the initial condition for $Q$, which along with \eqref{eq:AAQ} fully specifies $Q$. Note that the principle of equivalence puts no restrictions on the form of $B_1$ and $B_2$.\\
 The dividend payment stream flows from the surplus to the savings account, and we assume the dynamics are given by
 $$
 dD(t)=\delta^{Z(t)}(t,X(t),Y(t)) dt,
 $$
 for some deterministic function $\delta^j$ on the form
 \begin{equation*}
-\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y+\delta_4^j(t)xy.
+\delta^j(t,x,y)=\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y.
 \end{equation*}
 In this paper, the form of $\delta$ is probably the assumption most eligible for criticism. In practice, the dividend is determined by an actuary who takes much more information into account than simply the value of the savings and surplus. Furthermore the dividend-deciding actuary is most likely going to take past development of the savings and surplus into account. The specification of the dynamics of $D$ is at the heart of what a future management action is, and, as stated earlier, we do not fully incorporate these FMA's in all their generality and glory, but suffice with crude surrogates. Some of these crude surrogates can actually perform a decent job at describing real world dividend strategies, for instance by defining the dividend as some linear function of the contribution.
 
-The contributions are the safety contributions which ensure that the insurer can meet their liabilities. They represent the difference between the first and second order basis, and the artificial premium paid by the insured to cover the indiversifiable risk carried by the insurer. The contract is signed on the prudent first order basis, and as such, the contract is expected to generate a systematic surplus. This systematic surplus arises precisely because $C$ is positive. The dynamics of $C$ are defined to be
-$$
-dC(t)=(r(t)-r^*(t))X(t)dt + \sum_{k\neq Z(t)} \rho^{Z(t)k}(t,X(t))dt.
-$$
-By the principle of equivalence, the amount of $B_2$ cashflow that can be bought for the dividend implies that
-\begin{align*}
-dD(t)=&V_2^{Z(t)*}(t) dQ(t) .
-\end{align*}
-Using Itô's lemma for FV-functions and integration by parts for FV-functions, we find the dynamics of $X$ as
-\begin{align}
-dX(t)=&
-r^*(t)X(t)dt
- +\delta^{Z(t)}(t,X(t),Y(t))  dt
- -b^{Z(t)}(t,X(t)) dt
-- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
-\nonumber \\
-&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}^*(t)dt)
-\nonumber \\
-=&
-r^*(t)X(t)dt
- +\delta^{Z(t)}(t,X(t),Y(t))  dt
- -b^{Z(t)}(t,X(t)) dt
-- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
-\nonumber \\
-&- \sum_{k \neq Z(t-)} \rho^{Z(t-)k}(t,X(t-))dt
-\nonumber \\
-&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt).\label{eq:AAB}
-\end{align}
-Note that the predictable compensator for $dN^k$ when $k\neq Z(t-)$ is $\mu_{Z(t-)k}(t)$, under the second order basis, while $\mu^*_{Z(t-)k}(t)$ is the predictable compensator under the first order basis. We can now define the surplus of the accumulated contract as
-$$
-Y(t)= - \int_0^t e^{\int_s^t r} dB(s)-X(t),
-$$
-and derive the dynamics to be
+
+
+
+
+
+%Using Itô's lemma for FV-functions and integration by parts for FV-functions, we find the dynamics of $X$ as
+%\begin{align}
+%dX(t)=&
+%r^*(t)X(t)dt
+% +\delta^{Z(t)}(t,X(t),Y(t))  dt
+% -b^{Z(t)}(t,X(t)) dt
+%- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
+%\nonumber \\
+%&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}^*(t)dt)
+%\nonumber \\
+%=&
+%r^*(t)X(t)dt
+% +\delta^{Z(t)}(t,X(t),Y(t))  dt
+% -b^{Z(t)}(t,X(t)) dt
+%- \sum_{k \neq Z(t-)} b^{Z(t-)k}(t,X(t-)) dN^k(t)
+%\nonumber \\
+%&- \sum_{k \neq Z(t-)} \rho^{Z(t-)k}(t,X(t-))dt
+%\nonumber \\
+%&+ \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) (dN^k(t)-\mu_{Z(t-)k}(t)dt),\label{eq:AAB}
+%\end{align}
+
+
+
+%Note that the predictable compensator for $dN^k$ when $k\neq Z(t-)$ is $\mu_{Z(t-)k}(t)$, under the second order basis, while $\mu^*_{Z(t-)k}(t)$ is the predictable compensator under the first order basis.
+
+
+
+
+
+
+
+
+
+The dynamics of $Y$ can easily be derived to be
 \begin{align}
 dY(t)=&rY(t) dt + dC(t)-dD(t)-
-\sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t). \label{eq:AAC}
+\sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t), \label{eq:AAC}
 \end{align}
+for 
+\begin{gather*}
+dC(t)=(r(t)-r^*(t))X(t)dt+\sum_{k\neq Z(t)} \rho^{Z(t)k}(t,X(t)) dt,
+\end{gather*}
+which we call the contribution process, as it 
+
+
 Note that the dynamics of $X$ and $Y$ are affine, and that for suitable $g$ and $h$ we can write \eqref{eq:AAB} and \eqref{eq:AAC} respectively as
 \begin{align}
 dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t) \nonumber \\
@@ -700,16 +885,12 @@ where $\mathbb{F} \subseteq \mathcal{J}$ are the set of free policy states. Note
 \item $dB_1^{Z(t)+}(t)=0$, which is the case when $B_1$ only relates to the premium of the policy. 
 \end{itemize}  In these cases, the dynamics of $X$ are independent of the free-policy duration. This is because the otherwise duration dependent terms of the dynamics of $X$, $dB$ and $\chi^{jk}$, can be written as
 \begin{align*}
-dB^i(t,x,u)=&
-f(t-u) \underbrace{\left( dB^{i+}_1(t) - dB_1^{i+}(t) \right)}_{=0}  +\frac{x}{V_1^{i*+}(t)}dB_1^{i+}(t)
+dB^i(t,x,u)=&\frac{x}{V_1^{i*+}(t)}dB_2^{i+}(t)
 \\
 \chi^{jk}(t,x,u)=&V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_2^{j*+}(t)f(t-u)}V_2^{k*+}(t)f(t-u)
 \\
 =&
-V_1^{k*+}(t)f(t-u)+\frac{x-V_1^{j*+}(t)f(t-u)}{V_1^{j*+}(t)f(t-u)}V_1^{k*+}(t)f(t-u)
-\\
-=&
-\frac{x}{V_1^{j*+}(t)}V_1^{k*+}(t).
+\frac{x}{V_2^{j*+}(t)}V_2^{k*+}(t).
 \end{align*}
 Pleasing as these special cases may be, they are not general enough to encompass the real-world complexity we need. Instead we should try to derive a differential equation for the expectation of the savings account when it has dynamics given by \eqref{eq:AAK}.
 \\

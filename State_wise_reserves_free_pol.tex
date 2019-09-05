@@ -387,7 +387,7 @@ The payments specified by $B_1$ are the benefits which are fixed, and part of th
 $$
 V_i^{j*}(t)=\E \left[ \int_t^n e^{-\int_t^s r^*} dB_i(s) \big| Z(t)=j \right].
 $$
-We assume $V_2^{0*}(0)>0$. In order to keep track of how much dividend has been materialized into the $B_2$ payment stream, we introduce the process $Q(t)$, whose dynamics we do not yet specify. Intuitively we think of $Q(t)$ as the quantity of $B_2$ payment stream purchased at time $t$. The payment process experienced by the policyholder, $B$, consists of one unit $B_1$ payment stream and $Q$ units of $B_2$ payment stream, thus having dynamics
+We assume $V_2^{0*}(0)>0$. In order to keep track of how much dividend has been materialized into the $B_2$ payment stream, we introduce the process $Q(t)$ which denotes the quantity of $B_2$ payment stream purchased at time $t$. We do not yet specify the dynamics of $Q(t)$. The payment process experienced by the policyholder, $B$, consists of one unit $B_1$ payment stream and $Q$ units of $B_2$ payment stream, thus having dynamics
 $$
 dB(t)=dB_1(t)+ Q(t-)dB_2(t).
 $$
@@ -451,8 +451,9 @@ By the principle of equivalence
 \\
 Q(0-)=-\frac{V_1^{0*}(0)}{V_2^{0*}(0)}
 \end{gather*}
-providing us with the initial condition for $Q$, which along with \eqref{eq:AAQ} fully specifies $Q$. Note that the principle of equivalence puts no restrictions on the form of $B_1$ and $B_2$.\\
-The dividend payment stream flows from the surplus to the savings account, and we assume the dynamics are given by
+providing us with the initial condition for $Q$, which along with \eqref{eq:AAQ} fully specifies $Q$. Note that the principle of equivalence puts no restrictions on the form of $B_1$ and $B_2$.
+\\[12pt]
+We assume the dynamics of the dividend process is given by
 $$
 dD(t)=\delta^{Z(t)}(t,X(t),Y(t)) dt,
 $$
@@ -498,9 +499,7 @@ In this paper, the form of $\delta$ is probably the assumption most eligible for
 
 
 
-
-
-The dynamics of $Y$ can easily be derived to be
+\noin The dynamics of $Y$ can easily be derived to be
 \begin{align}
 dY(t)=&rY(t) dt + dC(t)-dD(t)-
 \sum_{k \neq Z(t-)}  R^{Z(t-)k}(t,X(t-)) dM^k(t), \label{eq:AAC}
@@ -509,10 +508,7 @@ for
 \begin{gather*}
 dC(t)=(r(t)-r^*(t))X(t)dt+\sum_{k\neq Z(t)} \rho^{Z(t)k}(t,X(t)) dt,
 \end{gather*}
-which we call the contribution process, as it 
-
-
-Note that the dynamics of $X$ and $Y$ are affine, and that for suitable $g$ and $h$ we can write \eqref{eq:AAB} and \eqref{eq:AAC} respectively as
+which we call the contribution process, as it represents the contributions from the savings account to the surplus. Note that the dynamics of $X$ and $Y$ are affine, and that for suitable $g$ and $h$ we can write \eqref{eq:AAB} and \eqref{eq:AAC} respectively as
 \begin{align}
 dX(t)=&X(t)g_{x1}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} X(t-) h_{x1}(t,Z(t-),k,Y(t-)) dN^k(t) \nonumber \\
 &+g_{x2}(t,Z(t),Y(t))dt + \sum_{k \neq Z(t-)} h_{x2}(t,Z(t-),k,Y(t-)) dN^k(t),
@@ -538,6 +534,7 @@ for $g$ and $h$ functions that are affine in $W$.
 It is important to realize the extent of applicable models that have affine dynamics, see \citet{Christiansen} for several relevant payment functions that are linear in the reserve, which corresponds to the savings when $D(t)=0$ for all $t$. While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
 As stated in the introduction, management actions are one of the main motivators of this paper, but they are hidden in mainly two terms; the second order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers. Due to the very human and abstract nature of management actions, we do not incorporate them directly in the dynamics of the savings and surplus, but instead let them work in the shadows.
 
+
 \iffalse
 \subsection{Prospective vs. Retrospective}
 The expected value of the prospective reserve is of monumental interest for insurance companies, and for good reason - they describe their liabilities. So why should we pay any concern to the savings account, that only pertains to the past? The past and future are connected through the principle of equivalence, stating that under the first order basis the expected premiums and benefits should be equal. However, under the first order basis, surplus only grows due to financial returns and not due to the difference between
@@ -561,6 +558,7 @@ There is an important distinction between the savings account, and the market va
 \item Something about FMA's - perhaps an example?
 \item Deterministic second order basis, and discussion regarding simulation.
 \end{itemize}
+
 
 \fi
 \subsection{One Active State}

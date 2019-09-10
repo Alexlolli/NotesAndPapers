@@ -1,0 +1,44 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Christiansen et~al.(2014)Christiansen, Denuit, and
+  Dhaene]{Christiansen}
+MC~Christiansen, MM~Denuit, and J~Dhaene.
+\newblock Reserve-dependent benefits and costs in life and health insurance
+  contracts.
+\newblock \emph{Insurance Mathematics and Economics}, 57\penalty0 (1):\penalty0
+  132--137, 2014.
+\newblock ISSN 0167-6687.
+
+\bibitem[Norberg(1991)]{Norberg}
+Ragnar Norberg.
+\newblock Reserves in life and pension insurance.
+\newblock \emph{Scand. Actuar. J. 1}, pages 3--24, 1991.
+
+\bibitem[Norberg(1999)]{NorbergB}
+Ragnar Norberg.
+\newblock A theory of bonus in life insurance.
+\newblock \emph{Finance and Stochastics}, 3\penalty0 (4):\penalty0 373--390,
+  1999.
+\newblock ISSN 0949-2984.
+
+\bibitem[Steffensen(2000)]{Steffensen0}
+Mogens Steffensen.
+\newblock A no arbitrage approach to thiele's differential equation.
+\newblock \emph{Insurance, Mathematics and Economics}, 27\penalty0
+  (2):\penalty0 201--214, 2000.
+\newblock ISSN 01676687.
+\newblock URL \url{http://search.proquest.com/docview/208166412/}.
+
+\bibitem[Steffensen(2001)]{Steffensen1}
+Mogens Steffensen.
+\newblock \emph{On valuation and control in life and pension insurance}.
+\newblock Laboratory of Actuarial Mathematics, University of Copenhagen,
+  Copenhagen, 2001.
+\newblock ISBN 8778344492.
+
+\end{thebibliography}

@@ -468,11 +468,11 @@ where
 \\
 R^{jk}(t,X(t-))=&R_1^{jk}(t)+Q(t-)R_2^{jk}(t)=R_1^{jk}(t)+\frac{X(t-)-V_1^{j*}(t-)}{V_2^{j*}(t-)}R_2^{jk}(t),
 \end{align*}
-respectively can be interpreted as the surplus contribution and sum-at-risk for the savings account. The savings account plays a crucial role in the understanding of the with-profit insurance contract, just as the first order reserve plays a crucial role in the model without dividends. The dynamics of $X$ are remarkably similar to the dynamics of the prospective reserve as seen in \eqref{eq:AAP}, in fact, if $dD(t)=0$ they are identical, and this is a special case of particular interest. If no dividends are ever allotted, i.e. $dD(t)=V_2^{Z(t)*}(t)dQ(t)=0$, then the dynamics of $X$ are identical to the dynamics of the technical reserve found in \eqref{eq:AAP} for an $X$-independent payment process $B_C$ given  by
+respectively can be interpreted as the surplus contribution and sum-at-risk for the savings account. The savings account plays a crucial role in the understanding of the with-profit insurance contract, just as the first order reserve plays a crucial role in the model without dividends. The dynamics of $X$ are remarkably similar to the dynamics of the prospective reserve as seen in \eqref{eq:AAP}. In fact, if no dividends are ever allotted, i.e. $dD(t)=V_2^{Z(t)*}(t)dQ(t)=0$, then the dynamics of $X$ are identical to the dynamics of the technical reserve found in \eqref{eq:AAP} for an $X$-independent payment process $B_C$ given  by
 $$
 dB_C(t)=dB_1(t)-\frac{V_1^{0*}(0-)}{V_2^{0*}(0-)}dB_2(t).
 $$
-If no dividends are allotted, then the savings account is simply a retrospective first order reserve, and therefore falls under the framework of Section \ref{sec:Nor}. The dividend process is the crucial term that separates the results of \citet{Norberg} from the results of this paper, and it is precisely due to the dividend process that we need to extend the results of \citet{Norberg}. Given the savings account, we can readily define the surplus as
+If no dividends are allotted, then the savings account is simply a retrospective first order reserve, and therefore falls under the framework of Section \ref{sec:Nor}. Hence, the dividend process is the crucial term that separates the results of \citet{Norberg} from the results of this paper, and it is precisely due to the dividend process that we need to extend the results of \citet{Norberg}. Given the savings account, we can readily define the surplus as
 $$
 Y(t)= - \int_0^t e^{\int_s^t r(\tau) d\tau} dB(s)-X(t),
 $$
@@ -523,7 +523,6 @@ for a matrix $f_1$ of dimension $n \times n$ and vector $f_2 \in \R^n$.
 
 In practice, the surplus account is shared among, say $N$, policyholders. In that case, $W$ should instead be an $N+1$-dimensional process - one dimension for each policyholder, and one dimension for the shared surplus. This implies that we need a system of $\# \{ \mathcal{J} \}^N+1$ differential equations; one for each combination of all policy states, and one for the common surplus. There are several ways to reduce the dimensionality of the problem, making it computationally tractable. One way to diminish the problem of dependency between policyholders, is to discretize the dividend function and comprise it as lump-sum payments, which conforms to real-world practise. When there are no dividends, the savings are independent of surplus, and thus also the other policies. In between lump-sum payments of dividend, the state-wise contributions including investment gains from each policy is accumulated. When a lump-sum time is reached, the probability weighted sum of contributions are contributed to a single state-independent surplus where after the dividend is allocated. This method requires $\# \{ \mathcal{J} \} \times 2 \times N + 1$ differential equations be solved. One for the surplus, and one for the savings account and contribution for each state of each policy. Furthermore, note that in between lump-sum payments of dividend the computations can be done in parallel over $N$ cores, as the policies are independent. Even though $\# \{ \mathcal{J} \} \times 2 \times N + 1$ independent differential equations is a vast improvement from $\# \{ \mathcal{J} \}^N + 1$ dependent differential equations, it is still a computationally difficult problem, but a further digression on the subject is outside the scope of this paper.
 \\[12pt]
-While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some min or max function, for instance in the case of guarantees, and these non-linear functions in savings cannot be described by affine dynamics. \\
 As stated in the introduction, management actions are one of the main motivators of this paper. The influence of management actions is present in our set-up through mainly two terms; the third order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers.
 
 
@@ -632,9 +631,7 @@ V_1^i(t)+\frac{\tilde{X}^{i}(t)/p_{0i}(0,t)-V_1^{i*}(t)}{V_2^{i*}(t)}V_2^i(t).
 \end{align*}
 Where we in the second equality have used that $X(t)\independent B_2(s)|Z(t)$ for $s>t$. Note that $\E[\text{GY}_{Z(t)}(t)|X(t)=x]$ is affine in $x$, and therefore it can be used as an input to the dividend function $\delta$ - for instance by letting the dividend be some percentage of the guaranteed future benefits.
 \\[12pt]
-Theorem \ref{thm:Diff_1} only applies to $\tilde{W}^i$ if the dynamics of $W$ are affine, however, if the dynamics of $W$ are not affine, we can still produce an approximation of $\tilde{W}^i$. We simply replace $W(t)$ with $\tilde{W}^{Z(t)}(t)$ in the terms of the dynamics that are not affine in $W(t)$. This idea is motivated by producing a second order Taylor approximation of the non-affine term.
-
-
+While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some non-linear function, for instance if the transition intensities are $X$ or $Y$ dependent, and these non-linear functions in savings cannot be described by affine dynamics. However, if the dynamics of $W$ are not affine, we can still produce an approximation of $\tilde{W}^i$. We simply replace $W(t)$ with $\tilde{W}^{Z(t)}(t)$ in the terms of the dynamics that are not affine in $W(t)$. This idea is motivated by producing a second order Taylor approximation of the non-affine term.
 
 
 

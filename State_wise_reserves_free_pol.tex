@@ -815,12 +815,12 @@ g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s  \E
 =
 g_3(s,g)\frac{p_{gj}(s,t)}{p_{Z(0)g}(0,s)} \indic{g \in \mathbb{F}} \int_0^s p_{Z(0)0}(0,\tau) \mu_{03}(\tau) \E_0[ f(\tau)|Z(\tau)=0] p_{3g}(\tau,s) d\tau,
 \end{align*}
-As $f(\tau)$ is not affine in $X(\tau)$, we cannot simply replace $X$ with its expectation given $Z(\tau)$. We can however perform a second order Taylor expansion of $f$ around $\tilde{X}^0(\tau)$, and get
+As $f(\tau)$ is not affine in $X(\tau)$, we cannot simply replace $X$ with its expectation given $Z(\tau)$. We can however perform a Taylor expansion of $f$ around $\tilde{X}^0(\tau)$, and get
 \begin{align*}
 \E_0[f(\tau) |Z(\tau)=0]
 =&
 \E_0[\tilde{f}(\tau) |Z(\tau)=0]+ 
-\E_0 \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right) ^2 \right) \bigg| Z(\tau)=0 \right]
+\E_0 \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right)  \right) \bigg| Z(\tau)=0 \right]
 \end{align*}
 where 
 $$
@@ -830,18 +830,9 @@ $$
 }{
 	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
 	-V_1^{0*-}(\tau)
-}
-+
-\frac{
-	V_1^{0*-}(\tau)
-	}{
-	\left( V_1^{0*-}(\tau)-
-	\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}
-	\right)^2
-}
-\left( \frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}-X(\tau)\right),
+},
 $$
-which is affine in $X$. As $\E_0[X(\tau)|Z(\tau)=0]=\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)}$, the second term vanishes and
+which is independent of $X$. Thus,
 \begin{align*}
 \E_0[f(\tau) |Z(\tau)=0]
 =&
@@ -853,7 +844,7 @@ which is affine in $X$. As $\E_0[X(\tau)|Z(\tau)=0]=\frac{\tilde{X}^0(\tau)}{p_{
 }
 \\
 &+
-\E_0 \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right) ^2 \right) \bigg| Z(\tau)=0 \right].
+\E_0 \left[ O \left( \left( X(\tau)-\frac{\tilde{X}^0(\tau)}{p_{Z(0)0}(0,\tau)} \right)  \right) \bigg| Z(\tau)=0 \right].
 \end{align*}
 Now we perform an approximation by disregarding the expectation of the $O$-function, leaving us with a deterministic approximated free policy factor, and as the duration dependent benefits are independent of $X$, we may use the lost-all trick to conclude
 \begin{align*}

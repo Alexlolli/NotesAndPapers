@@ -1,0 +1,830 @@
+\documentclass[12pt]{article}
+\usepackage[pdfstartview=FitH,hidelinks]{hyperref}
+\usepackage[british]{babel}
+\usepackage{a4,graphicx}
+\usepackage[a4paper, hmargin={2.05cm, 2.05cm}]{geometry} 
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{anyfontsize}
+\usepackage{bbm}
+%\usepackage{xypic}
+\usepackage[latin1,utf8]{inputenc}
+\usepackage{marvosym}
+\usepackage{etoolbox}
+\usepackage{relsize}
+\usepackage{needspace}
+\usepackage{nameref}
+\usepackage{dsfont}
+\usepackage{cancel}
+%\usepackage{thmtools}
+%\usepackage{ntheorem}
+%\newtheorem{lho}{Sætning}
+\usepackage{filecontents}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc}
+\usetikzlibrary{matrix}
+\usepackage{empheq}
+
+\newcommand*\widefbox[1]{\fbox{\hspace{2em}#1\hspace{2em}}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\E}{\text{E}}
+\newcommand{\cov}{\text{cov}}
+\newcommand{\indic}[1]{\mathds{1}_{ \{ #1 \} }}
+\newcommand{\unv}[1]{\mathds{1}_{  #1  }}
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+\newcommand{\noin}{\noindent}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Lu}[1]{\prescript{L}{}{#1}}
+\renewcommand{\P}{\text{P}}
+\renewcommand{\baselinestretch}{1.25} 
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\font\tt=rm-lmtl10
+
+\newtheoremstyle{my_thm}% name
+  {12pt}%         Space above, empty = `usual value'
+  {12pt}%         Space below
+  {\itshape}% Body font
+  {}%         Indent amount (empty = no indent, \parindent = para indent)
+  {\bfseries}% Thm head font
+  {.}%        Punctuation after thm head
+  {\newline}% Space after thm head: \newline = linebreak
+  {}%         Thm head spec
+\theoremstyle{my_thm}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+
+
+
+\usepackage{caption}
+\usepackage{listings,lstautogobble}
+\usepackage{color}
+\usepackage{float}
+\usepackage{cprotect}
+\usepackage[round, comma]{natbib}
+\usepackage{csquotes}
+
+\renewcommand{\mkbegdispquote}[2]{\itshape}
+
+%\iffalse
+\begin{filecontents*}{BIBS.bib}
+
+@article{Djehiche,
+issn = {01676687},
+abstract = {We suggest a unified approach to claims reserving for life insurance policies with reserve-dependent payments driven by multi-state Markov chains. The associated prospective reserve is formulated as a recursive utility function using the framework of backward stochastic differential equations (BSDE). We show that the prospective reserve satisfies a nonlinear Thiele equation for Markovian BSDEs when the driver is a deterministic function of the reserve and the underlying Markov chain. Aggregation of prospective reserves for large and homogeneous insurance portfolios is considered through mean-field approximations. We show that the corresponding prospective reserve satisfies a BSDE of mean-field type and derive the associated nonlinear Thiele equation. [web URL: http://www.sciencedirect.com/science/article/pii/S0167668715300548]},
+journal = {Insurance, Mathematics and Economics},
+volume = {69},
+publisher = {Elsevier Sequoia S.A.},
+year = {2016},
+title = {Nonlinear reserving in life insurance: Aggregation and mean-field approximation},
+language = {eng},
+address = {Amsterdam},
+author = {Djehiche, Boualem and Löfdahl, Björn},
+keywords = {Studies ; Life Insurance ; Insurance Claims ; Insurance Policies ; Differential Equations ; Stochastic Models ; Life and Health Insurance ; Experiment/Theoretical Treatment},
+url = {http://search.proquest.com/docview/1806433652/},
+}
+
+@article{Norberg,
+journal = {Scand. Actuar. J. 1},
+year = {1991},
+title = {Reserves in Life and Pension Insurance},
+author = {Norberg, Ragnar},
+pages={3-24}}
+
+@book{Pardoux,
+series = {Stochastic Modelling and Applied Probability},
+volume = {69},
+publisher = {Springer International Publishing},
+isbn = {9783319057132},
+year = {2014},
+title = {Stochastic Differential Equations, Backward SDEs, Partial Differential Equations},
+edition = {2014},
+language = {eng},
+address = {Cham},
+author = {Pardoux, Etienne and Rascanu, Aurel},
+keywords = {Mathematics ; Probability Theory and Stochastic Processes ; Partial Differential Equations ; Mathematics},
+}
+
+@article{THM_BUC,
+issn = {22279091},
+abstract = {The problem of the valuation of life insurance payments with policyholder behavior is studied. First, a simple survival model is considered, and it is shown how cash flows without policyholder behavior can be modified to include surrender and free policy behavior by calculation of simple integrals. In the second part, a more general disability model with recovery is studied. Here, cash flows are determined by solving a modified Kolmogorov forward differential equation. We conclude the paper with numerical examples illustrating the methods proposed and the impact of policyholder behavior.},
+journal = {Risks},
+pages = {290--317},
+volume = {3},
+publisher = {MDPI AG},
+number = {3},
+year = {2015},
+title = {Life Insurance Cash Flows with Policyholder Behavior},
+language = {eng},
+address = {Basel},
+author = {Buchardt, Kristian and Møller, Thomas},
+keywords = {Denmark ; Studies ; Life Insurance ; Cash Flow ; Consumer Behavior ; Differential Equations ; Experimental/Theoretical ; Life & Health Insurance ; Market Research ; Western Europe},
+url = {http://search.proquest.com/docview/1721901184/},
+}
+
+
+
+@book{Liv2,
+series = {International Series on Actuarial Science},
+publisher = {Cambridge University Press},
+isbn = {0521868777},
+year = {2007},
+title = {Market-valuation methods in life and pension insurance},
+language = {eng},
+address = {Cambridge},
+author = {Møller, Thomas and Steffensen, Mogens},
+keywords = {Insurance - Mathematics; Insurance, Life - Policies - Mathematics; Insurance, Pension trust guaranty - Mathematics; Life insurance policies - Mathematics; Pension trust guaranty insurance - Mathematics; Pension trusts - Mathematics; Økonomi, forsikring},
+}
+
+@book{RaI,
+series = {Probability Theory and Stochastic Modeling},
+year = {2019},
+publisher = {Springer},
+title = {Risk and Insurance},
+language = {eng},
+author = {Asmussen, Søren and Steffensen, Mogens},
+}
+
+@article{Steffensen0,
+issn = {01676687},
+abstract = {The multi-state life insurance contract is reconsidered in a framework of securitization where insurance claims may be priced by the principle of no arbitrage. This way a generalized version of Thiele's differential equation is obtained for insurance contracts linked to indices, possibly marketed securities. The equation is exemplified by a traditional policy, a simple unit-linked policy and a half-dependent unit-linked policy.},
+journal = {Insurance, Mathematics and Economics},
+pages = {201--214},
+volume = {27},
+publisher = {Elsevier Sequoia S.A.},
+number = {2},
+year = {2000},
+title = {A no arbitrage approach to Thiele's differential equation},
+language = {eng},
+address = {Amsterdam},
+author = {Steffensen, Mogens},
+keywords = {Arbitrage ; Securitization ; Market Prices ; Insurance Policies ; Stochastic Models ; Economic Theory ; Studies ; Economic Theory ; Insurance Industry ; Experimental/Theoretical},
+url = {http://search.proquest.com/docview/208166412/},
+}
+
+@book{Steffensen1,
+issn = {03461238},
+abstract = {We link dividend and bonus payments of a general life and pension insurance contract to the actuarial notion of surplus generated in a Black-Scholes financial market. With this contract specification we obtain a general system of partial differential equations for the market value of future payments. We derive semi-explicit solutions in the cases of linear links. The specification of dividend and bonus payments as functions of surplus and corresponding valuation techniques are relevant both for valuation and management of existing life insurance products and for general product design. [PUBLICATION ABSTRACT]},
+journal = {Scandinavian Actuarial Journal},
+pages = {1--22},
+publisher = {Taylor and Francis Ltd.},
+number = {1},
+year = {2006},
+title = {Surplus-linked life insurance},
+language = {eng},
+address = {Stockholm},
+author = {Steffensen, Mogens},
+keywords = {Scandinavia ; Studies ; Life Insurance ; Dividends ; Economic Theory ; Valuation ; Excess and Surplus Lines ; Western Europe ; Experimental/Theoretical ; Life and Health Insurance ; Economic Theory},
+url = {http://search.proquest.com/docview/201589507/},
+}
+
+
+
+@article{NorbergB,
+issn = {0949-2984},
+abstract = {The issue of bonus in life insurance is considered in a model framework where the traditional set-up is extended by letting the experience basis (mortality, interest, etc.) be stochastic. A novel definition of the technical surplus on an insurance contract is proposed, and basic principles for its repayment as bonus are discussed. Making the experience basis an endogenous part of the model opens possibilities of model-based prognostication of future bonuses. Numerical illustrations are provided.},
+journal = {Finance and Stochastics},
+pages = {373--390},
+volume = {3},
+publisher = {Springer-Verlag},
+number = {4},
+year = {1999},
+title = {A theory of bonus in life insurance},
+language = {eng},
+address = {Berlin Heidelberg},
+author = {Norberg, Ragnar},
+keywords = {Key words: Safety margins, prospective reserves, retrospective reserves, stochastic interest, stochastic mortality, counting processes ; JEL Classification:G22, G23 ; Mathematics Subject Classification (1991):60J27, 62P05},
+}
+
+
+@article{Christiansen,
+issn = {0167-6687},
+journal = {Insurance Mathematics and Economics},
+pages = {132--137},
+volume = {57},
+publisher = {ELSEVIER SCIENCE BV},
+number = {1},
+year = {2014},
+title = {Reserve-dependent benefits and costs in life and health insurance contracts},
+language = {English},
+author = {Christiansen, MC and Denuit, MM and Dhaene, J},
+keywords = {Insurance ; Contracts ; Cost-Benefit Analysis ; Economic Analysis ; Economics;},
+}
+
+@article{AvenT,
+issn = {03036898},
+abstract = {Let {N(t)} be a counting process adapted to a history {F t } and assume that there exists a process {λ(t)} such that $\lambda (t)= \matrix\format\c\\ \\ \text{lim} \\ h_{n}\downarrow 0 \endmatrix E[N(t+h_{n})-N(t)|\scr{F}_{t}]/h_{n}$ . Under certain conditions we prove that { $N(t)-\int_{0}^{t}\lambda (s)ds$ } is an F t martingale, i.e. { $\int_{0}^{t}\lambda (s)ds$ } is the compensator (often called the dual predictable projection) of {N(t)}. Our result is closely related to Dolivo's (1974) Theorem 2.5.1. The proof is very much like Dolivo's proof of the (b) part of this theorem. Some mistakes are pointed out in Dolivo's theorem/proof.},
+journal = {Scandinavian Journal of Statistics},
+pages = {69--72},
+volume = {12},
+publisher = {Almqvist & Wiksell Periodical Co.},
+number = {1},
+year = {1985},
+title = {A Theorem for Determining the Compensator of a Counting Process},
+language = {eng},
+author = {Aven, Terje},
+keywords = {Mathematics -- Pure mathematics -- Probability theory ; Mathematics -- Pure mathematics -- Topology},
+}
+
+
+
+
+
+\end{filecontents*}
+
+%\fi
+
+
+
+\begin{document}
+\section*{Introduction}
+We have a system of seven differential equations that describe the expected savings account, and they have to be solved for each financial scenario. As the number of financial scenarios is large, we would like to reduce the number of computations by decreasing the size of the system of differential equations. We might do this by lumping states, and consider a model driven by the lumped state process defined by
+$$
+\tilde{Z}(t)=R(Z(t))
+$$
+where $R$ is some reduction function on the state space. We refer to lumping as idea 1. Alternatively, we could simply investigate the differential equation for $\sum_{i \in A} \tilde{W}^i(t)$, which we call idea 2.
+\subsection*{Idea 2}
+Assume that the dynamics of $W$ are given by
+\begin{align*}
+dW(s)=  g^{Z(s)}(s,W(s))ds+
+ \sum_{k:k \neq Z(s-)} h^{Z(s-)k}(s,W(s-)) dN^k(s),
+\end{align*}
+for q-dimensional functions $g$ and $h$ of the form
+\begin{align*}
+g^{Z(s)}(s,W(s))=&g^{Z(s)}_1(s) W(s)+g_0^{Z(s)}(s),
+\\
+h^{Z(s-)k}(s,W(s-))=&h_1^{Z(s-)k}(s) W(s-)+h_0^{Z(s-)k}(s).
+\end{align*}
+Then $\tilde{W}^i(t)=\E_0[\indic{Z(t)=i}W(t)]$ is described by the differential equation
+\begin{align}
+\frac{d}{dt}\tilde{W}^i(t)=&
+\sum_{j:j \neq i} \left( \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t) \right)
+ \label{eq:AAH} \\
+&+
+ g_1^i(t)\tilde{W}^i(t)+p_{0i}(0,t)g_0^i(t)
+ \label{eq:AAI}\\
+&+
+\sum_{j:j\neq i} \mu_{ji}(t) \left(  h_1^{ji}(t) \tilde{W}^j(t) + p_{0j}(0,t)h_0^{ji}(t)\right) ,\label{eq:AAF}
+\\
+\tilde{W}^i(0)=&\indic{i=0}w_0 .\label{eq:AAG}
+\end{align}
+Define
+$$
+\tilde{W}^A(t)=\sum_{j \in A} \tilde{W}^j(t), \qquad R_{Ai}(t)=\frac{\tilde{W}^i(t)}{\tilde{W}^A(t)},
+$$
+for some subset of $\mathcal{J}$, $A$. The differential equation for $\tilde{W}^A$, depends on $\tilde{W}^A(t)$ and $R_{Ai}(t)$. It would seem that we need to calculate $\tilde{W}^i(t)$ in order to calculate $R_{Ai}(t)$. However, under a few assumptions, $R_{Ai}$ can be calculated using the retrospective first order reserve, and is furthermore independent of the financial market. Thus allowing for exact calculation of $\tilde{W}^A$ without calculating the entire system of seven differential equations. This does however require that $R_{Ai}$ is calculated, and it is only an improvement if $R_{Ai}$ can be calculated cheaply.
+\\[12pt]
+Assume that the dividends are are independent of $Z(t)$ given $Z(t)\in A$, i.e.
+$$
+g_1^i(t)=f_1^i(t)+\delta_1^A(t), \qquad g_0^i(t)=f_0^i(t)+\delta_0^A(t).
+$$
+The functional derivative of $R_{Ai}$ in $\delta_1^A$ thus satisfies
+\begin{align*}
+\tilde{W}^A(t) \frac{d}{d \delta_1^A}R_{Ai}(t)=&\frac{d}{d \delta_1^A}\tilde{W}^t(t)-R_{Ai}(t) \frac{d}{d \delta_1^A}\tilde{W}^A(t)
+\\
+=&\tilde{W}^i(t)-R_{Ai}\tilde{W}^A(t)
+\\
+&\Leftrightarrow
+\\
+\frac{d}{d \delta_1^A}R_{Ai}(t)=&\frac{\tilde{W}^i(t)}{\tilde{W}^A(t)}-\frac{\tilde{W}^i(t)}{\tilde{W}^A(t)}=0,
+\end{align*}
+implying that the ratios $R_{Ai}(t)$ are invariant to $\delta_1^A(t)$. This is unsurprising as it simply means that the ratios are invariant to linear scaling, when the scaling affects all $\tilde{W}^i$ equally. This is useful to some extent, but the ratios are not invariant to $\delta_0^A(t)$. In order to deal with the dependence in $\delta_0^A$, consider the contract with payment stream
+$$
+dB^R(t)=dB_1(t)-\delta_0^A(t)dt + dB_2(t),
+$$
+where $\delta_0^A$ can be considered additional premiums, that are not used to buy insurance. The prospective reserve $\hat{V}^{Z(t)*}$ of this contract has dynamics
+\begin{align*}
+d\hat{V}^{Z(t)*}(t)=&r^*(t)\hat{V}^{Z(t)*}(t)dt - b^{Z(t)}(t) dt + \delta_0^{\tilde{Z}(t)}(t)dt-\sum_{k:k \neq Z(t-)} b^{Z(t-)k}(t) dN^k(t)
+\\
+&- \sum_{k: k\neq Z(t-)} \rho^{Z(t-)k}(t) dt + \sum_{k: k\neq Z(t-)}R^{Z(t-)k}(t)\left(dN^k(t)-\mu_{Z(t-)k}(t) dt\right)
+\end{align*}
+where $\tilde{Z}(t)=\indic{Z(t) \in A} A+ \indic{Z(t) \notin A} Z(t)$. Using standard methods, we can calculate
+$
+\hat{V}^{j*}(t),
+$
+and therefore
+$$
+\hat{R}_{Ai}(t)=\frac{\hat{V}^{i*}(t)}{\sum_{j \in A} \hat{V}^{j*}(t)}.
+$$
+As $R_{Ai}$ is independent of $\delta_1$, we could let $\delta_1=0$, which corresponds exactly to the contract just defined. Since $\delta_1=0$ the savings and surplus are independent. We can therefore conclude that $R_{Ai}(t)=\hat{R}_{Ai}(t)$. If $\delta_0$ is independent of the financial market, we can calculate $\hat{R}_{Ai}$ once, and use these ratios for all scenarios. If $\delta_0$ depends on the financial market, then so will $R_{Ai}$. Then we might as well solve the full system of differential equations for $\tilde{W}^i$ if we want an exact calculation of $\tilde{W}^A$. Alternatively we could calculate $\hat{\delta}^j_0(t)=\E [ \delta^j_0(t,\omega)]$, and use it as a way to produce a scenario-independent approximation of $\hat{R}_{Ai}$. \\[12pt]
+Assuming that $\delta_0$ also only depends on the group, we could also use that
+$$
+\hat{V}^{j*}(t)=V^{j*}(t)- \overbrace{\E^* \left[ \int_t^n e^{-\int_t^s r^*} \delta^{Z(s)}_0(s) ds|Z(t)=j\right]}^{:=\Lambda(t)}
+$$
+which is easy to solve if $\delta_0$ is simple (and it is a yearly constant). Note that $V^{j*}(t)$ is independent of the financial market. The ratios are then given by
+$$
+\hat{R}_{Ai}(t)=\frac{V^{i*}(t)+\Lambda(t)}{V^{A*}(t)+ \Lambda(t) \#\{i \in A \} }.
+$$
+Fundamentally, it appears that we can produce an exact differential equation for $\tilde{W}^A$, when the dividend only depends on the group. There might be some way to include the calculation of $\hat{R}_{Ai}$ in the calculation of $\tilde{W}^A$, such that we don't need to calculate $\hat{R}_{Ai}$ before $\tilde{W}^A$. 
+\\[12pt]
+A huge practical disadvantage of this method is that we need to know the dynamics of $W(t)$ in order to produce the differential equation for $\tilde{W}^A$. We are not given the contractual payments, only an expected cashflow. Furthermore, we are also going to have dependence on the financial market through the transition probabilities.
+
+\subsection*{Idea 1}
+If we consider the model where the dynamics of $W$ are unchanged, and calculate
+$$
+\E_0 [\indic{Z^R(t) = A} W(t)]
+$$
+we simply get
+\begin{align*}
+\E_0 [\indic{Z^R(t) = A} W(t)] = & \E_0  \left[ \sum_{i \in A} \indic{Z(t)=i} W(t) \right]
+\\
+=& \sum_{i \in A} \tilde{W}^i(t)
+\end{align*}
+implying that we need to calculate $\tilde{W}^i(t)$, therefore not reducing the number of computations. Instead we should fundamentally change the contract in such a way that $W$ is $\mathcal{F}_t^R$-measurable. That is, information about the individual states should provide no more useful information than what is given from the lumped process. Throughout we assume that the distribution of $Z(0)$ on $\mathcal{J}$ is known, sometimes indicated by conditioning on $\mathcal{F}_0$. Denote
+\begin{align*}
+p_i(t)=P(Z(t)=i|\mathcal{F}_0),
+\end{align*}
+which in the case of $\mathcal{F}_0=\sigma\{ Z(0) = 0\}$ corresponds to
+$$
+p_{0i}(0,t).
+$$
+One can show that the predictable compensator for $N^{GH}(t)=\sum_{i \in G}\sum_{j \in H} N^{ij}(t)$ is given by
+$$
+\hat{\mu}_{GH}(t)=\sum_{i \in G}\sum_{j \in H} \P(Z(t)=i |\mathcal{F}_t^R) \mu_{ij}(t),
+$$
+which may depend heavily on the entire past, as for instance is evident in the following model. Consider the lumped model given by
+\def\sca{3.5}
+\def\scaa{0.9}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,minimum width=1cm,minimum height = 1cm}]
+    \node (0) at (0,-\sca*0.25) {0};
+    \node (1) at (\sca*1,0) {1};
+    \node (2) at (\sca*1,-\sca*0.5) {2};
+    \node (3) at (\sca*2,-\sca*0.25) {3};
+\end{scope}
+
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge node {$\mu_{01}$} (1)
+    		   	(0) edge node {$\mu_{02}$} (2)
+    		   	(1) edge node {$\mu_{13}$} (3)
+    		   	(2) edge node {$\mu_{23}$} (3);
+\end{scope}
+
+\draw [rounded corners=5mm,thick,dotted,scale=1]
+($(1)+(-\scaa,\scaa)$)--
+($(1)+( \scaa,\scaa)$)--
+($(2)+( \scaa,-\scaa)$)--
+($(2)+(-\scaa,-\scaa)$)--
+cycle;
+
+\node[text width=1cm] at ($([xshift=0.15cm,yshift=\scaa*1cm]1.north)$)  {\Huge{A}};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\noin with 
+\begin{gather*}
+\mu_{01}(t)=c \cdot \indic{t \leq 1} \quad \mu_{02}(t)=c \cdot  \indic{t > 1},
+\end{gather*}
+for some $c>0$ and $\mu_{13}\neq \mu_{23}$. Information about the time of the first jump completely determines the intensity from $A$ to state 3. In general, lumping states makes an otherwise markovian model, non-markovian. However, if there are a limited number of possible jumps in the lumped model, it will be semi-markov, possibly depending on all previous jump-times. Due to the structure of the behaviourally lumped 7-state model, where transition between lumped states is possible from the active state only, the state-process of this lumped model will "only" depend on the current state and the duration in that state\footnote{The allegations in this paragraph are not all shown. See paper "A successive lumping procedure for a class of markov chains" by Katehakis and Smit (2012), and note that the 7-state model is a succesively lumpable time-inhomogeneous markov chain.}. However, semi-markov is still too computationally demanding - we want a pure markov process. This is because we cannot construct a simple differential equation for the reserve given by
+\begin{align*}
+V(t)=& \E \left. \left[ \int_t^n e^{-\int_t^sr^*} dB(s) \right| \mathcal{F}_t^R \right]
+\\
+=& \E \left.\left[ \E \left.  \left[ \int_t^n e^{-\int_t^sr^*} dB(s) \right| \mathcal{F}_t \right] \right| \mathcal{F}_t^R \right]
+\\
+=& \E \left.\left[ \E \left.  \left[ \int_t^n e^{-\int_t^sr^*} dB(s) \right| Z(t) \right] \right| \mathcal{F}_t^R \right]
+\\
+=& \E \left.\left[  \sum_{i \in \mathcal{J}} V^i(t) \indic{Z(t)=i} \right| \mathcal{F}_t^R \right]
+\\
+=&  \sum_{i \in \mathcal{J}} V^i(t) \P(Z(t)=i| \mathcal{F}_t^R.
+\end{align*}
+In order to get more operational intensities we define the surrogate intensities
+$$
+\mu_{GH}(t)=\sum_{i \in G}\sum_{j \in H} \P(Z(t)=i |R(Z(t)) = G, \mathcal{F}_0) \mu_{ij}(t).
+$$
+These intensities do \textbf{not} describe $R(Z(t))$. Instead, they describe a somewhat similar markovian (see theorem 12.5 of LivStok notes) process $\tilde{Z}(t)$. From a practical point of view, $R(Z(t))$ and $\tilde{Z}(t)$ share important properties. 
+%The most important property of $\mu_{GH}(t)$ is that for a process $H$, being conditionally independent of $\indic{Z(\tau) = i}$ for $i \in G$ given $\mathcal{F}_0^R$,
+%\begin{align*}
+%\E \left. \left[ \int_0^t H(\tau) dN^{GH}(\tau)\right| \mathcal{F}_0^R \right]
+%=&
+%\E \left. \left[ \int_0^t H(\tau) \sum_{i \in G}\sum_{j \in H} \P(Z(\tau)=i |\mathcal{F}_\tau^R) \mu_{ij}(\tau)  d\tau\right| \mathcal{F}_0^R \right]
+%\\
+%=&\int_0^t  \E  \left. \left[  H(\tau) \sum_{i \in G}\sum_{j \in H} \indic{Z(\tau)=i }\mu_{ij}(\tau)  \right| \mathcal{F}_0^R \right] d\tau
+%\\
+%=&\int_0^t \E[H(\tau)|\mathcal{F}_0^R] \mu_{GH}(\tau)  d\tau.
+%\end{align*} 
+Note that
+\begin{align*}
+P(Z(t)=i|R(Z(t))=A,\mathcal{F}_0)=&\frac{\indic{i \in A} P(Z(t)=i|\mathcal{F}_0)}{P(R(Z(t))=A|\mathcal{F}_0)}
+\\
+=&
+\frac{\indic{i \in A} P(Z(t)=i|\mathcal{F}_0)}{P(Z(t)=R^{-1}(A)|\mathcal{F}_0)}
+\\
+=&
+\frac{\indic{i \in A} p_i(t)}{\sum_{i \in A}p_i(t)}.
+\end{align*}
+One can show that, in the 7-state model (and probably in general), the probabilities generated by $\mu_{GH}$ via the Kolmogorov differential equations, coincide with the probabilities of the non-lumped model, i.e
+$$
+p_A(t)=\sum_{i \in A} p_i(t).
+$$
+This is a highly desired property, but it is only possible because the surrogate intensities are tied to time zero in a sense. This is clear from the fact that the transition probabilities for initial times different from zero, do not coincide with the non-lumped model, i.e 
+$$
+p_{AG}(s,t) \neq \sum_{i \in A}\sum_{j \in G} p_{ij}(s,t),
+$$
+for $s>0$. It may however still hold if we weight the probabilities of the non-lumped model with the probability of being in that state?
+$$
+p_{AG}(s,t) \overset{?}{=} \sum_{i \in A}\sum_{j \in G} p_{ij}(s,t)P(Z(s)=i|\mathcal{F}_0).
+$$
+Now we construct $B_1^R(t)$, and $B_2^R(t)$ as payment streams that only depend on the lumped state/group. Let the sojourn payments of $B_1^R$ be given by
+\begin{align*}
+b_1^G(s)=\frac{1}{\sum_{k \in G}p_k(s)} \sum_{i \in G} p_i(s) \left( b_1^i(s) + \sum_{ \substack{j \in G \\j \neq i}} b_1^{ij}(s) \mu_{ij}(s) \right).
+\end{align*}
+The sojourn payments of $B_2^R$ are given analogously. Note that these payments correspond exactly to the cashflow, given that the intensities out of the group is zero, divided by the probability of being in that group. Similarly, we let the payments on transition be given by
+$$
+b_1^{GH}(s)= \ddfrac{\sum_{i \in G} p_i(s)\sum_{j \in H} \mu_{ij}(s)b_1^{ij}(s)}{\sum_{i \in G} p_i(s)\sum_{j \in H} \mu_{ij}(s)}.
+$$
+Consider now the insurance contract defined by the state-process $\tilde{Z} \subset \mathcal{J}'=R(\mathcal{J})$, with intensities $\mu_{GH}$ and payments given by a lumped payment stream $B$. The expected cashflow at time 0 is
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+CF_{\mathcal{J}'}(s)=
+&
+\sum_{G \in \mathcal{J}'} p_G(s) \left( 
+b^G(s)+\sum_{\substack{H \in \mathcal{J}' \\ H \neq G}} b^{GH}(s)\mu^{GH}(s) 
+\right)
+\\
+=&
+\sum_{G \in \mathcal{J}'} \sum_{k \in R^{-1}(G)} p_k(s) \left( 
+\ddfrac{1}{\sum_{k \in R^{-1}(G)} p_k(s) } \sum_{i \in R^{-1}(G)} 
+p_i(s) \left( b^{i}(s) +  \sum_{ \substack{j \in R^{-1}(G) \\ j\neq i}} b^{ij}(s) \mu^{ij}(s) \right)   \right.
+\\
+&+ 
+\left.
+\sum_{\substack{H \in \mathcal{J}' \\ H \neq G}} 
+\ddfrac{\sum_{i \in R^{-1}(G)} p_i(s) \sum_{j \in R^{-1}(H)} \mu^{ij}(s)b^{ij}(s)}{\sum_{i \in R^{-1}(G)} p_i(s) \sum_{j \in R^{-1}(H)} \mu^{ij}(s)}
+\ddfrac{1}{\sum_{k \in R^{-1}(G)} p_k(s) } \sum_{i \in R^{-1}(G)} p_i(s) \sum_{j \in R^{-1}(H)}  \mu^{ij}(s)
+\right)
+\\
+=&
+\sum_{G \in \mathcal{J}'}  \left(  \sum_{i \in R^{-1}(G)} p_i(s) \left( b^{i}(s) +  \sum_{ \substack{j \in R^{-1}(G) \\ j\neq i}} b^{ij}(s) \mu^{ij}(s) \right)    \right.
+\\
+&+ 
+\left.
+\sum_{\substack{H \in \mathcal{J}' \\ H \neq G}} 
+\sum_{i \in R^{-1}(G)} p_i(s) \sum_{j \in R^{-1}(H)} \mu^{ij}(s)b^{ij}(s)
+\right)
+\\
+=&
+\sum_{G \in \mathcal{J}'}   \sum_{i \in R^{-1}(G)} p_i(s) \left( b^{i}(s) +  \sum_{ \substack{j \in R^{-1}(G) \\ j\neq i}} b^{ij}(s) \mu^{ij}(s)+
+\sum_{\substack{H \in \mathcal{J}' \\ H \neq G}}  \sum_{j \in R^{-1}(H)} \mu^{ij}(s)b^{ij}(s)
+\right).
+\end{align*}
+\endgroup
+Note that
+\begin{align*}
+&\underbrace{\sum_{ \substack{j \in R^{-1}(G) \\ j\neq i}} b^{ij}(s) \mu^{ij}(s)}_{\substack{\text{Expected transition}\\ \text{payments within G}}}+
+\underbrace{\sum_{\substack{H \in \mathcal{J}' \\ H \neq G}}  \sum_{j \in R^{-1}(H)} \mu^{ij}(s)b^{ij}(s)}_{\substack{\text{Expected transition}\\ \text{payments out of G}}}
+\\
+&=
+\sum_{\substack{j \in \mathcal{J} \\ j\neq i}} b^{ij}(s)\mu^{ij}(s).
+\end{align*}
+Thus the cashflow is
+\begin{align*}
+CF_{\mathcal{J}'}(s)=&
+\sum_{G \in \mathcal{J}'}   \sum_{i \in R^{-1}(G)} p_i(s) \left( b^{i}(s) +  \sum_{\substack{j \in \mathcal{J} \\ j\neq i}} b^{ij}(s)\mu^{ij}(s)
+\right)
+\\
+=&
+ \sum_{i \in \mathcal{J}} p_i(s) \left( b^{i}(s) +  \sum_{\substack{j \in \mathcal{J} \\ j\neq i}} b^{ij}(s)\mu^{ij}(s)
+\right),
+\end{align*}
+Which can be regarded as the cashflow of the non-reduced model from which $\mu_{GH}$ and $B^R$ is constructed. 
+\\[12pt]
+Define
+$$
+U^I(t)= \E^* \left. \left[  \indic{\tilde{Z}(t)=I} \int_0^t e^{\int_s^t r^*} d(-B^R)(s) \right| \mathcal{F}_0 \right],
+$$
+which can be shown to solve the differential equation
+\begin{align*}
+\frac{d}{dt}U^I(t)=&r^*(t) U^I(t)-p_I(t)b^I(t)- \sum_{J \neq I} p_J(t) \mu_{JI}(t)b^{JI}(t)\\
+&+\sum_{G \neq I} \mu_{GI}(t) U^G(t)-\mu_{IG}(t)U^I(t)
+\end{align*}
+We would like to show that
+$$
+\frac{d}{dt}U^I(t)=\sum_{i \in I} \frac{d}{dt} U^i(t).
+$$
+By definition of $b^I,b^{JI}$ and $\mu_{JI}$ we get
+\begin{align*}
+\frac{d}{dt}U^I(t)=&r^*(t) U^I(t)-\cancel{p_I(t)} \ddfrac{\sum_{i \in I} p_i(t) \left( b^i(t) + \sum_{ \substack{j \in I \\j \neq i}} b^{ij}(t) \mu_{ij}(t) \right)}{\cancel{p_I(t)}}
+\\
+&-
+\sum_{J \neq I} \cancel{p_J(t)} \sum_{j \in J} \sum_{i \in I} \frac{p_j(t)}{\cancel{p_J(t)}}\mu_{ji}(t)\ddfrac{\sum_{j \in J} p_j(t)\sum_{i \in I} \mu_{ji}(t)b_1^{ji}(t)}{\sum_{j \in J} p_j(t)\sum_{i \in I} \mu_{ji}(t)}
+\\
+&+\sum_{G \neq I} \mu_{GI}(t) U^G(t)-\mu_{IG}(t)U^I(t)
+\\
+=&r^*(t) U^I(t)-\sum_{i \in I} p_i(t) \left( b^i(t) + \sum_{ \substack{j \in I \\j \neq i}} b^{ij}(t) \mu_{ij}(t) \right)
+\\
+&-
+\sum_{J \neq I} \cancel{  \sum_{j \in J} \sum_{i \in I} p_j(t) \mu_{ji}(t)}
+\ddfrac{\sum_{j \in J} p_j(t)\sum_{i \in I} \mu_{ji}(t)b_1^{ji}(t)}{
+\cancel{\sum_{j \in J} p_j(t)\sum_{i \in I} \mu_{ji}(t)}}
+\\
+&+\sum_{G \neq I} \mu_{GI}(t) U^G(t)-\mu_{IG}(t)U^I(t)
+\displaybreak
+\\
+=&r^*(t) U^I(t)-\sum_{i \in I} p_i(t)  b^i(t) 
+\\
+&-\sum_{i \in I} p_i(t) \sum_{ \substack{j \in I \\j \neq i}} b^{ij}(t) \mu_{ij}(t) 
+-
+\sum_{J \neq I} \sum_{j \in J} p_j(t)\sum_{i \in I} \mu_{ji}(t)b_1^{ji}(t)
+\\
+&+\sum_{G \neq I} \mu_{GI}(t) U^G(t)-\mu_{IG}(t)U^I(t),
+\end{align*}
+and since
+\begin{align*}
+&-\sum_{j \in I}  \sum_{ \substack{i \in I \\i \neq j}} p_j(t) b^{ji}(t) \mu_{ji}(t) 
+-\sum_{J \neq I} \sum_{j \in J} \sum_{i \in I}p_j(t) \mu_{ji}(t)b_1^{ji}(t)
+\\
+&=
+- \sum_{ i \in I} \sum_{\substack{j \in I \\j \neq i}}  p_j(t) b^{ji}(t) \mu_{ji}(t) 
+- \sum_{i \in I} \sum_{J \neq I} \sum_{j \in J} p_j(t) \mu_{ji}(t)b_1^{ji}(t)
+\\
+&=
+-\sum_{i \in I} \sum_{ \substack{j \in \mathcal{J} \\j \neq i}}p_j(t) b^{ji}(t) \mu_{ji}(t),
+\end{align*}
+the differential equation for $U^I$ becomes
+\begin{align*}
+\frac{d}{dt}U^I(t)=&r^*(t) U^I(t)-\sum_{i \in I} p_i(t)  b^i(t) 
+-\sum_{i \in I} \sum_{ \substack{j \in \mathcal{J} \\j \neq i}}p_j(t) b^{ji}(t) \mu_{ji}(t)
+\\
+&+\sum_{G \neq I} \mu_{GI}(t) U^G(t)-\mu_{IG}(t)U^I(t).
+\end{align*}
+Note that $U^I(0)=\sum_{i \in I} U^i(0)=0$. Now we just need to prove that the diffusion terms result in identical differential equations. Perhaps it can be done in a simple way along the following lines? If we lump to one state, then there are no diffusion terms, thus proving that the lumped reserve, equals the sum of the non-lumped reserves (as the diffusion terms of the Thiele differential equations cancel). The number of lumped states has no influence on the sum of the lumped reserves. Therefore, any lumping produces the same total reserve. If $\#\mathcal{J}'=\#\mathcal{J}-1$ it is easy to see that all the non-coalesced statewise reserves solve the same differential equation. Then we can residually determine the differential equation for the two coalesced states, which equals the sum of the individual reserves.
+\\[12pt]
+This result deserves a comment. It is not hard to construct payments and intensities of any given lumped model that results in the same expected cashflow as the corresponding non-lumped model, one could for instance let all intensities out of the initial state be zero, and let the sojourn payment be equal to the cashflow. Neither is it difficult, for any given model, to construct payments and intensities such that the sum of the lumped state-wise reserves correspond to the state-wise lumped reserves, though less trivial than matching the cashflow. However, the strength in the results above lies in the fact that these properties are satisfied for \textbf{any} model. We believe this is a unique property. To be more concrete, consider the space of insurance contracts driven by a Markov process. A point in this space specifies all intensities and payments needed to define an insurance contract. Now consider a mapping that takes as an input a point in the insurance contract space, and returns another point in the insurance contract space. If this mapping reduces the number of policy states, we may call it a lumping. We call the non-injective lumpings that produce the same cashflow and reserves, preserving lumpings. For any given point in the insurance contract space, there exists arbitrary many preserving lumpings. However, we believe that there exists only one universally preserving lumping, that for any point in the contract space preserves cashflow and reserves. 
+\\[12pt]
+Given the lumped payments and transition intensities we define the lumped reserves
+\begin{align*}
+V^{\tilde{Z}(t)}(t)=&\E^* \left. \left[ \int_t^n e^{-\int_t^s r*} dB(s) \right| \tilde{Z}(t) \right]
+\\
+=&
+\E^* \left. \left[ \int_t^n e^{-\int_t^s r*} dB(s) \right| \mathcal{F}_t^{\tilde{Z}} \right]
+\end{align*}
+with
+\begin{align*}
+dB(t)=b^{\tilde{Z}(t)}(t) dt +\sum_{K:K \neq \tilde{Z}(t-)} b^{\tilde{Z}(t-)K}(t)d\tilde{N}^k(t).
+\end{align*}
+The dynamics of the lumped reserves are given by
+\begin{align*}
+dV^{\tilde{Z}(t)*}(t)=& r(t)^*V^{\tilde{Z}(t)*}(t)dt -b^{\tilde{Z}(t)}(t)dt - \sum_{K \neq \tilde{Z}(t-)} b^{\tilde{Z}(t-)K}(t) d\tilde{N}^K(t)\\
+&-\sum_{K \neq \tilde{Z}(t-)} \rho^{\tilde{Z}(t-)K}(t) dt - \sum_{K \neq \tilde{Z}(t-)} R^{\tilde{Z}(t-)K}(t) (d\tilde{N}^K(t)- \mu_{\tilde{Z}(t-)K}(t) dt),
+\end{align*}
+where
+\begin{align*}
+R^{JK}(t)=&b^{JK}(t)+V^{K*}(t)-V^{J*}(t),
+\\
+\rho^{JK}(t)=&R^{JK}(t)(\mu^*_{JK}(t)-\mu_{JK}(t)).
+\end{align*}
+Given the lumped reserves, it is now straightforward to define a lumped savings account
+$$
+X(t)=V^{\tilde{Z}(t)*}_1(t)+ Q(t)  V^{\tilde{Z}(t)*}_2(t)
+$$
+where, by the principle of equivalence,
+$$
+dD(t)= V_2^{\tilde{Z}(t)*}(t)dQ(t),
+$$
+implying that the dynamics of $X$ are given by
+\begin{align*}
+dX(t)=&dV^{\tilde{Z}(t)*}_1(t)+ Q(t-) dV^{\tilde{Z}(t)*}_2(t)+ dD(t)
+\\
+=&
+r^*(t)X(t)dt
+ +dD(t)
+ -b^{\tilde{Z}(t)}(t,X(t)) dt
+- \sum_{k:k \neq \tilde{Z}(t-)} b^{\tilde{Z}(t-)k}(t,X(t-)) d\tilde{N}^k(t)
+\nonumber \\
+&- \sum_{k:k \neq \tilde{Z}(t-)} \rho^{\tilde{Z}(t-)k}(t,X(t-))dt
+\nonumber \\
+&+ \sum_{k:k \neq \tilde{Z}(t-)}  R^{\tilde{Z}(t-)k}(t,X(t-))d\tilde{M}^k(t),\label{eq:AAB}
+\end{align*}
+where
+\begin{align*}
+\rho^{jk}(t,X(t-))=&\rho_1^{jk}(t)+Q(t-)\rho_2^{jk}(t)=\rho_1^{jk}(t)+\frac{X(t-)-V_1^{j*}(t-)}{V_2^{j*}(t-)}\rho_2^{jk}(t),
+\\
+R^{jk}(t,X(t-))=&R_1^{jk}(t)+Q(t-)R_2^{jk}(t)=R_1^{jk}(t)+\frac{X(t-)-V_1^{j*}(t-)}{V_2^{j*}(t-)}R_2^{jk}(t).
+\end{align*}
+The dynamics of the surplus $Y$ are given by
+\begin{align*}
+dY(t)=& r(t) Y(t) dt + dC(t)-dD(t)-
+\sum_{K:K \neq \tilde{Z}(t-)}  R^{\tilde{Z}(t-)K}(t,X(t-)) d\tilde{M}^k(t), 
+\end{align*}
+for 
+\begin{gather*}
+dC(t)=(r(t)-r^*(t))X(t)dt+\sum_{K:K\neq \tilde{Z}(t)} \rho^{\tilde{Z}(t)K}(t,X(t)) dt.
+\end{gather*}
+Define
+$$
+W(t)=\begin{pmatrix}
+X(t)\\
+Y(t)
+\end{pmatrix}.
+$$
+The dynamics of $W$ are affine, and so we may apply theorem 5.1 from Lollike and Bruhn (2020) to establish a differential equation for 
+$$
+\tilde{W}^I(t)= \begin{pmatrix}
+\E[X(t)\indic{\tilde{Z}(t)=I}]\\
+\E[Y(t)\indic{\tilde{Z}(t)=I}]
+\end{pmatrix}.
+$$
+We are now interested in the difference
+$$
+\tilde{X}^I(t) - \sum_{i \in I} \tilde{X}^i(t),
+$$
+that is, the error introduced by lumping.
+To illustrate why there will be an error in the first place, consider the model given by
+\def\sca{3.5}
+\def\scaa{0.9}
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}
+\begin{scope}[every node/.style={rectangle,thick,draw,minimum width=1cm,minimum height = 1cm}]
+    \node (0) at (-\sca*0.5,0) {0};
+    \node (1) at (\sca*0.5,0) {1};
+\end{scope}
+
+
+\begin{scope}[>={Stealth[black]},
+              every node/.style={fill=white,circle,scale=0.9},
+              every edge/.style={draw=black,very thick}]
+    \path [->] 	(0) edge [bend left=15] node {$\mu_{01}$} (1)
+    		   	(1) edge [bend left=15] node {$\mu_{10}$} (0);
+\end{scope}
+
+\draw [rounded corners=5mm,thick,dotted,scale=1]
+($(0)+(-\scaa,-\scaa)$)--
+($(0)+(-\scaa,\scaa)$)--
+($(1)+(\scaa,\scaa)$)--
+($(1)+(\scaa,-\scaa)$)--
+cycle;
+
+
+\node[text width=1cm] at ($([xshift=0.15cm,yshift=\scaa*1cm]$(0.north) !.5! (1.north)$)$)  {\Huge{A}};
+\end{tikzpicture}
+\end{center}
+\end{figure}
+\noin And with X-dynamics given by
+$$
+dX(t)=g^{Z(t)}_1(t)X(t)+g^{Z(t)}_0(t).
+$$
+From theorem 5.1 we have that
+$$
+\frac{d}{dt}(\tilde{X}^0(t)+\tilde{X}^1(t))=\tilde{X}^0(t)g_1^0(t)+\tilde{X}^1(t)g_1^1(t)+p_0(t)g_0^0(t)+p_1(t)g_0^1(t),
+$$
+and that
+$$
+\frac{d}{dt}\tilde{X}^A(t)=\tilde{X}^A(t)\left( p_0(t)g_1^0(t)+p_1(t)g_1^1(t) \right) + p_0(t)g_0^0(t)+p_1(t)g_0^1(t).
+$$
+In general we do not have that 
+$$
+\frac{d}{dt}(\tilde{X}^0(t)+\tilde{X}^1(t)) =  \frac{d}{dt}\tilde{X}^A(t).
+$$
+This is however true if the relative reserves equal the probability of being in that state, i.e 
+$$
+\frac{\tilde{X}^i(t)}{\tilde{X}^A(t)}=p_i(t)
+,
+$$
+which is generally not the case in an insurance context. The error is zero if and only if
+$$
+\tilde{X}^0(t)g_1^0(t)+\tilde{X}^1(t)g_1^1(t)=\tilde{X}^A(t)\left( p_0(t)g_1^0(t)+p_1(t)g_1^1(t) \right).
+$$
+The difference 
+
+
+This inaccuracy is also present in the 7-state model.
+\\[12pt]
+The differential equation for $\tilde{W}^I(t)$ is given by
+\begin{align*}
+\frac{d}{dt}\tilde{W}^i(t)=&
+\sum_{j:j \neq i} \left( \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)\right)
+ \\
+&+
+g_1^i(t) \tilde{W}^i(t) +p_{0i}(0,t)g_0^i(t)
+\\
+&+
+\sum_{j:j\neq i} \mu_{ji}(t) \left( h_1^{ji}(t) \tilde{W}^j(t)  + p_{0j}(0,t)h_0^{ji}(t)\right) 
+\\
+\tilde{W}^i(0)=&\indic{i=0}W(0) ,
+\end{align*}
+where
+The functions $g_1,g_0,h_1$ and $h_0$ are on the form
+\begin{gather*}
+g^j_1(t)=\begin{pmatrix}
+g^j_{11}(t) & g^j_{12}(t) \\
+g^j_{21}(t) & g^j_{22}(t)
+\end{pmatrix},
+\qquad 
+\quad
+h^{jk}_1(t)=\begin{pmatrix}
+h^{jk}_{11}(t) & h^{jk}_{12}(t) \\
+h^{jk}_{21}(t) & h^{jk}_{22}(t)
+\end{pmatrix},
+\\
+g_0^j(t)=\begin{pmatrix}
+g^j_{x0}(t) \\
+g^j_{y0}(t)
+\end{pmatrix},
+\qquad 
+\quad
+h^{jk}_0(t)=\begin{pmatrix}
+h^{jk}_{x0}(t) \\
+h^{jk}_{y0}(t)
+\end{pmatrix}.
+\end{gather*}
+These 12 functions can be identified to be
+
+\begin{align*}
+g^j_{11}(t)=&r^*(t)  +\delta_2^j(t)\\
+&+\frac{1}{V_2^{j*}(t)}\bigg(
+-b^j_2(t)-\sum_{k:k\neq j}\rho_2^{jk}(t)-\sum_{k:k\neq j}R_2^{jk}(t)\mu^{jk}(t)
+\bigg),
+\\
+g^j_{12}(t)=&\delta_3^j(t),
+\\
+g^j_{x0}(t)=& \delta_1^{j}(t) 
+-b_1^{j}(t)
+-\sum_{k:k\neq j} \rho^{jk}_1(t) -\sum_{k:k\neq j} R^{jk}_1(t) \mu^{jk}(t)
+\\
+&+
+\frac{V^{j*}_1(t)}{V^{j*}_2(t)}
+\bigg( -b_2^{j}(t)-\sum_{k:k\neq j} \rho^{jk}_2(t) -\sum_{k:k\neq j} R^{jk}_2(t) \mu^{jk}(t) \bigg),
+\displaybreak
+\\
+h^{jk}_{11}(t)=& \frac{1}{V_2^{j*}(t)} \bigg( 
+\sum_{k:k\neq j}R_2^{jk}(t)-\sum_{k:k\neq j}b_2^{jk}(t)
+\bigg),
+\\
+h^{jk}_{12}(t)=& 0 ,
+\\
+h^{jk}_{x0}(t)=& 
+\sum_{k:k\neq j} R^{jk}_1(t) -\sum_{k:k\neq j}b_1^{jk}(t)
++
+\frac{V^{j*}_1(t)}{V^{j*}_2(t)}
+\bigg( \sum_{k:k\neq j} R^{jk}_2(t)-\sum_{k:k\neq j}b_2^{jk}(t)  \bigg)
+\\
+g^j_{21}(t)=&
+r(t)-r^*(t)-\delta_2^{j}(t)
+\\
+& + \frac{1}{V_2^{j*}(t)} \bigg( 
+\sum_{k:k\neq j} \rho_2^{jk}(t)
++\sum_{k:k \neq j}  R^{jk}_2(t) \mu^{jk}(t) 
+\bigg),
+\\
+g^j_{22}(t)=& r(t) -\delta_3^{j}(t),
+\\
+g^j_{y0}(t)=& - \frac{V_1^{j*}(t)}{V_2^{j*}(t)}\bigg(
+\sum_{k:k\neq j} \rho^{jk}_2(t) 
+ +\sum_{k:k\neq j} R^{jk}_2(t) \mu^{jk}(t) 
+\bigg)
+\\
+&-\delta_1^{j}(t)
++
+\sum_{k:k\neq j)} \rho^{jk}_1(t) 
++\sum_{k:k \neq j}  R_1^{jk}(t) \mu^{jk}(t) ,
+\\
+h^{jk}_{21}(t)=& 
+- \frac{1}{V_2^{j*}(t)} \sum_{k:k \neq j}  R^{jk}_2(t),
+\\
+h^{jk}_{22}(t)=& 0,
+\\
+h^{jk}_{y0}(t)=& \frac{V_1^{j*}(t)}{V_2^{j*}(t)}
+\sum_{k:k\neq j} R^{jk}_2(t) 
+-
+\sum_{k:k \neq j}  R_1^{jk}(t).
+\end{align*}
+\\[12pt]
+We want to lump states to decrease the computation time, but herein lies a problem. In order to calculate the lumped reserves, we need the lumped intensities, which depend on the probabilities $p_i(t)$ for $i \in \mathcal{J}$. In other words, we need to calculate the probabilities of the full model, in order to calculate the reserves of the lumped model. This defeats the purpose of lumping in the first case. However, if the complexity in the payments is high, the effort is still worthwhile. An approximation error is introduced if the sojourn lumped payments are calculated without inclusion of the market dependence, but we believe this error to be small, as it only relates 
+\\[12pt]
+An approximation error is introduced because
+\begin{align*}
+&\sum_{i \in G}\frac{P(Z(s)=i|\mathcal{F}_0)}{\sum_{k \in G}P(Z(s)=k|\mathcal{F}_0)}  \left( \frac{x-V_1^{i*}(s)}{V_2^{i*}(s)} b_2^i(s) + \sum_{ \substack{j \in G \\j \neq i}} \frac{x-V_1^{i*}(s)}{V_2^{i*}(s)}b_1^{ij}(s) \mu_{ij}(s) \right)
+\\
+\neq &
+\frac{x-V_1^{G*}(s)}{V_2^{G*}(s)}b_2^G(s).
+\end{align*}
+\\[12pt]
+Another approximation error is introduced because the internal distribution of the free-policy states will depend on the transition time to free policy, which depends on the market. We can calculate the sojourn payment of the lumped free-policy state residually, but in order to have the proper surrender intensity from free policy, we need $P(Z(s)=3|\mathcal{F}_0)$. This is only an approximation if the initial distribution lies in the active states.
+\\[12pt]
+\subsection*{Things to do}
+\begin{itemize}
+\item Prove that the relative rate of change of probabilities, given the lumped state, only depends on the enter-intensity, if there is only one exit state. Nope, not true.
+\item Investigate the error produced by making some intensities market-dependent. Ideally, find a way in which this error can be removed. A feasible solution requires that the internal distribution depends on the enter-intensity in a simple way. 
+\end{itemize}
+
+
+
+
+
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{BIBS}
+
+\end{document}

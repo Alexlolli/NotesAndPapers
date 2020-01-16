@@ -69,7 +69,7 @@
 
 \renewcommand{\mkbegdispquote}[2]{\itshape}
 
-%\iffalse
+\iffalse
 \begin{filecontents*}{BIBS.bib}
 
 @article{Djehiche,
@@ -166,13 +166,19 @@ url = {http://search.proquest.com/docview/208166412/},
 }
 
 @book{Steffensen1,
-publisher = {Laboratory of Actuarial Mathematics, University of Copenhagen},
-isbn = {8778344492},
-year = {2001},
-title = {On valuation and control in life and pension insurance},
+issn = {03461238},
+abstract = {We link dividend and bonus payments of a general life and pension insurance contract to the actuarial notion of surplus generated in a Black-Scholes financial market. With this contract specification we obtain a general system of partial differential equations for the market value of future payments. We derive semi-explicit solutions in the cases of linear links. The specification of dividend and bonus payments as functions of surplus and corresponding valuation techniques are relevant both for valuation and management of existing life insurance products and for general product design. [PUBLICATION ABSTRACT]},
+journal = {Scandinavian Actuarial Journal},
+pages = {1--22},
+publisher = {Taylor and Francis Ltd.},
+number = {1},
+year = {2006},
+title = {Surplus-linked life insurance},
 language = {eng},
-address = {Copenhagen},
+address = {Stockholm},
 author = {Steffensen, Mogens},
+keywords = {Scandinavia ; Studies ; Life Insurance ; Dividends ; Economic Theory ; Valuation ; Excess and Surplus Lines ; Western Europe ; Experimental/Theoretical ; Life and Health Insurance ; Economic Theory},
+url = {http://search.proquest.com/docview/201589507/},
 }
 
 
@@ -229,33 +235,45 @@ keywords = {Mathematics -- Pure mathematics -- Probability theory ; Mathematics 
 
 \end{filecontents*}
 
-%\fi
+\fi
 
+
+
+\title{Retrospective Reserves and Bonus}
+\date{January 2020}
+\author{Kenneth Bruhn \thanks{Edlund A/S} \\ Alexander Sevel Lollike \thanks{University of Copenhagen, Department of Mathematical Sciences}}
 
 
 \begin{document}
 
+\maketitle
+
+\abstract{This document is a draft for a paper by Bruhn and Lollike, titled "Retrospective Reserves and Bonus". The only intended readers are students of the course "Advances in Life Insurance Mathematics", held at the University of Copenhagen 2019-2020.}
+\newpage
+
+
 \section{Introduction}
-With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance. The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the surplus and the retrospective reserve including dividends, also called the savings account. Furthermore we do not restrict ourselves to the Black-Scholes market, but allow for arbitrary specification of the financial market.
+With-profit insurance contracts are to this day one of the most popular life insurance contracts. They arose as a natural way to distribute the systematic surplus that emerges due to the prudent assumptions on which the contract is made. In recent years, sensible questions accompanied by a lot of attention have been aimed at the surplus, to name a few; is it distributed fairly? how should it be invested? How is it affected by the financial market? To answer these questions we need to understand the dynamics of the surplus in a model of practical relevance.
 \\[12pt]
-In the existing literature, very little attention is paid to a very significant retrospective element of the with-profit insurance contract: the human element. Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are paid out is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
+The study of surplus and the interplay it has with other elements of an insurance contract, is not new. \citet{NorbergB} introduces the notion of individual surplus as well as the mean portfolio surplus. In \citet{Steffensen0} and \citet{Steffensen1}, partial differential equations are used to describe the prospective second order reserve for various forms of bonus, when the surplus is invested in a Black-Scholes market. In this paper we pay little regard to the prospective reserve, and instead focus on the surplus and the retrospective reserve including dividends, also called the savings account. Furthermore we do not restrict ourselves to the Black-Scholes market, but allow for arbitrary specification of the financial market.
+\\[12pt]
+In the existing literature, little attention is paid to a very significant retrospective element of the with-profit insurance contract: the human element. Insurance companies are governed by humans, and the decisions they make have an influence on the portfolio of policies - in particular concerning surplus and dividends. In a with-profit insurance contract many quantities are fixed at initialisation of the policy, but the rate at which dividends are paid out is not. The insurance company has a certain degree of freedom when it comes to the distribution of surplus, and the actions that have an influence on the insurance contracts are the so-called Management Actions.
 %As stated by CEIPOS\footnote{https://eiopa.europa.eu/CEIOPS-Archive/Documents/Advices/CEIOPS-L2-Final-Advice-TP-Assumptions-future-management-actions.pdf} \begin{displayquote} The actuarial and statistical methods used to calculate the best estimate should take account of the effect on these future cash-flows of potential future actions by the management of (re)insurance undertakings based upon current and credible information. \end{displayquote}
 From a mathematical point of view they pose a problem as they are retrospective in nature, and may depend on the entire history of the portfolio of policies in a possibly non-linear fashion, making it difficult to calculate prospective reserves. If we want to take a glance into the crystal ball of liabilities, taking Future Management Actions (FMA's) into account, we need to embrace its retrospective nature. In this paper, we do not incorporate FMA's to their full extent, but rather lay the retrospective groundwork on which models including FMA's can be built.
 \\[12pt]
 In Section \ref{sec:Set_1} we present a standard model for life insurance contracts that forms the foundation of the results in Section \ref{sec:Nor}, which is a summary of the relevant results from \citet{Norberg}. In Section \ref{sec:Set_2} we extend the set-up of Section \ref{sec:Set_1} to allow for a model where surplus and dividends are considered. The main result is presented in Section \ref{sec:diff}, where we derive a retrospective differential equation for the expected savings account and surplus, in a general model with affine dynamics.
-
 \section{Set-up} \label{sec:Set_1}
 We consider the classic multi-state life insurance set-up, comprised of a state process $Z$ denoting the state of the policy in a finite state space $\mathcal{J}=\{0,1,...,J\}$. By a permutation argument, we can without loss of generality assume that $Z(0)=0$. The filtration generated by $Z(t)$ is denoted by $\mathcal{F}_t$. The counting process $N^{k}$ defined by $N^{k}(t)=\# \{ s; Z(s-) \neq k, Z(s)=k, s \in (0,t] \}$ describes the number of transitions into state $k$. We assume that 
 \begin{equation}
-\lim_{n \rightarrow \infty} n \P( N^k(t+1/n) - N^k(t) \geq 2)=0 \label{eq:AAW}
+\lim_{n \rightarrow \infty} n \P( N^k(t+1/n) - N^k(t) \geq 2)=0, \label{eq:AAW}
 \end{equation}
 for all $t$. The state process $Z$ is assumed to be a continuous time Markov chain, with transition probabilities denoted by
 $$
-p_{ij}(s,t)= \P(Z(t)=j|Z(s)=i)
+p_{ij}(s,t)= \P(Z(t)=j|Z(s)=i),
 $$
-for $s\leq t$. We assumet that the corresponding transition intensities exist, and denote them by
+for $s\leq t$. We assume that the corresponding transition intensities exist, and denote them by
 $$
-\mu_{ij}(t)=\lim_{h \searrow 0} p_{ij}(t,t+h)/h
+\mu_{ij}(t)=\lim_{h \searrow 0} p_{ij}(t,t+h)/h,
 $$
 for $i \neq j$. The predictable process $ \indic{Z(t-)\neq k }\mu_{Z(t-)k}(t)$ is the intensity process for $N^{k}(t)$, i.e
 $$
@@ -271,9 +289,17 @@ for sufficiently regular $b^i(t)$ and $b^{jk}(t)$. The deterministic payment fun
 $$
 V^{j*}(t)=\E^*\left[ \int_t^n  e^{-\int_t^s r^*(\tau) d\tau} dB(s) |Z(t)=j \right].
 $$
-The dynamics of the technical reserves are found using Itô's lemma for FV-functions to be
+The dynamics of the technical reserves can be found using Itô's lemma for FV-functions. This is done in e.g \citep{RaI} chapter 6 section 7, providing us with the following dynamics of the technical prospective reserve
 \begin{align}
-dV^{Z(t)*}(t)=&r^*(t)V^{Z(t)*}(t)dt - b^{Z(t)}(t)dt -\sum_{k:k\neq Z(t-)}b^{Z(t-)k}(t) dN^k(t)\nonumber
+dV^{Z(t)*}(t)=
+%&
+%r^*(t)V^{Z(t)*}(t)dt - b^{Z(t)}(t) dt - \sum_{k:k\neq Z(t-)}R^{Z(t-)k}(t) \mu^*_{Z(t-)k}%(t)
+%\\
+%%&+ \sum_{k:k \neq Z(t-)} \left( V^{k*}(t)- V^{Z(t-)*}(t) \right) dN^k(t)
+%\\
+%=
+&
+r^*(t)V^{Z(t)*}(t)dt - b^{Z(t)}(t)dt -\sum_{k:k\neq Z(t-)}b^{Z(t-)k}(t) dN^k(t)\nonumber
 \\
 &-\sum_{k:k\neq Z(t-)} \rho^{Z(t-)k}(t) dt
 +
@@ -293,16 +319,16 @@ One of the main contributions of \citet{Norberg} is a definition of the retrospe
 U^*_\mathbb{E}(t)=&\E^*  \left. \left[ \int_0^t e^{\int_s^t r^*(\tau) d\tau} d(-B(s)) \right| \mathcal{E}_t \right] 
 %\\
 %=&
-%\E^* \left[ \int_0^t e^{\int_s^t r*}  \left( \sum_{i:i \in \mathcal{J}} \indic{Z(s)=i} %b^i(s)ds+ \sum_{k:k \neq Z(s-)} b^{ik}(t) dN^k(s) \right) \big| \mathcal{E}_t \right]
+%\E^* \left[ \int_0^t e^{\int_s^t r*}  \left( \sum_{i:i \in \mathcal{J}} \indic{Z(s)=i} %b^i(s)ds+ \sum_{k:k \neq Z(s-)} b^{ik}(t) dN^k(s) \right) \big| \mathcal{E}_t \right],
 \end{align*} 
 for some family of sigmaalgrebras $\mathbb{E}=\{\mathcal{E}_t \}_{0\leq t}$, where $\mathcal{E}_t$ represents the information available at time $t$. It is very natural to assume that $\mathcal{E}_t=\sigma\{ Z(s), 0 \leq s\leq t \}$, implying that all information about the past is accounted for. As noted by \citet{Norberg} the family of sigmaalgebras may be increasing, i.e $\mathcal{E}_s \subseteq \mathcal{E}_t$ for $s<t$, but it is not required. With this very general definition of the retrospective reserve, we may discard information, for instance by defining $\mathcal{E}_t=\sigma \{Z(0), Z(t) \}$. But why should we ever choose to discard information that is available to us? Because it is intractable to use $\mathcal{E}_t=\mathcal{F}_t$, when we want to calculate the expected value of $U^*_\mathbb{E}(t)$ and $\{ Z(s) \}_{s\leq t}$ has not yet been realized. Computationally it is simply too demanding to take the expectation over $\mathcal{F}_t$ - all possible paths and all possible transition times have to be considered. We therefore let $\mathcal{E}_t=\sigma \{Z(0), Z(t) \}$, implying that we only use the state at initialization and time $t$ to evaluate the retrospective reserve. Using this formulation of $\mathcal{E}_t$, the retrospective reserve can be interpreted as the average reserve of a group of policies that all start in $Z(0)$ and end in $Z(t)$. In order to actually calculate this retrospective reserve, we note by the Markov property that for $\tau < s < t$
 \begin{equation}
 P(Z(s)=j| Z(\tau)=g, Z(t)=i )=\frac{p_{gj}(\tau,s)p_{ji}(s,t)}{p_{gi}(\tau,t)},
 \label{eq:AAM}
 \end{equation}
-and under appropriate technical conditions (see Section \ref{sec:pred}), the predictable compensator for $N^{jk}(s)\indic{Z(t)=i}$, has intensity given by
+and under appropriate technical conditions (see Section \ref{sec:pred} of the Appendix), the predictable compensator for $N^{jk}(s)\indic{Z(t)=i}$ has intensity given by
 \begin{equation}
-\indic{Z(t)=i}\indic{Z(s-)=j}\mu^*_{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)}. \label{eq:AAN}
+\indic{Z(t)=i}\indic{Z(s-)=j}\mu_{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)}. \label{eq:AAN}
 \end{equation}
 Define
 $$
@@ -310,68 +336,67 @@ U^{i*}(t)= \E^*  \left[ \left. \int_0^t e^{\int_s^t r*} d(-B(s)) \right| Z(0)=0,
 $$
 which by \eqref{eq:AAM} and \eqref{eq:AAN} is equal to
 \begin{align}
-U^{i*}(t)=& -\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} \frac{p_{0j}(0,s)p_{ji}(s,t)}{p_{0i}(0,t)} \left(  b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)} \right) ds
-%\\ =& \frac{-1}{p_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)p_{ji}(s,t) \left(  b^{j}(s) + \sum_{k:k \neq j}  \mu_{jk}(s)b^{jk}(s)\frac{p_{ki}(s,t)}{p_{ji}(s,t)} \right) ds
- \nonumber \\
+U^{i*}(t)=& -\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} \frac{p^*_{0j}(0,s)p^*_{ji}(s,t)}{p^*_{0i}(0,t)} \left(  b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)\frac{p^*_{ki}(s,t)}{p^*_{ji}(s,t)} \right) ds
+%\\ =& \frac{-1}{p^*_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s)p^*_{ji}(s,t) \left(  b^{j}(s) + \sum_{k:k \neq j}  \mu_{jk}(s)b^{jk}(s)\frac{p^*_{ki}(s,t)}{p^*_{ji}(s,t)} \right) ds
+\label{eq:AAO}\\
 =&
- \frac{-1}{p_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds \label{eq:AAO}
+ \frac{-1}{p^*_{0i}(0,t)}\int_0^t e^{\int_s^t r*} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left(p^*_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p^*_{ki}(s,t) \right) ds,  \nonumber
 \end{align}
 as also derived by \citet{Norberg}. In itself \eqref{eq:AAO} provides an interpretation of the retrospective reserve; it is the accumulated negative payments on transition and sojourn payments at all times prior to $t$, weighted by the corresponding probability of transitions between states and sojourns in states, given the initial and terminal state of the policy. For sufficiently nice intensities and payment functions, analytical solutions for $U^{i*}(t)$ can be derived. In general, we cannot provide a closed form expression for $U^{i*}(t)$, and instead we have to rely on numerical methods, for instance by a numerical solution to the differential equation that characterizes $U^{i*}(t)$. As it is a nuisance to directly derive a differential equation for $U^{i*}$, due to the division by the probability of entering state $i$ at time $t$, we define
 \begin{align*}
-\tilde{U}^{i*}(t)= \E^* \left. \left[ \indic{Z(t)=i} \int_0^t e^{\int_s^t r^*(\tau) d\tau} d(-B(s)) \right| Z(0)=0\right] = U^{i*}(t)p_{0i}(0,t).
+\tilde{U}^{i*}(t)= \E^* \left. \left[ \indic{Z(t)=i} \int_0^t e^{\int_s^t r^*(\tau) d\tau} d(-B(s)) \right| Z(0)=0\right] = U^{i*}(t)p^*_{0i}(0,t).
 \end{align*}
-Using the Kolmogorov differential equations, $p_{0i}(0,t)$ can be calculated for all $i$ and $t$, and thus $U^{i*}(t)$ can easily be calculated once $\tilde{U}^{i*}(t)$ is available. Differentiating $\tilde{U}^{i*}(t)$ with respect to $t$ gives
+Using the Kolmogorov differential equations, $p^*_{0i}(0,t)$ can be calculated for all $i$ and $t$, and thus $U^{i*}(t)$ can easily be calculated once $\tilde{U}^{i*}(t)$ is available. Differentiating $\tilde{U}^{i*}(t)$ with respect to $t$ gives
 \begin{align*}
 \frac{d}{dt} \tilde{U}^{i*}(t)=& -\frac{d}{dt} 
-\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds
-\\
+\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left(p^*_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p^*_{ki}(s,t) \right) ds
+ \displaybreak \\
 =&
--\sum_{j:j \in \mathcal{J}} p_{0j}(0,t) \left( \indic{j=i}   b^{j}(t) + \sum_{k:k \neq j}  \mu^*_{jk}(t) b^{jk}(t) \indic{k=i}  \right) 
+-\sum_{j:j \in \mathcal{J}} p^*_{0j}(0,t) \left( \indic{j=i}   b^{j}(t) + \sum_{k:k \neq j}  \mu^*_{jk}(t) b^{jk}(t) \indic{k=i}  \right) 
+ \\
+&-
+\int_0^t \frac{d}{dt} e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left(p^*_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p^*_{ki}(s,t) \right) ds\\
+=&
+r^*(t)\tilde{U}^{i*}(t)-p^*_{0i}(0,t) b^{i}(t) -\sum_{j:j \neq i} p^*_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
 \\
 &-
-\int_0^t \frac{d}{dt} e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left(p_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p_{ki}(s,t) \right) ds
-\\
-=&
-r^*(t)\tilde{U}^{i*}(t)-p_{0i}(0,t) b^{i}(t) -\sum_{j:j \neq i} p_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
-\\
-&-
-\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left( \frac{d}{dt}p_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) \frac{d}{dt} p_{ki}(s,t) \right) ds.
+\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left( \frac{d}{dt}p^*_{ji}(s,t)   b^{j}(s) + \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) \frac{d}{dt} p^*_{ki}(s,t) \right) ds.
 \end{align*}
 The Kolmogorov forward differential equations state that
 $$
-\frac{d}{dt}p_{ji}(s,t)=\sum_{g:g \neq i} p_{jg}(s,t)\mu^*_{gi}(t) - \mu^*_{ig}(t)p_{ji}(s,t)
+\frac{d}{dt}p^*_{ji}(s,t)=\sum_{g:g \neq i} p^*_{jg}(s,t)\mu^*_{gi}(t) - \mu^*_{ig}(t)p^*_{ji}(s,t)
 $$
 which implies that
 \begin{align}
 &\frac{d}{dt}\tilde{U}^{i*}(t) \nonumber
 \\
 =&
-r^*(t)\tilde{U}^{i*}(t)-p_{0i}(0,t) b^{i}(t) - \sum_{j:j \neq i} p_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
+r^*(t)\tilde{U}^{i*}(t)-p^*_{0i}(0,t) b^{i}(t) - \sum_{j:j \neq i} p^*_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
  \nonumber \\
 &-
-\sum_{g:g \neq i} \mu^*_{gi}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) p_{jg}(s,t)   b^{j}(s) ds
+\sum_{g:g \neq i} \mu^*_{gi}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) p^*_{jg}(s,t)   b^{j}(s) ds
  \nonumber \\
 &+
-\sum_{g:g \neq i} \mu^*_{ig}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  p_{ji}(s,t)   b^{j}(s)  ds
+\sum_{g:g \neq i} \mu^*_{ig}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s)  p^*_{ji}(s,t)   b^{j}(s)  ds
 \nonumber  \\
 &-
-\sum_{g:g \neq j} \mu^*_{gi}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p_{kg}(s,t) ds
+\sum_{g:g \neq j} \mu^*_{gi}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p^*_{kg}(s,t) ds
 \nonumber \\
 &+
-\sum_{g:g \neq i} \mu^*_{ig}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)  p_{kj}(s,t) ds
+\sum_{g:g \neq i} \mu^*_{ig}(t) \int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)  p^*_{kj}(s,t) ds
 \nonumber \\
 =&
-r^*(t)\tilde{U}^{i*}(t)-p_{0i}(0,t) b^{i}(t) - \sum_{j:j \neq i} p_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
+r^*(t)\tilde{U}^{i*}(t)-p^*_{0i}(0,t) b^{i}(t) - \sum_{j:j \neq i} p^*_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
 \nonumber \\
 &+
-\sum_{g:g \neq i} \mu^*_{gi}(t) \underbrace{ \left(-\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left( p_{jg}(s,t)   b^{j}(s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p_{kg}(s,t)\right)  ds \right)}_{\tilde{U}^{g*}(t)}
+\sum_{g:g \neq i} \mu^*_{gi}(t) \underbrace{ \left(-\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left( p^*_{jg}(s,t)   b^{j}(s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s) p^*_{kg}(s,t)\right)  ds \right)}_{\tilde{U}^{g*}(t)}
 \nonumber \\
 &-
-\sum_{g:g \neq i} \mu^*_{ig}(t) \underbrace{ \left(  -\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s) \left( p_{ji}(s,t)   b^{j}(s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)  p_{ki}(s,t)\right) ds  \right)}_{\tilde{U}^{i*}(t)}
+\sum_{g:g \neq i} \mu^*_{ig}(t) \underbrace{ \left(  -\int_0^t e^{\int_s^t r^*(\tau) d\tau} \sum_{j:j \in \mathcal{J}} p^*_{0j}(0,s) \left( p^*_{ji}(s,t)   b^{j}(s) \sum_{k:k \neq j}  \mu^*_{jk}(s) b^{jk}(s)  p^*_{ki}(s,t)\right) ds  \right)}_{\tilde{U}^{i*}(t)}
 \nonumber 
 \displaybreak \\
 =&
-r^*(t)\tilde{U}^{i*}(t) -p_{0i}(0,t) b^{i}(t)  - \sum_{j:j \neq i} p_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
+r^*(t)\tilde{U}^{i*}(t) -p^*_{0i}(0,t) b^{i}(t)  - \sum_{j:j \neq i} p^*_{0j}(0,t) \mu^*_{ji}(t) b^{ji}(t) 
  \label{eq:AAR}
 \\
 &+
@@ -387,22 +412,22 @@ dB(t)=\indic{t=s}\indic{Z(t)=j},
 $$
 that has a payout of one unit at a fixed time $s$ if $Z(t)=j$. Then 
 $$
-\tilde{U}^{i*}(t)=\E^* \left[ \int_0^t  \indic{Z(\tau)=j} d\delta_{s}(\tau) |Z(0)=0, Z(t)=i \right] p_{0i}(0,t) = p_{0j}(0,s)p_{ji}(s,t),
+\tilde{U}^{i*}(t)=\E^* \left[ \int_0^t  \indic{Z(\tau)=j} d\delta_{s}(\tau) |Z(0)=0, Z(t)=i \right] p^*_{0i}(0,t) = p^*_{0j}(0,s)p^*_{ji}(s,t),
 $$
-and $\tilde{U}^{i*}(s)=p_{0j}(0,s)\indic{i=j}$ providing the initial condition for the Kolmogorov forward differential equations. The differential equation for this retrospective reserve for $s<t$ is given by 
+and $\tilde{U}^{i*}(s)=p^*_{0j}(0,s)\indic{i=j}$ providing the initial condition for the Kolmogorov forward differential equations. The differential equation for this retrospective reserve for $s<t$ is given by 
 \begin{gather*}
-p_{0j}(0,s)\frac{d}{dt}p_{ji}(s,t)= \sum_{g:g\neq i} \mu^*_{gi}(t)p_{0j}(0,s)p_{jg}(s,t)- \mu^*_{ig}(t)p_{0j}(0,s)p_{ji}(s,t),
+p^*_{0j}(0,s)\frac{d}{dt}p^*_{ji}(s,t)= \sum_{g:g\neq i} \mu^*_{gi}(t)p^*_{0j}(0,s)p^*_{jg}(s,t)- \mu^*_{ig}(t)p^*_{0j}(0,s)p^*_{ji}(s,t),
 \\
 \Leftrightarrow
 \\
-\frac{d}{dt}p_{ji}(s,t)= \sum_{g:g\neq i} \mu^*_{gi}(t)p_{jg}(s,t)- \mu^*_{ig}(t)p_{ji}(s,t),
+\frac{d}{dt}p^*_{ji}(s,t)= \sum_{g:g\neq i} \mu^*_{gi}(t)p^*_{jg}(s,t)- \mu^*_{ig}(t)p^*_{ji}(s,t),
 \end{gather*}
 which constitute the Kolmogorov forward differential equations. 
 \\[12pt]
 \citet{Norberg} defined the retrospective reserve, and derived some of its important properties. At the time, the retrospective reserve was perhaps more of a mathematical curiosity than an actuarial tool, as the prospective reserves at the time provided all the information you could ask for. Furthermore, when $\mathcal{E}_t=\mathcal{F}_t$ the retrospective reserve is observable, and not something you need to calculate. However, the retrospective reserve with $\mathcal{E}_t=\sigma \{Z(0),Z(t)\}$ definitely deserves recognition when surplus and dividends are introduced.
 
 \section{Set-Up Including Surplus and Dividends} \label{sec:Set_2}
-In this section we expand our set-up, allowing us to can accurately describe the benefits and balances in a model where surplus and dividends are included. The notation and definitions are heavily inspired by Chapter 6, Section 7 of \citet{RaI}. The first order basis on which insurance contracts are signed, are a set of prudent assumptions regarding interest and transition intensities. Knowing that the assumptions are prudent, the insurer and insured agree that when surplus has emerged as a consequence of the realized interest and transition intensities, this surplus should be given back to the insured. The surplus is returned to the insured through a dividend payment stream. What the insured chooses to do with his dividend can vary, but a standard product design is to use the dividends to buy more insurance. In a sense, the dividend payment stream becomes a premium for a bonus payment stream. We introduce the two payment streams $B_1$ and $B_2$ with dynamics
+In this section we expand our set-up, allowing us to accurately describe the benefits and reserves in a model where surplus and dividends are included. The notation and definitions are heavily inspired by Chapter 6, Section 7 of \citet{RaI}. The first order basis on which insurance contracts are signed, are a set of prudent assumptions regarding interest and transition intensities. Knowing that the assumptions are prudent, the insurer and insured agree that when surplus has emerged as a consequence of the realized interest and transition intensities, this surplus should be given back to the insured. The surplus is returned to the insured through a dividend payment stream. What the insured chooses to do with his dividend can vary, but a standard product design is to use the dividends to buy more insurance. In a sense, the dividend payment stream becomes a premium for a bonus payment stream. We introduce the two payment streams $B_1$ and $B_2$ with dynamics
 $$
 dB_i(t)=b_i^{Z(t)}(t) dt +\sum_{k:k \neq Z(t-)} b_i^{Z(t-)k}(t)dN^k(t).
 $$
@@ -410,7 +435,7 @@ The payments specified by $B_1$ are the benefits and premiums which are fixed, a
 $$
 V_i^{j*}(t)=\E^* \left. \left[ \int_t^n e^{-\int_t^s r^*(\tau) d\tau} dB_i(s) \right| Z(t)=j \right].
 $$
-When the contract is signed, both $B_1$ and $B_2$ are agreed upon, and while there is practically no restriction on the design of $B_1$, $B_2$ should be constructed in such a way that $V_2^{j*}(t)\neq 0$ for all $t$ and all $j$. Simply because it does not make sense to use the dividend to buy a payment stream that has zero value. In order to keep track of how much dividend has been materialized into the $B_2$ payment stream, we introduce the process $Q(t)$ which denotes the quantity of $B_2$ payment stream purchased at time $t$. The dividends are instantaneously used to increase benefits, by buying more of the $B_2$ payment stream. These additional benefits are, like the fixed benefits, priced under the first order basis, which means that one unit of $B_2$ has a value of $V_2^{Z(t)*}(t)$. The total amount of accrued dividends at time $t$ are denoted by $D(t)$, and as the dividends are used to buy $B_2$, we must have that
+When the contract is signed, both $B_1$ and $B_2$ are agreed upon, and while there is practically no restriction on the design of $B_1$, $B_2$ should be constructed in such a way that $V_2^{j*}(t)\neq 0$ for all $t$ and all $j$. This should be required simply because it does not make sense to use the dividend to buy a payment stream that has zero value. In order to keep track of how much dividend has been materialized into the $B_2$ payment stream, we introduce the process $Q(t)$ which denotes the quantity of $B_2$ payment stream purchased at time $t$. The dividends are instantaneously used to increase benefits, by buying more of the $B_2$ payment stream. These additional benefits are, like the fixed benefits, priced under the first order basis, which means that one unit of $B_2$ has a value of $V_2^{Z(t)*}(t)$. The total amount of accrued dividends at time $t$ are denoted by $D(t)$, and as the dividends are used to buy $B_2$, we must have that
 \begin{align}
 dD(t)=V_2^{Z(t)*}(t)dQ(t). \label{eq:AAQ}
 \end{align}
@@ -420,9 +445,10 @@ dB(t)=dB_1(t)+ Q(t-)dB_2(t),
 $$
 where the left limit version of $Q$ is used to ensure that it is predictable. We now define the savings account as the technical value of future guaranteed payments, for a certain quantity of $B_2$ payment stream,
 \begin{align*}
-X(t)=&\E^*\left[ \left. \int_t^n e^{-\int_t^s r^*(\tau) d\tau} d\left( B_1(s) + Q(t) B_2(s) \right)  \right| Z(t) \right]
-\\
-=&
+X(t)=&
+%\E^*\left[ \left. \int_t^n e^{-\int_t^s r^*(\tau) d\tau} d\left( B_1(s) + Q(t) B_2(s) \right)  \right| Z(t) \right]
+%\\
+%=&
 V_1^{Z(t)*}(t)+Q(t)V_2^{Z(t)*}(t). 
 \end{align*}
 Noting that
@@ -443,11 +469,7 @@ for deterministic functions $b^j$ and $b^{jk}$. By the principle of equivalence
 \\
 Q(0)=-\frac{V_1^{0*}(0)}{V_2^{0*}(0)},
 \end{gather*}
-providing us with the initial condition for $Q$, which along with \eqref{eq:AAQ} fully specifies $Q$. Note that the principle of equivalence puts no restrictions on the form of $B_1$ and $B_2$. The dynamics of the dividend process $D$ is a central element of a with-profit insurance contract, as it determines how the surplus should be returned to the policyholders. We assume that the dynamics of the dividend process is given by
-$$
-dD(t)=\delta^{Z(t)}(t,X(t),Y(t)) dt,
-$$
-but do not yet impose any restrictions on the $\delta^j$-functions. Using integration by parts for FV-functions, and plugging in the dynamics of $V_1^{Z(t)*}$ and $V_2^{Z(t)*}$ given by \eqref{eq:AAP}, we find the dynamics of $X$ to be
+providing us with the initial condition for $Q$, which along with \eqref{eq:AAQ} fully specifies $Q$. Note that the principle of equivalence puts no restrictions on the form of $B_1$ and $B_2$. Using integration by parts for FV-functions, and plugging in the dynamics of $V_1^{Z(t)*}$ and $V_2^{Z(t)*}$ given by \eqref{eq:AAP}, we find the dynamics of $X$ to be
 \begin{align}
 dX(t)=&
 dV_1^{Z(t)*}(t)+Q(t-)dV_2^{Z(t)*}(t)+V_2^{Z(t)*}(t)dQ(t) \nonumber
@@ -472,7 +494,7 @@ respectively can be interpreted as the surplus contribution and sum-at-risk for 
 $$
 dB_C(t)=dB_1(t)-\frac{V_1^{0*}(0-)}{V_2^{0*}(0-)}dB_2(t).
 $$
-If no dividends are allotted, then the savings account is simply a retrospective first order reserve, and therefore falls under the framework of Section \ref{sec:Nor}. Hence, the dividend process is the crucial term that separates the results of \citet{Norberg} from the results of this paper, and it is precisely due to the dividend process that we need to extend the results of \citet{Norberg}. Given the savings account, we can readily define the surplus as
+Note that the technical prospective reserve for the payment process $B_c$ automatically fulfills the principle of equivalence. If no dividends are allotted, then the expected savings account could be seen as a retrospective first order reserve, therefore falling under the framework of Section \ref{sec:Nor}. Hence, the dividend process is the crucial term that separates the results of \citet{Norberg} from the results of this paper, and it is precisely due to the dividend process that we need to extend the results of \citet{Norberg}. Given the savings account, we can readily define the surplus as
 $$
 Y(t)= - \int_0^t e^{\int_s^t r(\tau) d\tau} dB(s)-X(t),
 $$
@@ -490,9 +512,13 @@ for
 \begin{gather*}
 dC(t)=(r(t)-r^*(t))X(t)dt+\sum_{k:k\neq Z(t)} \rho^{Z(t)k}(t,X(t)) dt,
 \end{gather*}
-which we call the contribution process, as it represents the contributions from the savings account to the surplus.  We can for suitable functions $g$ and $h$, write the dynamics of $X$ and $Y$ as
+which we call the contribution process, as it represents the contributions from the savings account to the surplus. The dynamics of the dividend process $D$ is a central element of a with-profit insurance contract, as it determines how the surplus should be returned to the policyholders. We assume that the dynamics of the dividend process are given by
+$$
+dD(t)=\delta^{Z(t)}(t,X(t),Y(t)) dt,
+$$
+but do not yet impose any restrictions on the $\delta^j$-functions. We can for suitable functions $g$ and $h$, write the dynamics of $X$ and $Y$ as
 \begin{align}
-dX(t)=&g^{Z(t)}_{x}(t,X(t),Y(t))dt + \sum_{k:k \neq Z(t-)}  h^{Z(t-)k}_{x}(t,X(t-),Y(t-)) dN^k(t)
+dX(t)=&g^{Z(t)}_{x}(t,X(t),Y(t))dt + \sum_{k:k \neq Z(t-)}  h^{Z(t-)k}_{x}(t,X(t-),Y(t-)) dN^k(t),
 \label{eq:AAD}
 \\
 dY(t)=&g^{Z(t)}_{y}(t,X(t),Y(t))dt + \sum_{k:k \neq Z(t-)} h^{Z(t-)k}_{y}(t,X(t-), Y(t-)) dN^k(t)
@@ -513,17 +539,16 @@ Y(t)
 $$
 with dynamics given by
 \begin{align*}
-dW(t)=& g^{Z(t)}(t,W(t)) ds+ \sum_{k:k\neq Z(t-)} h^{Z(t-)k}(t,W(t-)) dN^k(t),
+dW(t)=& g^{Z(t)}(t,W(t)) dt+ \sum_{k:k\neq Z(t-)} h^{Z(t-)k}(t,W(t-)) dN^k(t),
 \end{align*}
 for $g$ and $h$ functions that are affine functions of $W$, and determined by the dynamics of $X$ and $Y$. Without loss of generality we assume that $W(0)=w_0$ for some deterministic but arbitrary $w_0$. A function $f$ is an affine function of $W(t)\in \R^n$ if and only if
 $$
-f(t,W(t))=f_1(t) W(t) + f_2(t)
+f(t,W(t))=f_1(t) W(t) + f_0(t),
 $$
-for a matrix $f_1$ of dimension $n \times n$ and vector $f_2 \in \R^n$.
-
-In practice, the surplus account is shared among, say $N$, policyholders. In that case, $W$ should instead be an $N+1$-dimensional process - one dimension for each policyholder, and one dimension for the shared surplus. This implies that we need a system of $\# \{ \mathcal{J} \}^N+1$ differential equations; one for each combination of all policy states, and one for the common surplus. There are several ways to reduce the dimensionality of the problem, making it computationally tractable. One way to diminish the problem of dependency between policyholders, is to discretize the dividend function and comprise it as lump-sum payments, which conforms to real-world practise. When there are no dividends, the savings are independent of surplus, and thus also the other policies. In between lump-sum payments of dividend, the state-wise contributions including investment gains from each policy is accumulated. When a lump-sum time is reached, the probability weighted sum of contributions are contributed to a single state-independent surplus where after the dividend is allocated. This method requires $\# \{ \mathcal{J} \} \times 2 \times N + 1$ differential equations be solved. One for the surplus, and one for the savings account and contribution for each state of each policy. Furthermore, note that in between lump-sum payments of dividend the computations can be done in parallel over $N$ cores, as the policies are independent. Even though $\# \{ \mathcal{J} \} \times 2 \times N + 1$ independent differential equations is a vast improvement from $\# \{ \mathcal{J} \}^N + 1$ dependent differential equations, it is still a computationally difficult problem, but a further digression on the subject is outside the scope of this paper.
+for a matrix $f_1$ of dimension $n \times n$ and vector $f_0 \in \R^n$.
 \\[12pt]
-As stated in the introduction, management actions are one of the main motivators of this paper. The influence of management actions is present in our set-up through mainly two terms; the third order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers.
+%In practice, the surplus account is shared among, say $N$, policyholders. In that case, $W$ should instead be an $N+1$-dimensional process - one dimension for each policyholder, and one dimension for the shared surplus. This implies that we need a system of $\# \{ \mathcal{J} \}^N+1$ differential equations; one for each combination of all policy states, and one for the common surplus. There are several ways to reduce the dimensionality of the problem, making it computationally tractable. One way to diminish the problem of dependency between policyholders, is to discretize the dividend function and comprise it as lump-sum payments, which conforms to real-world practise. When there are no dividends, the savings are independent of surplus, and thus also the other policies. In between lump-sum payments of dividend, the state-wise contributions including investment gains from each policy is accumulated. When a lump-sum time is reached, the probability weighted sum of contributions are contributed to a single state-independent surplus where after the dividend is allocated. This method requires $\# \{ \mathcal{J} \} \times 2 \times N + 1$ differential equations be solved. One for the surplus, and one for the savings account and contribution for each state of each policy. Furthermore, note that in between lump-sum payments of dividend the computations can be done in parallel over $N$ cores, as the policies are independent. Even though $\# \{ \mathcal{J} \} \times 2 \times N + 1$ independent differential equations is a vast improvement from $\# \{ \mathcal{J} \}^N + 1$ dependent differential equations, it is still a computationally difficult problem, but a further digression on the subject is outside the scope of this paper.
+\noin As stated in the introduction, management actions are one of the main motivators of this paper. The influence of management actions is present in our set-up through mainly two terms; the third order interest and the dividend. This is because the management decides how to invest the surplus, and how it should be distributed to the customers.
 
 
 \section{A Differential Equation for With-profit Insurance} \label{sec:diff}
@@ -566,7 +591,7 @@ By the Markov property $W(s)\independent Z(t)|Z(s)$ for $s<t$, as $W(s)$ is $\ma
 \end{align*}
 Differentiating with respect to $t$, and using Kolmogorov's forward differential equations yields the following system of differential equations
 \begin{align*}
-\frac{d}{dt} \tilde{W}^i(t)=& g^i(t) \tilde{W}^i(t)+ \sum_{j:j\neq i} \mu_{ji}(t)\tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
+\frac{d}{dt} \tilde{W}^i(t)=& g^i(t) \tilde{W}^i(t)+ \sum_{j:j\neq i} \left( \mu_{ji}(t)\tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)\right),
 \\
 \tilde{W}^i(0)=&\indic{i=0}w_0.
 \end{align*}
@@ -576,50 +601,50 @@ It is crucial to note that this differential equation relies on the affine struc
 Let $Z(t)$ be a Markov process on the state space $\mathcal{J}$, and let $W(t)$ be a q-dimensional, $\mathcal{F}_t$-measurable process with dynamics
 \begin{align*}
 dW(s)=  g^{Z(s)}(s,W(s))ds+
- \sum_{k:k \neq Z(s-)} h^{Z(s-)k}(s,W(s-)) dN^k(s) 
+ \sum_{k:k \neq Z(s-)} h^{Z(s-)k}(s,W(s-)) dN^k(s),
 \end{align*}
 for q-dimensional functions $g$ and $h$ of the form
 \begin{align*}
-g^{Z(s)}(s,W(s))=&g^{Z(s)}_1(s) W(s)+g_2^{Z(s)}(s)
+g^{Z(s)}(s,W(s))=&g^{Z(s)}_1(s) W(s)+g_0^{Z(s)}(s),
 \\
-h^{Z(s-)k}(s,W(s-))=&h_1^{Z(s-)k}(s) W(s-)+h_2^{Z(s-)k}(s),
+h^{Z(s-)k}(s,W(s-))=&h_1^{Z(s-)k}(s) W(s-)+h_0^{Z(s-)k}(s),
 \end{align*}
-where $g_1^j$ and $h^{jk}_1$ are $q\times q$-matrices, and $g^j_2$ and $h^{jk}_2$ are vectors of length $q$. Then $\tilde{W}^i(t)=\E_0[\indic{Z(t)=i}W(t)]$ is described by the differential equation
+where $g_1^j$ and $h^{jk}_1$ are $q\times q$-matrices, and $g^j_0$ and $h^{jk}_0$ are vectors of length $q$. Then $\tilde{W}^i(t)=\E_0[\indic{Z(t)=i}W(t)]$ is described by the differential equation
 \begin{align}
 \frac{d}{dt}\tilde{W}^i(t)=&
-\sum_{j:j \neq i} \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
+\sum_{j:j \neq i} \left( \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t) \right)
  \label{eq:AAH} \\
 &+
- g_1^i(t)\tilde{W}^i(t)+p_{0i}(0,t)g_2^i(t)
+ g_1^i(t)\tilde{W}^i(t)+p_{0i}(0,t)g_0^i(t)
  \label{eq:AAI}\\
 &+
-\sum_{j:j\neq i} \mu_{ji}(t) \left(  h_1^{ji}(t) \tilde{W}^j(t) + p_{0j}(0,t)h_2^{ji}(t)\right) \label{eq:AAF}
+\sum_{j:j\neq i} \mu_{ji}(t) \left(  h_1^{ji}(t) \tilde{W}^j(t) + p_{0j}(0,t)h_0^{ji}(t)\right) ,\label{eq:AAF}
 \\
-\tilde{W}^i(0)=&\indic{i=0}w_0 \label{eq:AAG}
+\tilde{W}^i(0)=&\indic{i=0}w_0 .\label{eq:AAG}
 \end{align}
 \end{thm}
-\noin The differential equations given by \eqref{eq:AAH}-\eqref{eq:AAG} bear close resemblance to the differential equation for the retrospective reserve given by \eqref{eq:AAR}-\eqref{eq:AAS}. In fact, for
+\noin The differential equation given by \eqref{eq:AAH}-\eqref{eq:AAG} bears close resemblance to the differential equation for the retrospective reserve given by \eqref{eq:AAR}-\eqref{eq:AAS}. In fact, for
 \begin{gather*}
 g_1=h_1=0, \qquad w_0=0,
 \\
-g_2(t,i)=b^{i}(t),\qquad h_2(t,j,i)=b^{ji}(t),
+g_0(t,i)=b^{i}(t),\qquad h_0(t,j,i)=b^{ji}(t),
 \end{gather*}
-we arrive at the differential equation derived by \citet{Norberg}. The terms \eqref{eq:AAH}-\eqref{eq:AAF} in the differential equation can be intuitively explained.
+we arrive at the differential equation derived by \citet{Norberg}.
 \\[12pt]
-If the policy is in state $i$ at time $t$, it develops with the continuous dynamics of that state, given by $g^i_1(t)W(t)+g_2^i(t)$. Due to the uncertainty involved pertaining to the state of the policy and the value of $W$, we have to weigh these dynamics with the probability of $Z(t)=i$, as well as the expected value of $W$, thus arriving at \eqref{eq:AAI} as
+The terms \eqref{eq:AAH}-\eqref{eq:AAF} in the differential equation can be intuitively explained. If the policy is in state $i$ at time $t$, it develops with the continuous dynamics of that state, given by $g^i_1(t)W(t)+g_0^i(t)$. Due to the uncertainty involved pertaining to the state of the policy and the value of $W$, we have to weigh these dynamics with the probability of $Z(t)=i$, as well as the expected value of $W$, thus arriving at \eqref{eq:AAI} as
 $$
-\E_0 [\indic{Z(t)=i} \left(g^i_1(t)W(t)+g_2^i(t)\right)]= g_1^i(t)\tilde{W}^i(t)+p_{0i}(0,t)g_2^i(t).
+\E_0 [\indic{Z(t)=i} \left(g^i_1(t)W(t)+g_0^i(t)\right)]= g_1^i(t)\tilde{W}^i(t)+p_{0i}(0,t)g_0^i(t).
 $$
-Similarly, we have to account for any transitions into the current state $i$, over the small interval $t+dt$. The infinitesimal probability of transition from $j$ to $i$ over an interval from $t$ to $t+dt$ is given by $\mu_{ji}(t)$, and if such a transition was made, the savings and surplus are bumped by $h^{ji}_1(t)W(t)+h^{ji}_2(t)$. In order for a transition from $j$ to $i$ to be possible over the interval $t+dt$, the policy has to be in state $j$ at time $t$, thus arriving at 
+Similarly, we have to account for any transitions into the current state $i$, over the small interval $t+dt$. The infinitesimal probability of transition from $j$ to $i$ over an interval from $t$ to $t+dt$ is given by $\mu_{ji}(t)$, and if such a transition was made, the savings and surplus are bumped by $h^{ji}_1(t)W(t)+h^{ji}_0(t)$. In order for a transition from $j$ to $i$ to be possible over the interval $t+dt$, the policy has to be in state $j$ at time $t$, thus arriving at 
 \eqref{eq:AAF} as
 $$
-\E_0[ \indic{Z(t)=j} \left( h_1^{ji}(t)W(t)+ h_2^{ji}(t)\right)]= h_1^{ji}(t)\tilde{W}^j(t)+ p_{0j}(0,t)h_2^{ji}(t).
+\E_0[ \indic{Z(t)=j} \left( h_1^{ji}(t)W(t)+ h_0^{ji}(t)\right)]= h_1^{ji}(t)\tilde{W}^j(t)+ p_{0j}(0,t)h_0^{ji}(t).
 $$
 Furthermore, when a transition from $j$ to $i$ is made, the savings and surplus from state $j$ (after the bump) are transferred to the savings and surplus of state $i$, amounting to the term given in \eqref{eq:AAH}. 
 \\[12pt]
-For dynamics of $X$ and $Y$ given by \eqref{eq:AAB} and \eqref{eq:AAC} it is important to note that if the dividend function $\delta$ is affine in $X$ and $Y$, then the dynamics of $X$ and $Y$ are also affine in $X$ and $Y$. The applicability of theorem \ref{thm:Diff_1} relies solely on the affinity of the dynamics of the dividends in savings and surplus. While other quantities could be studied, the projection of expected savings and surplus provides us with useful information. A practically important quantity that can be calculated based on $\tilde{X}$ and $\tilde{Y}$ is the present value of guaranteed future benefits, given by
+For dynamics of $X$ and $Y$ given by \eqref{eq:AAB} and \eqref{eq:AAC} it is important to note that if the dividend function $\delta$ is affine in $X$ and $Y$, then the dynamics of $X$ and $Y$ are also affine in $X$ and $Y$. The applicability of Theorem \ref{thm:Diff_1} relies solely on the affinity of the dynamics of the dividends in savings and surplus. While other quantities could be studied, the projection of expected savings and surplus provides us with useful information. A practically important quantity that can be calculated based on $\tilde{X}$ and $\tilde{Y}$ is the present value of guaranteed future benefits, given by
 \begin{align*}
-\text{GY}_i(t)=&\E \left. \left[ \int_t^n e^{-\int_t^s r} d \left( B_1(s)+\frac{X(t)-V_1^{Z(t)*}(t)}{V_2^{Z(t)*}(t)}B_2(s) \right) \right| Z(t)=i\right]
+\text{GB}^i(t)=&\E \left. \left[ \int_t^n e^{-\int_t^s r} d \left( B_1(s)+\frac{X(t)-V_1^{Z(t)*}(t)}{V_2^{Z(t)*}(t)}B_2(s) \right) \right| Z(t)=i\right]
 \\
 =&
 \E \left[ \left. \int_t^n e^{-\int_t^s r} d B_1(s) \right| Z(t)=i \right]
@@ -629,9 +654,9 @@ For dynamics of $X$ and $Y$ given by \eqref{eq:AAB} and \eqref{eq:AAC} it is imp
 =&
 V_1^i(t)+\frac{\tilde{X}^{i}(t)/p_{0i}(0,t)-V_1^{i*}(t)}{V_2^{i*}(t)}V_2^i(t).
 \end{align*}
-Where we in the second equality have used that $X(t)\independent B_2(s)|Z(t)$ for $s>t$. Note that $\E[\text{GY}_{Z(t)}(t)|X(t)=x]$ is affine in $x$, and therefore it can be used as an input to the dividend function $\delta$ - for instance by letting the dividend be some percentage of the guaranteed future benefits.
+Here we have in the second equality used that $X(t)\independent B_2(s)|Z(t)$ for $s>t$. Note that $\E[\text{GB}^{Z(t)}(t)|X(t)=x]$ is affine in $x$, and therefore it can be used as an input to the dividend function $\delta$ - for instance by letting the dividend be some percentage of the guaranteed future benefits.
 \\[12pt]
-While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some non-linear function, for instance if the transition intensities are $X$ or $Y$ dependent, and these non-linear functions in savings cannot be described by affine dynamics. However, if the dynamics of $W$ are not affine, we can still produce an approximation of $\tilde{W}^i$. We simply replace $W(t)$ with $\tilde{W}^{Z(t)}(t)$ in the terms of the dynamics that are not affine in $W(t)$. This idea is motivated by producing a second order Taylor approximation of the non-affine term.
+While the reach of models with affine dynamics is extensive, there are limitations to consider. It is not uncommon to have dynamics that include some non-linear function, for instance if the transition intensities are $X$ or $Y$ dependent, and these non-linear functions in savings cannot be described by affine dynamics. However, if the dynamics of $W$ are not affine, we can still produce an approximation of $\tilde{W}^i$. We simply replace $W(t)$ with $\tilde{W}^{Z(t)}(t)$ in the terms of the dynamics that are not affine in $W(t)$. This idea is motivated by producing a Taylor approximation of the non-affine term.
 
 
 
@@ -737,9 +762,9 @@ f(t-u)\left( dB^{i+}_1(t) - \frac{V_1^{i*+}(t)}{V_2^{i*+}(t)}dB_2^{i+}(t) \right
 \end{align*}
 implying that the dynamics of $X$ are on the form
 \begin{align}
-dX(s)=&X(s)g_1(s,Z(s))ds+g_2(s,Z(s))ds +  \indic{Z(s)\in \mathbb{F}} f(s-U(s)) g_3(s,Z(s))ds \label{eq:AAK} \\
+dX(s)=&X(s)g_1(s,Z(s))ds+g_0(s,Z(s))ds +  \indic{Z(s)\in \mathbb{F}} f(s-U(s)) g_3(s,Z(s))ds \label{eq:AAK} \\
 &+
-\sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_2(s,Z(s-),h) + \right) dN^h(s)
+\sum_{h\neq Z(s-)} \left( X(s-)h_1(s,Z(s-),h)+ h_0(s,Z(s-),h) + \right) dN^h(s)
 \nonumber \\
 &+
 \sum_{h\neq Z(s-)}  \indic{Z(s)\in \mathbb{F}} f(s-U(s))h_3(s,Z(s-),h) dN^h(s),
@@ -859,9 +884,9 @@ Performing the same procedure as in the case without duration dependence brings 
 \frac{d}{dt}\tilde{X}^j(t)=&
 \sum_{g:g\neq j} \mu^{gj}(t) \tilde{X}^g(t) - \mu^{jg}(t) \tilde{X}^j(t)
 \\
-&+ \tilde{X}^j(t) g_1(t,j)+p_{0j}(0,t) g_2(t,j)+p^\text{lost}_{0j}(0,t)g_3(t,j) \indic{j \in \mathbb{F}}
+&+ \tilde{X}^j(t) g_1(t,j)+p_{0j}(0,t) g_0(t,j)+p^\text{lost}_{0j}(0,t)g_3(t,j) \indic{j \in \mathbb{F}}
 \\
-&+ \sum_{g:g \neq j} \mu^{gj}(t) \left( \tilde{X}^g(t) h_1(t,g,j)+ p_{0g}(0,t) h_2(t,g,j) \right)
+&+ \sum_{g:g \neq j} \mu^{gj}(t) \left( \tilde{X}^g(t) h_1(t,g,j)+ p_{0g}(0,t) h_0(t,g,j) \right)
 \\
 &+
 \sum_{g:g \neq j} \mu^{gj}(t) p^\text{lost}_{0g}(0,t) h_3(t,g,j)   \indic{g \in \mathbb{F}}
@@ -1117,7 +1142,7 @@ p_{0i}(0,t)w_0+\E_0 \left[ \int_0^t \indic{Z(t)=i} g^{Z(s)}(s,W(s))ds \right]
 &+
 \E_0 \left[ \int_0^t \sum_{k:k \neq Z(s-)} \indic{Z(t)=i} h^{Z(s-)k}(s,W(s-)) dN^k(s)  \right].
 \end{align*}
-Based on the calculations in Section \ref{sec:pred}, note that 
+Based on the calculations in Section \ref{sec:pred} of the Appendix, note that 
 \begin{align*}
 \E_0 & \left. \left[ N^{jk}(s) - \int_0^s \indic{Z(\tau-)=j} \mu_{jk}(\tau)\frac{p_{ki}(\tau,t)}{p_{ji}(\tau,t)} d\tau \right| Z(t)=i \right] 
 \\
@@ -1162,10 +1187,10 @@ Since $W(s)$ is $\mathcal{F}_s$-measurable, the Markov property gives us
 Using that $g$ and $h$ are affine in $W$, and plugging \eqref{eq:AAX} into \eqref{eq:AAT}-\eqref{eq:AAU} gives
 \begin{align*}
 \tilde{W}^i(t)=&p_{0i}(0,t)w_0+
-\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)\left(  g_1^j(s)\frac{\tilde{W}^j(s)}{p_{0j}(0,s)}+g^j_2(s)\right)p_{ji}(s,t) ds
+\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)\left(  g_1^j(s)\frac{\tilde{W}^j(s)}{p_{0j}(0,s)}+g^j_0(s)\right)p_{ji}(s,t) ds
 \\
 &+
-\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \left( \sum_{k:k \neq j}  \mu_{jk}(t)p_{ki}(s,t) \left(  h_1^{jk}(s) \frac{\tilde{W}^j(s)}{p_{0j}(0,s)} +h_2^{jk}(s)  \right) \right) ds
+\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \left( \sum_{k:k \neq j}  \mu_{jk}(t)p_{ki}(s,t) \left(  h_1^{jk}(s) \frac{\tilde{W}^j(s)}{p_{0j}(0,s)} +h_0^{jk}(s)  \right) \right) ds
  \\
 =&p_{0i}(0,t)w_0+
 \int_0^t \sum_{j:j \in \mathcal{J}} p_{ji}(s,t) g_1^j(s) \tilde{W}^j(s) ds
@@ -1174,10 +1199,10 @@ Using that $g$ and $h$ are affine in $W$, and plugging \eqref{eq:AAX} into \eqre
 \int_0^t \sum_{j:j \in \mathcal{J}} \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t) \tilde{W}^j(s) h^{jk}_1(s)  ds
 \\
 &+
-\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)g_2^j(s)p_{ji}(s,t) ds
+\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)g_0^j(s)p_{ji}(s,t) ds
 \\
 &+
-\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h^{jk}_2(s) ds.
+\int_0^t \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h^{jk}_0(s) ds.
 \end{align*}
 Differentiating with respect to $t$ gives
 \begin{align*}
@@ -1186,9 +1211,9 @@ w_0
 \left(\sum_{k:k \neq i} p_{0k}(0,t)\mu_{ki}(t) - \mu_{ik}(t)p_{0i}(0,t)\right)
 \\
 &+
- g_1^i(t) \tilde{W}^i(t) +p_{0i}(0,t)g^i_2(t)\\
+ g_1^i(t) \tilde{W}^i(t) +p_{0i}(0,t)g^i_0(t)\\
 &+
-\sum_{k:k \neq i} \mu_{ki}(t) \left(  h_1^{ki}(t) \tilde{W}^k(t) + p_{0k}(0,t)h^{ki}_2(t) \right)
+\sum_{k:k \neq i} \mu_{ki}(t) \left(  h_1^{ki}(t) \tilde{W}^k(t) + p_{0k}(0,t)h^{ki}_0(t) \right)
 \\
 &+
 \int_0^t \frac{\partial}{\partial t}  \sum_{j:j \in \mathcal{J}} p_{ji}(s,t) g_1^j(s) \tilde{W}^j(s)  ds
@@ -1197,20 +1222,20 @@ w_0
 \int_0^t \frac{\partial}{\partial t}  \sum_{j:j \in \mathcal{J}} \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t)  h^{jk}_1(s) \tilde{W}^j(s)   ds
 \\
 &+
-\int_0^t \frac{\partial}{\partial t}  \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)g_2^j(s)p_{ji}(s,t) ds
+\int_0^t \frac{\partial}{\partial t}  \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)g_0^j(s)p_{ji}(s,t) ds
 \\
 &+
-\int_0^t \frac{\partial}{\partial t} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h_2^{jk}(s) ds.
+\int_0^t \frac{\partial}{\partial t} \sum_{j:j \in \mathcal{J}} p_{0j}(0,s)  \sum_{k:k \neq j}  \mu_{jk}(t) p_{ki}(s,t)h_0^{jk}(s) ds.
 \end{align*}
 Using the Kolmogorov forward differential equations and recognizing $\tilde{W}^k$ and $\tilde{W}^i$, we arrive at
 \begin{align*}
 \frac{d}{dt}\tilde{W}^i(t)=&
-g^i_1(t) \tilde{W}^i(t) +p_{0i}(0,t)g^i_2(t)\\
+g^i_1(t) \tilde{W}^i(t) +p_{0i}(0,t)g^i_0(t)\\
 &+
-\sum_{k:k \neq i} \mu_{ki}(t) \left(   h^{ki}_1(t) \tilde{W}^k(t) + p_{0k}(0,t)h^{ki}_2(t) \right)
+\sum_{k:k \neq i} \mu_{ki}(t) \left(   h^{ki}_1(t) \tilde{W}^k(t) + p_{0k}(0,t)h^{ki}_0(t) \right)
 \\
 &+
-\sum_{k:k \neq i} \mu_{ki}(t) \tilde{W}^k(t)-\mu_{ik}(t)\tilde{W}^i(t).
+\sum_{k:k \neq i}\left( \mu_{ki}(t) \tilde{W}^k(t)-\mu_{ik}(t)\tilde{W}^i(t)\right).
 \end{align*}
 Combined with the initial condition
 $$
@@ -1302,18 +1327,18 @@ Assuming that the dividend functions $\delta^j$ are affine, such that Theorem \r
 \begin{align*}
 \delta^j(t,x,y)=&\delta_1^j(t)+\delta_2^j(t)x+\delta_3^j(t)y.
 \end{align*}
-We are interested in the specification of $g_1,g_2,h_1$ and $h_2$ for which the differential equation
+We are interested in the specification of $g_1,g_0,h_1$ and $h_0$ for which the differential equation
 \begin{align*}
 \frac{d}{dt}\tilde{W}^i(t)=&
-\sum_{j:j \neq i} \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)
+\sum_{j:j \neq i} \left( \mu_{ji}(t) \tilde{W}^j(t)-\mu_{ij}(t)\tilde{W}^i(t)\right)
  \\
 &+
-g_1^i(t) \tilde{W}^i(t) +p_{0i}(0,t)g_2^i(t)
+g_1^i(t) \tilde{W}^i(t) +p_{0i}(0,t)g_0^i(t)
 \\
 &+
-\sum_{j:j\neq i} \mu_{ji}(t) \left( h_1^{ji}(t) \tilde{W}^j(t)  + p_{0j}(0,t)h_2^{ji}(t)\right) 
+\sum_{j:j\neq i} \mu_{ji}(t) \left( h_1^{ji}(t) \tilde{W}^j(t)  + p_{0j}(0,t)h_0^{ji}(t)\right) 
 \\
-\tilde{W}^i(0)=&\indic{i=0}W(0) 
+\tilde{W}^i(0)=&\indic{i=0}W(0) ,
 \end{align*}
 determines
 \begin{align*}
@@ -1328,7 +1353,7 @@ determines
 \E[ Y(t) \indic{Z(t)=j}]
 \end{pmatrix}.
 \end{align*}
-The functions $g_1,g_2,h_1$ and $h_2$ are on the form
+The functions $g_1,g_0,h_1$ and $h_0$ are on the form
 \begin{gather*}
 g^j_1(t)=\begin{pmatrix}
 g^j_{11}(t) & g^j_{12}(t) \\
@@ -1341,15 +1366,15 @@ h^{jk}_{11}(t) & h^{jk}_{12}(t) \\
 h^{jk}_{21}(t) & h^{jk}_{22}(t)
 \end{pmatrix},
 \\
-g_2^j(t)=\begin{pmatrix}
-g^j_{x2}(t) \\
-g^j_{y2}(t)
+g_0^j(t)=\begin{pmatrix}
+g^j_{x0}(t) \\
+g^j_{y0}(t)
 \end{pmatrix},
 \qquad 
 \quad
-h^{jk}_2(t)=\begin{pmatrix}
-h^{jk}_{x2}(t) \\
-h^{jk}_{y2}(t)
+h^{jk}_0(t)=\begin{pmatrix}
+h^{jk}_{x0}(t) \\
+h^{jk}_{y0}(t)
 \end{pmatrix}.
 \end{gather*}
 We want to find the twelve $g$ and $h$ functions that describe the dynamics of $X$ and $Y$. We separate the dynamics of $X$ into the terms that are linear in $X$, linear in $Y$ and those that are neither,
@@ -1383,33 +1408,33 @@ r^*(t)dt+\delta_2^{Z(t)}(t)dt
 -\sum_{k:k\neq Z(t-)} \rho^{Z(t-)k}_1(t) dt
 \\
 &+\sum_{k:k\neq Z(t-)} R^{Z(t-)k}_1(t) dN^k(t)
--\sum_{k:k\neq Z(t-)} R^{Z(t-)k}_1(t) \mu^{Z(t-)k}(t)dt
+-\sum_{k:k\neq Z(t-)} R^{Z(t-)k}_1(t) \mu^{Z(t-)k}(t)dt.
 \end{align*}
 These terms are then further separated into those that relate to the discrete and continuous dynamics of $X$, providing us with $g_{11}^j,g_{12}^j,g_{x2}^j,h_{11}^{jk},h_{12}^{jk}$ and $h_{x2}^{jk}$.
 \begin{align*}
 g^j_{11}(t)=&r^*(t)  +\delta_2^j(t)\\
 &+\frac{1}{V_2^{j*}(t)}\bigg(
 -b^j_2(t)-\sum_{k:k\neq j}\rho_2^{jk}(t)-\sum_{k:k\neq j}R_2^{jk}(t)\mu^{jk}(t)
-\bigg)
+\bigg),
 \\
-g^j_{12}(t)=&\delta_3^j(t)
+g^j_{12}(t)=&\delta_3^j(t),
 \\
-g^j_{x2}(t)=& \delta_1^{j}(t) 
+g^j_{x0}(t)=& \delta_1^{j}(t) 
 -b_1^{j}(t)
 -\sum_{k:k\neq j} \rho^{jk}_1(t) -\sum_{k:k\neq j} R^{jk}_1(t) \mu^{jk}(t)
 \\
 &+
 \frac{V^{j*}_1(t)}{V^{j*}_2(t)}
-\bigg( -b_2^{j}(t)-\sum_{k:k\neq j} \rho^{jk}_2(t) -\sum_{k:k\neq j} R^{jk}_2(t) \mu^{jk}(t) \bigg)
+\bigg( -b_2^{j}(t)-\sum_{k:k\neq j} \rho^{jk}_2(t) -\sum_{k:k\neq j} R^{jk}_2(t) \mu^{jk}(t) \bigg),
 \end{align*}
 \begin{align*}
 h^{jk}_{11}(t)=& \frac{1}{V_2^{j*}(t)} \bigg( 
 \sum_{k:k\neq j}R_2^{jk}(t)-\sum_{k:k\neq j}b_2^{jk}(t)
-\bigg)
+\bigg),
 \\
-h^{jk}_{12}(t)=& 0 
+h^{jk}_{12}(t)=& 0 ,
 \\
-h^{jk}_{x2}(t)=& 
+h^{jk}_{x0}(t)=& 
 \sum_{k:k\neq j} R^{jk}_1(t) -\sum_{k:k\neq j}b_1^{jk}(t)
 +
 \frac{V^{j*}_1(t)}{V^{j*}_2(t)}
@@ -1466,11 +1491,11 @@ r(t)-r^*(t)-\delta_2^{j}(t)
 & + \frac{1}{V_2^{j*}(t)} \bigg( 
 \sum_{k:k\neq j} \rho_2^{jk}(t)
 +\sum_{k:k \neq j}  R^{jk}_2(t) \mu^{jk}(t) 
-\bigg)
+\bigg),
 \\
-g^j_{22}(t)=& r(t) -\delta_3^{j}(t)
+g^j_{22}(t)=& r(t) -\delta_3^{j}(t),
 \\
-g^j_{y2}(t)=& - \frac{V_1^{j*}(t)}{V_2^{j*}(t)}\bigg(
+g^j_{y0}(t)=& - \frac{V_1^{j*}(t)}{V_2^{j*}(t)}\bigg(
 \sum_{k:k\neq j} \rho^{jk}_2(t) 
  +\sum_{k:k\neq j} R^{jk}_2(t) \mu^{jk}(t) 
 \bigg)
@@ -1478,14 +1503,14 @@ g^j_{y2}(t)=& - \frac{V_1^{j*}(t)}{V_2^{j*}(t)}\bigg(
 &-\delta_1^{j}(t)
 +
 \sum_{k:k\neq j)} \rho^{jk}_1(t) 
-+\sum_{k:k \neq j}  R_1^{jk}(t) \mu^{jk}(t) 
++\sum_{k:k \neq j}  R_1^{jk}(t) \mu^{jk}(t) ,
 \\
 h^{jk}_{21}(t)=& 
-- \frac{1}{V_2^{j*}(t)} \sum_{k:k \neq j}  R^{jk}_2(t)
+- \frac{1}{V_2^{j*}(t)} \sum_{k:k \neq j}  R^{jk}_2(t),
 \\
-h^{jk}_{22}(t)=& 0
+h^{jk}_{22}(t)=& 0,
 \\
-h^{jk}_{y2}(t)=& \frac{V_1^{j*}(t)}{V_2^{j*}(t)}
+h^{jk}_{y0}(t)=& \frac{V_1^{j*}(t)}{V_2^{j*}(t)}
 \sum_{k:k\neq j} R^{jk}_2(t) 
 -
 \sum_{k:k \neq j}  R_1^{jk}(t).
